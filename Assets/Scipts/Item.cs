@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "TE/Item", order = 0)]
-public class Item : ScriptableObject 
+public class Item : ScriptableObject
 {
-    private int MAX_STACK;
-    private int ID;
-    private Sprite ICON;
+    [SerializeField] private int MAX_STACK;
+    [SerializeField] private int ID;
+    [SerializeField] private Sprite ICON;
 
     public Item(int id, int maxStack, Sprite icon)
     {
@@ -30,6 +30,4 @@ public class Item : ScriptableObject
     {
         get { return ICON; }
     }
-
-
 }

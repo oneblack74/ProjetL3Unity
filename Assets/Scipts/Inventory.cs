@@ -12,33 +12,33 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public Tuple<Item,int> removeItem(int ind, int quantity)
+    public (Item, int) removeItem(int ind, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
-            throw new OutOfBoundException("Index out of range");
+            throw new Exception("Index out of range");
         if (tab[ind].getItemQuantity < quantity)
-            throw new NotEnoughItemException("Not enough item in the slot");
-        
-        return new Tuple(tab[ind].getItem, tab[ind].removeItem(quantity));
+            throw new Exception("Not enough item in the slot");
+
+        return (tab[ind].getItem, tab[ind].removeItem(quantity).Item2);
     }
 
     // retourne l'exces d'item non ajoute
-    public Tuple<Item,int> addItem(int ind, Item item, int quantity)
+    public (Item, int) addItem(int ind, Item item, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
-            throw new OutOfBoundException("Index out of range");
+            throw new Exception("Index out of range");
         if (tab[ind].getItemQuantity + quantity > item.getMaxStack)
-            throw new TooMuchItemException("Too much item in the slot");
-        
-        return new Tuple(tab[ind].getItem, tab[ind].addItem(quantity));
+            throw new Exception("Too much item in the slot");
+
+        return (tab[ind].getItem, tab[ind].addItem(quantity).Item2);
     }
 }
