@@ -6,7 +6,7 @@ using System;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
-    [SerializeField] private int offsetY;
+    [SerializeField] private int slotsPerLine;
     private List<Slot> tab = new List<Slot>();
 
     // Start is called before the first frame update
@@ -19,6 +19,31 @@ public class Inventory : MonoBehaviour
     void Update()
     {
 
+    }
+
+    // Retourne le nombre de case par ligne de l'inventaire
+    // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
+    public int getNbSlotPerLine()
+    {
+        if (slotsPerLine == 0)
+        {
+            return inventorySize;
+        }
+        if (inventorySize % slotsPerLine == 0)
+        {
+            return slotsPerLine;
+        }
+        return -1;
+    }
+
+    // Retourne le nombre de lignes de l'inventaire
+    public int getNbLine()
+    {
+        if (getNbSlotPerLine() == -1)
+        {
+            return 1;
+        }
+        return inventorySize / slotsPerLine;
     }
 
     public (Item, int) removeItem(int ind, int quantity)
