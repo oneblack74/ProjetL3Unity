@@ -1,0 +1,1 @@
+- UI avec les bouttons qui appelerons les fonctions de l'objet "Inventaire"

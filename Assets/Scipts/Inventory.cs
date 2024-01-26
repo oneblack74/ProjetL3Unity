@@ -9,18 +9,6 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int slotsPerLine;
     private List<Slot> tab = new List<Slot>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
     public int getNbSlotPerLine()
@@ -64,6 +52,19 @@ public class Inventory : MonoBehaviour
         if (tab[ind].getItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
-        return (tab[ind].getItem, tab[ind].addItem(quantity).Item2);
+        return (tab[ind].getItem, tab[ind].addItem(item, quantity).Item2);
+    }
+
+    // Ajoute un item à la première place possible
+    public (Item, int) addItemFast(Item item, int quantity)
+    {
+        foreach (Slot slot in tab)
+        {
+            if (slot.isEmpty())
+            {
+                return slot.addItem(item, quantity);
+            }
+        }
+        return (null, 0);
     }
 }
