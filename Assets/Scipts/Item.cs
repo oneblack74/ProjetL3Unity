@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "TE/Item", order = 0)]
+
+// namespace InventoryScripts
+// {
 public class Item : ScriptableObject
 {
     [SerializeField] private int MAX_STACK;
@@ -31,3 +34,4 @@ public class Item : ScriptableObject
         get { return ICON; }
     }
 }
+// }

@@ -3,11 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+// namespace InventoryScripts
+// {
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] private int slotsPerLine;
     private List<Slot> tab = new List<Slot>();
+
+    public Inventory(int size, int slotsPerLine)
+    {
+        this.inventorySize = size;
+        this.slotsPerLine = slotsPerLine;
+        for (int i = 0; i < inventorySize; i++)
+        {
+            tab[i] = new Slot(this, i);
+        }
+    }
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
@@ -68,3 +80,4 @@ public class Inventory : MonoBehaviour
         return (null, 0);
     }
 }
+// }

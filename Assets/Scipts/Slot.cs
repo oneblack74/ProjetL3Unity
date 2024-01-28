@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+// namespace InventoryScripts
+// {
 public class Slot : MonoBehaviour
 {
     [SerializeField] private int quantity;
     private Item item = null;
+    private Inventory parentInv;
+    private int indexInv;
+
+    public Slot(Inventory parentInv, int indexInv, Item item = null, int quantity = 0)
+    {
+        this.quantity = quantity;
+        this.item = item;
+        this.parentInv = parentInv;
+        this.indexInv = indexInv;
+    }
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
     public void switchItems(Slot slot)
@@ -46,6 +58,18 @@ public class Slot : MonoBehaviour
         return (this.item, 0);
     }
 
+    public string getNbToDraw()
+    {
+        if (quantity == 0 || quantity == 1)
+        {
+            return "";
+        }
+        else
+        {
+            return quantity + "";
+        }
+    }
+
     public bool isEmpty()
     {
         return quantity == 0;
@@ -61,3 +85,4 @@ public class Slot : MonoBehaviour
         get { return item; }
     }
 }
+// }
