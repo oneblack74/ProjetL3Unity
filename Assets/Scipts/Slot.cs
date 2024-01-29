@@ -1,24 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using System;
 
 // namespace InventoryScripts
 // {
 public class Slot : MonoBehaviour
 {
-    [SerializeField] private int quantity;
+    private int quantity = 0;
     private Item item = null;
     private Inventory parentInv;
     private int indexInv;
+    private Image image;
+    private TextMeshPro textMeshPro;
+    private GameObject gameObject;
 
-    public Slot(Inventory parentInv, int indexInv, Item item = null, int quantity = 0)
+    public Slot(Inventory parentInv, int indexInv, GameObject gameObject, int quantity = 0, Item item = null)
     {
         this.quantity = quantity;
         this.item = item;
         this.parentInv = parentInv;
         this.indexInv = indexInv;
+
+        this.gameObject = gameObject;
+        this.gameObject = Instantiate(gameObject, parentInv.transform);
+
+        this.image = this.gameObject.transform.GetChild(1).GetComponent<Image>();
+        this.textMeshPro = this.gameObject.transform.GetChild(0).GetComponent<TextMeshPro>();
     }
+
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
     public void switchItems(Slot slot)

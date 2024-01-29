@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 // namespace InventoryScripts
@@ -9,17 +10,50 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
     [SerializeField] private int slotsPerLine;
-    private List<Slot> tab = new List<Slot>();
+    [SerializeField] private float espaceEntreElements = 10f;
+    [SerializeField] private GameObject gameObject;
+    [SerializeField] private List<Slot> tab = new List<Slot>();
+    private GridLayoutGroup gridLayout;
 
+    /*
     public Inventory(int size, int slotsPerLine)
     {
         this.inventorySize = size;
         this.slotsPerLine = slotsPerLine;
         for (int i = 0; i < inventorySize; i++)
         {
-            tab[i] = new Slot(this, i);
+            tab[i] = new Slot(this, i, gameObject);
+        }
+    }*/
+
+    void Start()
+    {
+        for (int i = 0; i < inventorySize; i++)
+        {
+            tab.Add(new Slot(this, i, gameObject));
+        }
+
+        gridLayout = GetComponent<GridLayoutGroup>();
+
+        if (gridLayout != null)
+        {
+            AjusterTailleGridLayout();
+        }
+        else
+        {
+            Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
         }
     }
+
+    void AjusterTailleGridLayout()
+{
+    gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
+
+    float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (slotsPerLine - 1))) / slotsPerLine;
+
+    gridLayout.cellSize = new Vector2(size, size);
+}
+
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
@@ -79,5 +113,6 @@ public class Inventory : MonoBehaviour
         }
         return (null, 0);
     }
+
 }
 // }
