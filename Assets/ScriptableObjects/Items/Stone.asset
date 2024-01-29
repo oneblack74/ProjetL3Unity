@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_STACK: 64
   ID: 2
-  ICON: {fileID: 0}
+  ICON: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}

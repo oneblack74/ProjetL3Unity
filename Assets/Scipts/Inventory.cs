@@ -98,6 +98,7 @@ public class Inventory : MonoBehaviour
         if (tab[ind].getItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
+        Debug.Log(tab[ind].getItemQuantity);
         return (tab[ind].getItem, tab[ind].addItem(item, quantity).Item2);
     }
 
