@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class TestItem : MonoBehaviour
 {
-    public Inventory inventory;
-    public Item item;
-    
-    public void testAddItem()
+    private Inventory inventory;
+    public ItemDefinition item;
+    public ItemDefinition item2;
+
+    void Start()
     {
-        inventory.addItem(2, item, 3);
+        inventory = new Inventory(2, 2);
+        inventory.addItemFast(item, 1);
+        inventory.addItemFast(item2, 5);
+        Debug.Log(inventory.checkItem(0));
+        Debug.Log(inventory.checkItem(1));
+        Debug.Log(inventory.checkItemQuantity(1));
     }
 }

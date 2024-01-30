@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Item", menuName = "TE/Item", order = 0)]
+[CreateAssetMenu(fileName = "ItemDefinition", menuName = "TE/ItemDefinition", order = 0)]
 
 // namespace InventoryScripts
 // {
-public class Item : ScriptableObject
+public class ItemDefinition : ScriptableObject
 {
     [SerializeField] private int MAX_STACK;
     [SerializeField] private int ID;
     [SerializeField] private Sprite ICON;
 
-    public Item(int id, int maxStack, Sprite icon)
+    public ItemDefinition(int id, int maxStack, Sprite icon)
     {
-        this.ID = id;
-        this.MAX_STACK = maxStack;
-        this.ICON = icon;
+        ID = id;
+        MAX_STACK = maxStack;
+        ICON = icon;
     }
 
     public int getID

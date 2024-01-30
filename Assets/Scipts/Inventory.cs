@@ -8,52 +8,19 @@ using System;
 // {
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private int inventorySize;
-    [SerializeField] private int slotsPerLine;
-    [SerializeField] private float espaceEntreElements = 10f;
-    [SerializeField] private GameObject gameObject;
-    [SerializeField] private List<Slot> tab = new List<Slot>();
-    private GridLayoutGroup gridLayout;
+    private readonly int inventorySize;
+    private readonly int slotsPerLine;
+    private List<Slot> tab = new List<Slot>();
 
-    /*
-    public Inventory(int size, int slotsPerLine)
+    public Inventory(int inventorySize, int slotsPerLine)
     {
-        this.inventorySize = size;
+        this.inventorySize = inventorySize;
         this.slotsPerLine = slotsPerLine;
         for (int i = 0; i < inventorySize; i++)
         {
-            tab[i] = new Slot(this, i, gameObject);
-        }
-    }*/
-
-    void Start()
-    {
-        for (int i = 0; i < inventorySize; i++)
-        {
-            tab.Add(new Slot(this, i, gameObject));
-        }
-
-        gridLayout = GetComponent<GridLayoutGroup>();
-
-        if (gridLayout != null)
-        {
-            AjusterTailleGridLayout();
-        }
-        else
-        {
-            Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
+            tab.Add(new Slot(this, i));
         }
     }
-
-    void AjusterTailleGridLayout()
-{
-    gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
-
-    float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (slotsPerLine - 1))) / slotsPerLine;
-
-    gridLayout.cellSize = new Vector2(size, size);
-}
-
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
@@ -80,7 +47,7 @@ public class Inventory : MonoBehaviour
         return inventorySize / slotsPerLine;
     }
 
-    public (Item, int) removeItem(int ind, int quantity)
+    public (ItemDefinition, int) removeItem(int ind, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
             throw new Exception("Index out of range");
@@ -91,7 +58,7 @@ public class Inventory : MonoBehaviour
     }
 
     // retourne l'exces d'item non ajoute
-    public (Item, int) addItem(int ind, Item item, int quantity)
+    public (ItemDefinition, int) addItem(int ind, ItemDefinition item, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
             throw new Exception("Index out of range");
@@ -103,7 +70,7 @@ public class Inventory : MonoBehaviour
     }
 
     // Ajoute un item à la première place possible
-    public (Item, int) addItemFast(Item item, int quantity)
+    public (ItemDefinition, int) addItemFast(ItemDefinition item, int quantity)
     {
         foreach (Slot slot in tab)
         {
@@ -113,6 +80,16 @@ public class Inventory : MonoBehaviour
             }
         }
         return (null, 0);
+    }
+
+    public ItemDefinition checkItem(int index)
+    {
+        return tab[index].getItem;
+    }
+
+    public int checkItemQuantity(int index)
+    {
+        return tab[index].getItemQuantity;
     }
 
 }
