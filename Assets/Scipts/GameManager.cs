@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEditor.Search;
 using System.Text.RegularExpressions;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,23 +20,26 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        string[] guids = AssetDatabase.FindAssets("t:ItemDefinition", new[] { "Assets/ScriptableObjects/Items" });
+
+        foreach (string guid in guids)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(guid);
+            ItemDefinition item = AssetDatabase.LoadAssetAtPath<ItemDefinition>(path);
+            if (item != null)
+            {
+                itemDico.Add(item.getID, item);
+            }
+        }
+
+        foreach (int dico in itemDico.Keys)
+        {
+            Debug.Log(dico);
+        }
+
     }
 
-    void Start()
-    {
-        // A modifier https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html
-        DirectoryInfo items = new DirectoryInfo("./Assets/ScriptableObjects/Items/");
-        FileInfo[] filesItems = items.GetFiles();
-        foreach (FileInfo file in filesItems)
-        {
-            Regex noMeta = new Regex("*.meta");
-            if (noMeta.IsMatch(file.FullName))
-            {
-                continue;
-            }
-            Debug.Log(file);
-        }
-    }
 
     public ItemDefinition ConvertIdToItem(int ID)
     {
