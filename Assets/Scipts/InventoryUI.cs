@@ -4,15 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+[RequireComponent(typeof(GridLayoutGroup))]
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private float espaceEntreElements = 10f;
     [SerializeField] private GameObject prefabRef;
     private GridLayoutGroup gridLayout;
-    private Inventory inventory;
+    [SerializeField] private Inventory inventory;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         gridLayout = GetComponent<GridLayoutGroup>();
 
@@ -24,6 +25,14 @@ public class InventoryUI : MonoBehaviour
         {
             Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
         }
+
+        InstantiateSlot();  
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -32,8 +41,24 @@ public class InventoryUI : MonoBehaviour
 
     }
 
+    public void UpdateUI()
+    {
+        for (int i = 0; i < inventory.getInventorySize; i++)
+        {
+            Debug.Log(inventory.checkItemQuantity(i));
+            //transform.GetChild(i).GetComponent<SlotUI>().UpdateUI(inventory.checkItem(i), inventory.checkItemQuantity(i));
+        }
+    }
 
-    void AjusterTailleGridLayout()
+    private void InstantiateSlot()
+    {
+        for (int i = 0; i < inventory.getInventorySize; i++)
+        {
+            GameObject.Instantiate(prefabRef, transform);
+        }
+    }
+
+    private void AjusterTailleGridLayout()
     {
         gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
         float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (inventory.getNbSlotPerLine() - 1))) / inventory.getNbSlotPerLine();

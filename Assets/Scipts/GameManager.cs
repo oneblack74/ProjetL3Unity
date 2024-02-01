@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
-using UnityEditor.Search;
-using System.Text.RegularExpressions;
 using UnityEditor;
 
 public class GameManager : MonoBehaviour
@@ -21,6 +17,8 @@ public class GameManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
 
+
+        // récupérer les item scriptableobject et les stocker dans un dico
         string[] guids = AssetDatabase.FindAssets("t:ItemDefinition", new[] { "Assets/ScriptableObjects/Items" });
 
         foreach (string guid in guids)
@@ -33,13 +31,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        foreach (int dico in itemDico.Keys)
-        {
-            Debug.Log(dico);
-        }
-
     }
-
 
     public ItemDefinition ConvertIdToItem(int ID)
     {

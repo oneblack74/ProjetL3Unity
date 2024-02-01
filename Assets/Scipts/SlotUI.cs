@@ -7,10 +7,9 @@ using System;
 
 public class SlotUI : MonoBehaviour
 {
-    private Slot slot;
     private Image image;
     private TextMeshPro textMeshPro;
-    [SerializeField] private GameObject prefabRef;
+    public int intTest = 10;
 
     void Awake()
     {
@@ -18,15 +17,11 @@ public class SlotUI : MonoBehaviour
         this.textMeshPro = this.gameObject.transform.GetChild(0).GetComponent<TextMeshPro>();
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateUI(ItemDefinition item, int itemQuantity)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        if (itemQuantity == 0)
+            textMeshPro.text = "";
+        else 
+            textMeshPro.text = itemQuantity.ToString();
     }
 }

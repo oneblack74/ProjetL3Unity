@@ -8,10 +8,12 @@ using System;
 // {
 public class Inventory : MonoBehaviour
 {
-    private readonly int inventorySize;
-    private readonly int slotsPerLine;
-    private List<Slot> tab = new List<Slot>();
+    [SerializeField] private int inventorySize = 5;
+    [SerializeField] private int slotsPerLine = 1;
+    private GameManager gameManager;
+    [SerializeField] public List<Slot> tab = new List<Slot>();
 
+    /*
     public Inventory(int inventorySize, int slotsPerLine)
     {
         this.inventorySize = inventorySize;
@@ -20,7 +22,29 @@ public class Inventory : MonoBehaviour
         {
             tab.Add(new Slot(this, i));
         }
+    }*/
+
+    void Awake()
+    {
+        for (int i = 0; i < inventorySize; i++)
+        {
+            tab.Add(new Slot(this, i));
+        }
     }
+
+    void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+
+        addItemFast(gameManager.ConvertIdToItem(1), 3);
+        addItem(1, gameManager.ConvertIdToItem(2), 3);
+
+        Debug.Log(tab[0].getItem);
+        Debug.Log(tab[1].getItem);
+ 
+    }
+
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
@@ -65,7 +89,7 @@ public class Inventory : MonoBehaviour
         if (tab[ind].getItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
-        Debug.Log(tab[ind].getItemQuantity);
+        //Debug.Log(tab[ind].getItemQuantity);
         return (tab[ind].getItem, tab[ind].addItem(item, quantity).Item2);
     }
 
@@ -90,6 +114,11 @@ public class Inventory : MonoBehaviour
     public int checkItemQuantity(int index)
     {
         return tab[index].getItemQuantity;
+    }
+
+    public int getInventorySize
+    {
+        get {return inventorySize;}
     }
 
 }
