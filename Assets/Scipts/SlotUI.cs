@@ -1,27 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class SlotUI : MonoBehaviour
 {
-    private Image image;
-    private TextMeshPro textMeshPro;
+    private TextMeshProUGUI textMeshPro;
+    private Image itemIcon;
     public int intTest = 10;
 
     void Awake()
     {
-        this.image = this.gameObject.transform.GetChild(1).GetComponent<Image>();
-        this.textMeshPro = this.gameObject.transform.GetChild(0).GetComponent<TextMeshPro>();
+        textMeshPro = gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        itemIcon = gameObject.transform.GetChild(1).GetComponent<Image>();
     }
 
     public void UpdateUI(ItemDefinition item, int itemQuantity)
     {
+        if (item == null)
+        {
+            return;
+        }
+        itemIcon.sprite = item.getIcon;
+
+        if (textMeshPro == null)
+        {
+            Debug.Log("TextMeshPro Not found");
+            return;
+        }
         if (itemQuantity == 0)
             textMeshPro.text = "";
-        else 
+        else
             textMeshPro.text = itemQuantity.ToString();
     }
 }

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 
 // namespace InventoryScripts
@@ -24,25 +22,22 @@ public class Inventory : MonoBehaviour
         }
     }*/
 
-    void Awake()
-    {
-        for (int i = 0; i < inventorySize; i++)
-        {
-            tab.Add(new Slot(this, i));
-        }
-    }
-
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
+
+        for (int i = 0; i < inventorySize; i++)
+        {
+            tab.Add(new Slot(this, i, 0, gameManager.ConvertIdToItem(0)));
+        }
 
         addItemFast(gameManager.ConvertIdToItem(1), 3);
         addItem(1, gameManager.ConvertIdToItem(2), 3);
 
         Debug.Log(tab[0].getItem);
         Debug.Log(tab[1].getItem);
- 
+        Debug.Log(tab[0].getItemQuantity);
+        Debug.Log(tab[1].getItemQuantity);
     }
 
 
@@ -118,7 +113,7 @@ public class Inventory : MonoBehaviour
 
     public int getInventorySize
     {
-        get {return inventorySize;}
+        get { return inventorySize; }
     }
 
 }

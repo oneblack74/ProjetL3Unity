@@ -40,16 +40,23 @@ public class Slot
     // Retourne le trop d'item qui n'as pas pu être dans le slot
     public (ItemDefinition, int) addItem(ItemDefinition item, int quantity)
     {
+        if (this.item == item)
+        {
+            if (this.quantity + quantity > item.getMaxStack)
+            {
+                this.quantity = item.getMaxStack;
+                return (this.item, quantity - (item.getMaxStack - this.quantity));
+            }
+            this.quantity += quantity;
+            return (this.item, 0);
+        }
+
         if (this.item != null)
         {
             // Switch Item
-
         }
         this.item = item;
-        if (this.quantity + quantity > item.getMaxStack)
-        {
-            return (this.item, quantity - (item.getMaxStack - this.quantity));
-        }
+        this.quantity = quantity;
         return (this.item, 0);
     }
 

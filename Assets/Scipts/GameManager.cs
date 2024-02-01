@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
 
 
         // récupérer les item scriptableobject et les stocker dans un dico
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
                 itemDico.Add(item.getID, item);
             }
         }
+
 
     }
 

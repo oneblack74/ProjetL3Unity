@@ -1,17 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 [RequireComponent(typeof(GridLayoutGroup))]
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private float espaceEntreElements = 10f;
-    [SerializeField] private GameObject prefabRef;
+    [SerializeField] private SlotUI slotUIPrefab;
     private GridLayoutGroup gridLayout;
     [SerializeField] private Inventory inventory;
-
+    private List<SlotUI> slotsUI = new List<SlotUI>();
 
     void Awake()
     {
@@ -26,35 +24,31 @@ public class InventoryUI : MonoBehaviour
             Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
         }
 
-        InstantiateSlot();  
+        InstantiateSlot();
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        UpdateUI();
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
+        UpdateUI();
     }
 
     public void UpdateUI()
     {
         for (int i = 0; i < inventory.getInventorySize; i++)
         {
-            Debug.Log(inventory.checkItemQuantity(i));
-            //transform.GetChild(i).GetComponent<SlotUI>().UpdateUI(inventory.checkItem(i), inventory.checkItemQuantity(i));
+            //Debug.Log(inventory.checkItemQuantity(i));
+            slotsUI[i].UpdateUI(inventory.checkItem(i), inventory.checkItemQuantity(i));
         }
     }
 
     private void InstantiateSlot()
     {
-        for (int i = 0; i < inventory.getInventorySize; i++)
+        if (slotUIPrefab != null)
         {
-            GameObject.Instantiate(prefabRef, transform);
+            for (int i = 0; i < inventory.getInventorySize; i++)
+            {
+                slotsUI.Add(Instantiate(slotUIPrefab, transform));
+            }
         }
     }
 
