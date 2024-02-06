@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
     private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
-
     void Awake()
     {
         if (instance != null)
@@ -39,6 +38,5 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
     }
 }
