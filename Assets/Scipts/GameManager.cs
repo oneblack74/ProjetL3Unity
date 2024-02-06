@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,12 +32,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeScene(int sceneIndex)
+    {
+        SceneManager.LoadSceneAsync(sceneIndex);
+    }
+
     public ItemDefinition ConvertIdToItem(int ID)
     {
         return itemDico[ID];
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) TestChangeScene();
+    }
+
+    public void TestChangeScene()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ChangeScene(2);
+        }
+        else
+        {
+            ChangeScene(1);
+        }
+    }
+
     void Start()
     {
+        ChangeScene(2);
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        //TestChangeScene();
     }
 }
