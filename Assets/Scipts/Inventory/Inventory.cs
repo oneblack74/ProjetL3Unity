@@ -18,10 +18,8 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < inventorySize; i++)
         {
             tab.Add(new Slot(this, i, 0, gameManager.ConvertIdToItem(0)));
+            tab[i].addItem(gameManager.ConvertIdToItem(0), 0);
         }
-
-        addItemFast(gameManager.ConvertIdToItem(1), 3);
-        addItem(1, gameManager.ConvertIdToItem(2), 3);
     }
 
     // Retourne le nombre de case par ligne de l'inventaire
@@ -84,6 +82,11 @@ public class Inventory : MonoBehaviour
         return (null, 0);
     }
 
+    public void switchItem(int index, Slot slot)
+    {
+        tab[index].switchItems(slot);
+    }
+
     public ItemDefinition checkItem(int index)
     {
         return tab[index].getItem;
@@ -97,6 +100,11 @@ public class Inventory : MonoBehaviour
     public int getInventorySize
     {
         get { return inventorySize; }
+    }
+
+    public Slot GetSlot(int index)
+    {
+        return tab[index];
     }
 
 }

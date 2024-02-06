@@ -43,11 +43,17 @@ public class InventoryUI : MonoBehaviour
 
     private void InstantiateSlot()
     {
+        GameObject cursor = GameObject.Find("CursorUI");
+
         if (slotUIPrefab != null)
         {
             for (int i = 0; i < inventory.getInventorySize; i++)
             {
                 slotsUI.Add(Instantiate(slotUIPrefab, transform));
+                slotsUI[i].GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    inventory.switchItem(i, cursor.GetComponent<Inventory>().GetSlot(0));
+                });
             }
         }
     }
@@ -55,7 +61,8 @@ public class InventoryUI : MonoBehaviour
     private void AjusterTailleGridLayout()
     {
         gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
-        float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (inventory.getNbSlotPerLine() - 1))) / inventory.getNbSlotPerLine();
+        float size = (GetComponent<RectTransform>().rect.width -
+        (espaceEntreElements * (inventory.getNbSlotPerLine() - 1))) / inventory.getNbSlotPerLine();
         gridLayout.cellSize = new Vector2(size, size);
     }
 }

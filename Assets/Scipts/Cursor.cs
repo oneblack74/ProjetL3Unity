@@ -1,0 +1,34 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Inventory))]
+public class Cursor : MonoBehaviour
+{
+    private bool following = true;
+    [SerializeField] private SlotUI slotUI;
+    private Inventory inventory;
+
+    void Start()
+    {
+        inventory = GetComponent<Inventory>();
+    }
+
+    void Update()
+    {
+        slotUI.UpdateUI(inventory.checkItem(0), inventory.checkItemQuantity(0));
+        if (following)
+        {
+            FollowMouse();
+        }
+    }
+
+    public void SetFollowMouse(bool b)
+    {
+        following = b;
+    }
+
+    public void FollowMouse()
+    {
+        transform.position = Mouse.current.position.ReadValue();
+    }
+}
