@@ -11,17 +11,6 @@ public class Inventory : MonoBehaviour
     private GameManager gameManager;
     [SerializeField] public List<Slot> tab = new List<Slot>();
 
-    /*
-    public Inventory(int inventorySize, int slotsPerLine)
-    {
-        this.inventorySize = inventorySize;
-        this.slotsPerLine = slotsPerLine;
-        for (int i = 0; i < inventorySize; i++)
-        {
-            tab.Add(new Slot(this, i));
-        }
-    }*/
-
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,13 +22,7 @@ public class Inventory : MonoBehaviour
 
         addItemFast(gameManager.ConvertIdToItem(1), 3);
         addItem(1, gameManager.ConvertIdToItem(2), 3);
-
-        Debug.Log(tab[0].getItem);
-        Debug.Log(tab[1].getItem);
-        Debug.Log(tab[0].getItemQuantity);
-        Debug.Log(tab[1].getItemQuantity);
     }
-
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
