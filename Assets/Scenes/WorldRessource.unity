@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   espaceEntreElements: 10
-  prefabRef: {fileID: 8946732701515733719, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
+  slotUIPrefab: {fileID: 1114659226723823090, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
   inventory: {fileID: 1816506390}
 --- !u!114 &177864089
 MonoBehaviour:

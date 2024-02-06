@@ -30,12 +30,15 @@ public class GameManager : MonoBehaviour
                 itemDico.Add(item.getID, item);
             }
         }
-
-
     }
 
     public ItemDefinition ConvertIdToItem(int ID)
     {
         return itemDico[ID];
+    }
+
+    void Start()
+    {
+
     }
 }
