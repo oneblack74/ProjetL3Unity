@@ -84,6 +84,7 @@ public class Inventory : MonoBehaviour
 
     public void switchItem(int index, Slot slot)
     {
+        Debug.Log(index);
         tab[index].switchItems(slot);
     }
 

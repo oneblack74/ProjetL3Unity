@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        ChangeScene(2);
+        //ChangeScene(1);
         Debug.Log(SceneManager.GetActiveScene().buildIndex);
         //TestChangeScene();
     }
