@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
+    public PlayerInput inputs;
     private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
     void Awake()
     {
@@ -32,9 +34,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static GameManager GetInstance()
+    {
+        return instance;
+    }
+
     public void ChangeScene(int sceneIndex)
     {
         SceneManager.LoadSceneAsync(sceneIndex);
+    }
+
+    public int GetSceneIndex
+    {
+        get { return SceneManager.GetActiveScene().buildIndex; }
     }
 
     public ItemDefinition ConvertIdToItem(int ID)
@@ -59,10 +71,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    public PlayerInput GetInputs
     {
-        //ChangeScene(1);
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
-        //TestChangeScene();
+        get { return inputs; }
     }
+
+
 }
