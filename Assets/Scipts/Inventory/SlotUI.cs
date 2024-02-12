@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
 
 public class SlotUI : MonoBehaviour
 {
     private TextMeshProUGUI textMeshPro;
     private Image itemIcon;
-    private
 
     void Awake()
     {

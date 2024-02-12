@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
     private GameManager gameManager;
-    [SerializeField] public List<Slot> tab = new List<Slot>();
+    [SerializeField] public List<Slot> tab = new();
 
     void Start()
     {
@@ -18,13 +18,12 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < inventorySize; i++)
         {
             tab.Add(new Slot(this, i, 0, gameManager.ConvertIdToItem(0)));
-            tab[i].addItem(gameManager.ConvertIdToItem(0), 0);
         }
     }
 
     // Retourne le nombre de case par ligne de l'inventaire
     // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
-    public int getNbSlotPerLine()
+    public int GetNbSlotPerLine()
     {
         if (slotsPerLine == 0)
         {
@@ -38,67 +37,67 @@ public class Inventory : MonoBehaviour
     }
 
     // Retourne le nombre de lignes de l'inventaire
-    public int getNbLine()
+    public int GetNbLine()
     {
-        if (getNbSlotPerLine() == -1)
+        if (GetNbSlotPerLine() == -1)
         {
             return 1;
         }
         return inventorySize / slotsPerLine;
     }
 
-    public (ItemDefinition, int) removeItem(int ind, int quantity)
+    public (ItemDefinition, int) RemoveItem(int ind, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
             throw new Exception("Index out of range");
-        if (tab[ind].getItemQuantity < quantity)
+        if (tab[ind].GetItemQuantity < quantity)
             throw new Exception("Not enough item in the slot");
 
-        return (tab[ind].getItem, tab[ind].removeItem(quantity).Item2);
+        return (tab[ind].GetItem, tab[ind].RemoveItem(quantity).Item2);
     }
 
     // retourne l'exces d'item non ajoute
-    public (ItemDefinition, int) addItem(int ind, ItemDefinition item, int quantity)
+    public (ItemDefinition, int) AddItem(int ind, ItemDefinition item, int quantity)
     {
         if (ind < 0 || ind >= inventorySize)
             throw new Exception("Index out of range");
-        if (tab[ind].getItemQuantity + quantity > item.getMaxStack)
+        if (tab[ind].GetItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
         //Debug.Log(tab[ind].getItemQuantity);
-        return (tab[ind].getItem, tab[ind].addItem(item, quantity).Item2);
+        return (tab[ind].GetItem, tab[ind].AddItem(item, quantity).Item2);
     }
 
     // Ajoute un item à la première place possible
-    public (ItemDefinition, int) addItemFast(ItemDefinition item, int quantity)
+    public (ItemDefinition, int) AddItemFast(ItemDefinition item, int quantity)
     {
         foreach (Slot slot in tab)
         {
-            if (slot.isEmpty())
+            if (slot.IsEmpty())
             {
-                return slot.addItem(item, quantity);
+                return slot.AddItem(item, quantity);
             }
         }
         return (null, 0);
     }
 
-    public void switchItem(int index, Slot slot)
+    public void SwitchItem(int index, Slot slot)
     {
         Debug.Log(index);
-        tab[index].switchItems(slot);
+        tab[index].SwitchItems(slot);
     }
 
-    public ItemDefinition checkItem(int index)
+    public ItemDefinition CheckItem(int index)
     {
-        return tab[index].getItem;
+        return tab[index].GetItem;
     }
 
-    public int checkItemQuantity(int index)
+    public int CheckItemQuantity(int index)
     {
-        return tab[index].getItemQuantity;
+        return tab[index].GetItemQuantity;
     }
 
-    public int getInventorySize
+    public int GetInventorySize
     {
         get { return inventorySize; }
     }

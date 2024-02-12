@@ -34,10 +34,10 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        for (int i = 0; i < inventory.getInventorySize; i++)
+        for (int i = 0; i < inventory.GetInventorySize; i++)
         {
             //Debug.Log(inventory.checkItemQuantity(i));
-            slotsUI[i].UpdateUI(inventory.checkItem(i), inventory.checkItemQuantity(i));
+            slotsUI[i].UpdateUI(inventory.CheckItem(i), inventory.CheckItemQuantity(i));
         }
     }
 
@@ -47,12 +47,12 @@ public class InventoryUI : MonoBehaviour
 
         if (slotUIPrefab != null)
         {
-            for (int i = 0; i < inventory.getInventorySize; i++)
+            for (int i = 0; i < inventory.GetInventorySize; i++)
             {
                 slotsUI.Add(Instantiate(slotUIPrefab, transform));
                 slotsUI[i].GetComponent<Button>().onClick.AddListener(delegate
                 {
-                    inventory.switchItem(i, cursor.GetComponent<Inventory>().GetSlot(0));
+                    inventory.SwitchItem(i, cursor.GetComponent<Inventory>().GetSlot(0));
                 });
             }
         }
@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
     {
         gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
         float size = (GetComponent<RectTransform>().rect.width -
-        (espaceEntreElements * (inventory.getNbSlotPerLine() - 1))) / inventory.getNbSlotPerLine();
+        (espaceEntreElements * (inventory.GetNbSlotPerLine() - 1))) / inventory.GetNbSlotPerLine();
         gridLayout.cellSize = new Vector2(size, size);
     }
 }

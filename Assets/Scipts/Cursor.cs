@@ -15,7 +15,7 @@ public class Cursor : MonoBehaviour
 
     void Update()
     {
-        slotUI.UpdateUI(inventory.checkItem(0), inventory.checkItemQuantity(0));
+        slotUI.UpdateUI(inventory.CheckItem(0), inventory.CheckItemQuantity(0));
         if (following)
         {
             FollowMouse();

@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
     public PlayerInput inputs;
+    public GameObject player; // A SUPPRIMER, PÖUR TEST
+    private PlayerController playerController; // A SUPPRIMER, POUR TEST
     private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
     void Awake()
     {
@@ -34,6 +36,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        playerController = player.GetComponent<PlayerController>();
+    }
+
     public static GameManager GetInstance()
     {
         return instance;
@@ -57,6 +64,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) TestChangeScene();
+        if (Input.GetKeyDown(KeyCode.I)) playerController.ShowInventory(true);
+        if (Input.GetKeyDown(KeyCode.J)) player.GetComponent<Inventory>().AddItem(0, ConvertIdToItem(1), 1);
     }
 
     public void TestChangeScene()
@@ -75,6 +84,4 @@ public class GameManager : MonoBehaviour
     {
         get { return inputs; }
     }
-
-
 }

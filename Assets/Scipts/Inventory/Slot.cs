@@ -16,15 +16,15 @@ public class Slot
     }
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
-    public void switchItems(Slot slot)
+    public void SwitchItems(Slot slot)
     {
-        (ItemDefinition, int) gotItem = slot.removeItem(slot.getItemQuantity);
-        slot.addItem(item, quantity);
-        addItem(gotItem.Item1, gotItem.Item2);
+        (ItemDefinition, int) gotItem = slot.RemoveItem(slot.GetItemQuantity);
+        slot.AddItem(item, quantity);
+        AddItem(gotItem.Item1, gotItem.Item2);
     }
 
     // Retourne la quantité retiré du slot
-    public (ItemDefinition, int) removeItem(int quantity)
+    public (ItemDefinition, int) RemoveItem(int quantity)
     {
         if (quantity >= this.quantity)
         {
@@ -38,7 +38,7 @@ public class Slot
     }
 
     // Retourne le trop d'item qui n'as pas pu être dans le slot
-    public (ItemDefinition, int) addItem(ItemDefinition item, int quantity)
+    public (ItemDefinition, int) AddItem(ItemDefinition item, int quantity)
     {
         if (this.item == item)
         {
@@ -60,7 +60,7 @@ public class Slot
         return (this.item, 0);
     }
 
-    public string getNbToDraw()
+    public string GetNbToDraw()
     {
         if (quantity == 0 || quantity == 1)
         {
@@ -72,17 +72,17 @@ public class Slot
         }
     }
 
-    public bool isEmpty()
+    public bool IsEmpty()
     {
         return quantity == 0;
     }
 
-    public int getItemQuantity
+    public int GetItemQuantity
     {
         get { return quantity; }
     }
 
-    public ItemDefinition getItem
+    public ItemDefinition GetItem
     {
         get { return item; }
     }

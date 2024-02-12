@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject inventoryUI;
+    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject curorUI;
+    [SerializeField] private GameManager gameManager;
+    private Inventory inventory;
 
     void Start()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
+        inventory = GetComponent<Inventory>();
+        inventory.AddItemFast(gameManager.ConvertIdToItem(1), 10);
     }
 
-    public void showInventory(bool b)
+    public void ShowInventory(bool b)
     {
         inventoryUI.SetActive(b);
+        curorUI.SetActive(b);
     }
 
 }
