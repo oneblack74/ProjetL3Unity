@@ -10,7 +10,7 @@ public class MoveScript : MonoBehaviour
 
     public enum Dir { Up, Down, Left, Right };
     [SerializeField] private Dir myDir = Dir.Down;
-    [SerializeField] private bool isMove = false;
+    [SerializeField] private bool isMoving = false;
     private GameManager manager;
     private PlayerInput inputs;
     private InputAction moveAction;
@@ -23,40 +23,40 @@ public class MoveScript : MonoBehaviour
         moveAction = inputs.actions["Move"];
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
     }
 
     private void Move()
     {
-        // récupérer l'input avec inputmanager et de movement et modifier le player avec transform.translate
-        // modifier myDir et isMove ==> permettra au script MoveAnimationScript de jouer la bonne animation du player
+        // récupère l'input avec inputmanager et de movement et modifier le player avec transform.translate
+        // modifier myDir et isMoving ==> permettra au script MoveAnimationScript de jouer la bonne animation du player
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         transform.Translate(moveValue * moveSpeed * Time.deltaTime);
         if (moveValue.x > 0)
         {
             myDir = Dir.Right;
-            isMove = true;
+            isMoving = true;
         }
         else if (moveValue.x < 0)
         {
             myDir = Dir.Left;
-            isMove = true;
+            isMoving = true;
         }
         else if (moveValue.y > 0)
         {
             myDir = Dir.Up;
-            isMove = true;
+            isMoving = true;
         }
         else if (moveValue.y < 0)
         {
             myDir = Dir.Down;
-            isMove = true;
+            isMoving = true;
         }
         else
         {
-            isMove = false;
+            isMoving = false;
         }
     }
 
@@ -72,6 +72,6 @@ public class MoveScript : MonoBehaviour
 
     public bool GetIsMove
     {
-        get { return isMove; }
+        get { return isMoving; }
     }
 }
