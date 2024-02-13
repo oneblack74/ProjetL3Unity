@@ -25,7 +25,7 @@ public class InventoryUI : MonoBehaviour
             Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
         }
 
-        InstantiateSlot();
+        InstantiateSlots();
     }
 
     void Update()
@@ -41,7 +41,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private void InstantiateSlot()
+    private void InstantiateSlots()
     {
         GameObject cursor = GameObject.Find("CursorUI");
 
@@ -60,6 +60,11 @@ public class InventoryUI : MonoBehaviour
     {
         inventory.SwitchItem(index, cursor.GetComponent<Inventory>().GetSlot(0));
     }
+
+    // private void OnRightButtonClick(int index, GameObject cursor)
+    // {
+    //     inventory.RightClick(index, cursor.GetComponent<Inventory>().GetSlot(0));
+    // }
 
     private void AjusterTailleGridLayout()
     {

@@ -31,4 +31,19 @@ public class SlotUI : MonoBehaviour
         else
             textMeshPro.text = itemQuantity.ToString();
     }
+
+    public void LeftClick()
+    {
+
+    }
+
+    public void RightCLick()
+    {
+
+    }
+
+    public void MiddleClick()
+    {
+
+    }
 }

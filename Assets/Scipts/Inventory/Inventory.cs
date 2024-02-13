@@ -8,16 +8,13 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
-    private GameManager gameManager;
     [SerializeField] public List<Slot> tab = new();
 
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
         for (int i = 0; i < inventorySize; i++)
         {
-            tab.Add(new Slot(this, i, 0, gameManager.ConvertIdToItem(0)));
+            tab.Add(new Slot(0, GameManager.GetInstance().ConvertIdToItem(0)));
         }
     }
 
@@ -86,6 +83,8 @@ public class Inventory : MonoBehaviour
         if (tab[index].GetItem == slot.GetItem)
         {
             (ItemDefinition, int) restant = tab[index].AddItem(slot.GetItem, slot.GetItemQuantity);
+            Debug.Log(restant.Item1);
+            Debug.Log(restant.Item2);
             slot.RemoveItem(slot.GetItemQuantity);
             slot.AddItem(restant.Item1, restant.Item2);
             return;

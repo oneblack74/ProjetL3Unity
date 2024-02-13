@@ -67,6 +67,8 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I)) playerController.ShowInventory(true);
         if (Input.GetKeyDown(KeyCode.O)) playerController.ShowInventory(false);
         if (Input.GetKeyDown(KeyCode.J)) player.GetComponent<Inventory>().AddItem(0, ConvertIdToItem(1), 1);
+        if (Input.GetKeyDown(KeyCode.K)) player.GetComponent<Inventory>().AddItem(0, ConvertIdToItem(1), 10);
+        if (Input.GetKeyDown(KeyCode.U)) player.GetComponent<Inventory>().AddItem(0, ConvertIdToItem(2), 1);
     }
 
     public void TestChangeScene()

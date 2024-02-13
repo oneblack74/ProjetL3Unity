@@ -12,49 +12,60 @@ public class StaminaControl : MonoBehaviour
     private float timer = 0f;                               //? Used for stamina regen  
 
 
-/**
-* Used to drain stamina ( when casting a dash for example )
-* Will if there is enough stamina to call a drain
-* If true, drains stamina. Returns false otherwise.
-* @param s : Float, stamina to drain
+    /**
+    * Used to drain stamina ( when casting a dash for example )
+    * Will if there is enough stamina to call a drain
+    * If true, drains stamina. Returns false otherwise.
+    * @param s : Float, stamina to drain
 */
-    public bool TryDrainStamina(float s) { 
-        if (this.stamina >= s) {
+    public bool TryDrainStamina(float s)
+    {
+        if (this.stamina >= s)
+        {
             DrainStamina(s);
             return true;
-        } else {
-            Debug.Log("[-] Can't drain stamina "+stamina+" / "+s);
+        }
+        else
+        {
+            Debug.Log("[-] Can't drain stamina " + stamina + " / " + s);
             return false;
         }
     }
 
     // This function is never called on its own 
     // Useful for 1-time drains, like dashes, jumps..
-    public void DrainStamina(float s) {
+    public void DrainStamina(float s)
+    {
         timer = 0f;
         stamina -= s;
     }
 
     // This function is never called on its own
     // Useful for draining over time, like for sprinting
-    public void DrainStaminaOverTime(float rate) {
+    public void DrainStaminaOverTime(float rate)
+    {
         timer = 0f;
-        stamina -= rate * time.deltaTime;
+        stamina -= rate * Time.deltaTime;
     }
 
-    public void RegenStamina() {
-        if (this.timer >= regenDelay) {
+    public void RegenStamina()
+    {
+        if (this.timer >= regenDelay)
+        {
             if (stamina < maxStamina) stamina += refillRate * Time.deltaTime;
         }
     }
 
-    private void UpdateTimer() {
-        if (timer < regenDelay) {
-            timer +=time.deltaTime;
+    private void UpdateTimer()
+    {
+        if (timer < regenDelay)
+        {
+            timer += Time.deltaTime;
         }
     }
-    void Update() {
+    void Update()
+    {
         UpdateTimer();
-        RegenStamina():
+        RegenStamina();
     }
 }

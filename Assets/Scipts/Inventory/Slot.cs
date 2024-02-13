@@ -1,18 +1,18 @@
+using UnityEngine;
+using System;
+
 // namespace InventoryScripts
 // {
+
 public class Slot
 {
     private int quantity = 0;
     private ItemDefinition item = null;
-    private Inventory parentInv;
-    private int indexInv;
 
-    public Slot(Inventory parentInv, int indexInv, int quantity = 0, ItemDefinition item = null)
+    public Slot(int quantity = 0, ItemDefinition item = null)
     {
         this.quantity = quantity;
         this.item = item;
-        this.parentInv = parentInv;
-        this.indexInv = indexInv;
     }
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
@@ -44,14 +44,22 @@ public class Slot
         {
             if (this.quantity + quantity > item.getMaxStack)
             {
+                int restant = quantity - (item.getMaxStack - this.quantity);
                 this.quantity = item.getMaxStack;
-                return (this.item, quantity - (item.getMaxStack - this.quantity));
+                return (this.item, restant);
             }
             this.quantity += quantity;
             return (this.item, 0);
         }
-        this.item = item;
         this.quantity = quantity;
+        if (quantity == 0)
+        {
+            this.item = GameManager.GetInstance().ConvertIdToItem(0);
+        }
+        else
+        {
+            this.item = item;
+        }
         return (this.item, 0);
     }
 
