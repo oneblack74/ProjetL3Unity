@@ -83,7 +83,13 @@ public class Inventory : MonoBehaviour
 
     public void SwitchItem(int index, Slot slot)
     {
-        Debug.Log(index);
+        if (tab[index].GetItem == slot.GetItem)
+        {
+            (ItemDefinition, int) restant = tab[index].AddItem(slot.GetItem, slot.GetItemQuantity);
+            slot.RemoveItem(slot.GetItemQuantity);
+            slot.AddItem(restant.Item1, restant.Item2);
+            return;
+        }
         tab[index].SwitchItems(slot);
     }
 

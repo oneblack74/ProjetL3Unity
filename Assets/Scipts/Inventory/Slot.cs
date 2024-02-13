@@ -30,7 +30,7 @@ public class Slot
         {
             ItemDefinition tmp = item;
             this.quantity = 0;
-            item = null;
+            item = GameManager.GetInstance().ConvertIdToItem(0);
             return (tmp, quantity);
         }
         this.quantity -= quantity;
@@ -49,11 +49,6 @@ public class Slot
             }
             this.quantity += quantity;
             return (this.item, 0);
-        }
-
-        if (this.item != null)
-        {
-            // Switch Item
         }
         this.item = item;
         this.quantity = quantity;

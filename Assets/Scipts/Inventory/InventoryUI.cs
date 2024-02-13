@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,6 @@ public class InventoryUI : MonoBehaviour
     {
         for (int i = 0; i < inventory.GetInventorySize; i++)
         {
-            //Debug.Log(inventory.checkItemQuantity(i));
             slotsUI[i].UpdateUI(inventory.CheckItem(i), inventory.CheckItemQuantity(i));
         }
     }
@@ -49,13 +49,16 @@ public class InventoryUI : MonoBehaviour
         {
             for (int i = 0; i < inventory.GetInventorySize; i++)
             {
+                int tmp = i;
                 slotsUI.Add(Instantiate(slotUIPrefab, transform));
-                slotsUI[i].GetComponent<Button>().onClick.AddListener(delegate
-                {
-                    inventory.SwitchItem(i, cursor.GetComponent<Inventory>().GetSlot(0));
-                });
+                slotsUI[i].GetComponent<Button>().onClick.AddListener(() => OnButtonCLick(tmp, cursor));
             }
         }
+    }
+
+    private void OnButtonCLick(int index, GameObject cursor)
+    {
+        inventory.SwitchItem(index, cursor.GetComponent<Inventory>().GetSlot(0));
     }
 
     private void AjusterTailleGridLayout()

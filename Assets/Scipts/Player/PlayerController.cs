@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject curorUI;
+    [SerializeField] private GameObject cursorUI;
     [SerializeField] private GameManager gameManager;
     private Inventory inventory;
 
@@ -17,8 +17,8 @@ public class PlayerController : MonoBehaviour
 
     public void ShowInventory(bool b)
     {
+        cursorUI.SetActive(b);
         inventoryUI.SetActive(b);
-        curorUI.SetActive(b);
     }
 
 }

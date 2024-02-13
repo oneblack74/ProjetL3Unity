@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) TestChangeScene();
         if (Input.GetKeyDown(KeyCode.I)) playerController.ShowInventory(true);
+        if (Input.GetKeyDown(KeyCode.O)) playerController.ShowInventory(false);
         if (Input.GetKeyDown(KeyCode.J)) player.GetComponent<Inventory>().AddItem(0, ConvertIdToItem(1), 1);
     }
 
