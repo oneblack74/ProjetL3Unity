@@ -70,6 +70,16 @@ public class MoveScript : MonoBehaviour
         get { return myDir; }
     }
 
+    public int GetMyDirToInt()
+    {
+
+        if (myDir == Dir.Up) return 0;
+        if (myDir == Dir.Right) return 1;
+        if (myDir == Dir.Down) return 2;
+        return 3;
+
+    }
+
     public bool GetIsMove
     {
         get { return isMoving; }
