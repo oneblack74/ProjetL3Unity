@@ -112,6 +112,15 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void RedefineSlots(List<Slot> newTab)
+    {
+        tab.Clear();
+        foreach (Slot slot in newTab)
+        {
+            tab.Add(slot);
+        }
+    }
+
 
     public ItemDefinition CheckItem(int index)
     {
@@ -131,6 +140,11 @@ public class Inventory : MonoBehaviour
     public Slot GetSlot(int index)
     {
         return tab[index];
+    }
+
+    public List<Slot> GetTab
+    {
+        get { return tab; }
     }
 
 }
