@@ -27,6 +27,8 @@ public class SaveData : MonoBehaviour
 
         string saveData = JsonUtility.ToJson(data);
         string chemin = Application.persistentDataPath + "/SaveData.json";
+        Debug.Log(data);
+        Debug.Log(saveData);
         Debug.Log(chemin);
 
         System.IO.File.WriteAllText(chemin, saveData);
@@ -44,19 +46,22 @@ public class SaveData : MonoBehaviour
     private void SaveElements()
     {
         SaveInventory(manager.GetPlayerController.GetInventory);
+        data.test = 5;
     }
 
     private void SaveInventory(Inventory inventory)
     {
-        data.slots = new List<Slot>();
+        data.slots = new List<StructSlot>();
         foreach (Slot slot in inventory.GetTab)
         {
-            data.slots.Add(slot);
+            StructSlot s = new()
+            {
+                itemID = slot.GetItem.getID,
+                itemQuantity = slot.GetItemQuantity
+            };
+            data.slots.Add(s);
         }
-        foreach (Slot slot in data.slots)
-        {
-            Debug.Log(slot.GetItemQuantity);
-        }
+
     }
 
     private void LoadInventory(Inventory inventory)
@@ -71,7 +76,14 @@ public class SaveData : MonoBehaviour
 }
 
 [System.Serializable]
-public class Data
+public struct Data
 {
-    [SerializeField] public List<Slot> slots;
+    public List<StructSlot> slots;
+    public int test;
+}
+
+public struct StructSlot
+{
+    public int itemID;
+    public int itemQuantity;
 }

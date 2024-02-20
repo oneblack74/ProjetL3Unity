@@ -112,12 +112,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void RedefineSlots(List<Slot> newTab)
+    public void RedefineSlots(List<StructSlot> newTab)
     {
         tab.Clear();
-        foreach (Slot slot in newTab)
+        foreach (StructSlot slot in newTab)
         {
-            tab.Add(slot);
+            Slot s = new Slot(slot.itemQuantity, GameManager.GetInstance().ConvertIdToItem(slot.itemID));
+            tab.Add(s);
         }
     }
 
