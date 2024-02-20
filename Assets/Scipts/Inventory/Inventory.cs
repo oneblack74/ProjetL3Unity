@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
-    [SerializeField] public List<Slot> tab = new();
+    [SerializeField] private List<Slot> tab = new();
 
     void Start()
     {
@@ -102,7 +102,13 @@ public class Inventory : MonoBehaviour
         Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
         if (slotCursor.IsEmpty())
         {
-            tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+            (ItemDefinition, int) restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+            slotCursor.AddItem(restant.Item1, restant.Item2);
+        }
+        else if (tab[slotID].IsEmpty() || tab[slotID].GetItem == slotCursor.GetItem)
+        {
+            (ItemDefinition, int) restant = slotCursor.RemoveItem(1);
+            tab[slotID].AddItem(restant.Item1, restant.Item2);
         }
     }
 
