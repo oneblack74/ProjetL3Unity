@@ -1,21 +1,30 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject cursorUI;
     private Inventory inventory;
+    private bool inventoryVisibility;
+
+    void Awake()
+    {
+        inventoryUI.SetActive(false);
+        cursorUI.SetActive(false);
+    }
 
     void Start()
     {
+        GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         inventory = GetComponent<Inventory>();
-        inventoryUI.SetActive(false);
     }
 
-    public void ShowInventory(bool b)
+    public void ShowInventory(InputAction.CallbackContext context)
     {
-        cursorUI.SetActive(b);
-        inventoryUI.SetActive(b);
+        inventoryVisibility = !inventoryVisibility;
+        inventoryUI.SetActive(inventoryVisibility);
+        cursorUI.SetActive(inventoryVisibility);
     }
 
     public Inventory GetInventory
