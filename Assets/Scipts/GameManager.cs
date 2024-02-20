@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
     public PlayerInput inputs;
-    public GameObject player; // A SUPPRIMER, PÖUR TEST
-    private PlayerController playerController; // A SUPPRIMER, POUR TEST
+    public GameObject player;
+    private PlayerController playerController;
     private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
     void Awake()
     {
@@ -86,5 +86,10 @@ public class GameManager : MonoBehaviour
     public PlayerInput GetInputs
     {
         get { return inputs; }
+    }
+
+    public PlayerController GetPlayerController
+    {
+        get { return playerController; }
     }
 }

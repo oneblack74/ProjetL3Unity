@@ -6,6 +6,7 @@ public class SlotUI : MonoBehaviour
 {
     private TextMeshProUGUI textMeshPro;
     private Image itemIcon;
+    private int slotID;
 
     void Awake()
     {
@@ -32,14 +33,19 @@ public class SlotUI : MonoBehaviour
             textMeshPro.text = itemQuantity.ToString();
     }
 
+    public void SetId(int id)
+    {
+        slotID = id;
+    }
+
     public void LeftClick()
     {
-
+        GameManager.GetInstance().GetPlayerController.GetInventory.LeftClick(slotID);
     }
 
     public void RightCLick()
     {
-
+        GameManager.GetInstance().GetPlayerController.GetInventory.RightCLick(slotID);
     }
 
     public void MiddleClick()

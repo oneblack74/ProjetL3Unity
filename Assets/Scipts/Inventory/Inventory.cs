@@ -83,14 +83,29 @@ public class Inventory : MonoBehaviour
         if (tab[index].GetItem == slot.GetItem)
         {
             (ItemDefinition, int) restant = tab[index].AddItem(slot.GetItem, slot.GetItemQuantity);
-            Debug.Log(restant.Item1);
-            Debug.Log(restant.Item2);
             slot.RemoveItem(slot.GetItemQuantity);
             slot.AddItem(restant.Item1, restant.Item2);
             return;
         }
         tab[index].SwitchItems(slot);
     }
+
+    public void LeftClick(int slotID)
+    {
+        GameObject cursor = GameObject.Find("CursorUI");
+        SwitchItem(slotID, cursor.GetComponent<Inventory>().GetSlot(0));
+    }
+
+    public void RightCLick(int slotID)
+    {
+        GameObject cursor = GameObject.Find("CursorUI");
+        Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
+        if (slotCursor.IsEmpty())
+        {
+            tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+        }
+    }
+
 
     public ItemDefinition CheckItem(int index)
     {
