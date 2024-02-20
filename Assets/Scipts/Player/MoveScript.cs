@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class MoveScript : MonoBehaviour
 {
+    
     [SerializeField] private float moveSpeed;
 
     public enum Dir { Up, Down, Left, Right };
@@ -14,6 +15,7 @@ public class MoveScript : MonoBehaviour
     private GameManager manager;
     private PlayerInput inputs;
     private InputAction moveAction;
+    private float timer = 0f;
 
     void Start()
     {
@@ -84,4 +86,24 @@ public class MoveScript : MonoBehaviour
     {
         get { return isMoving; }
     }
+
+    public void ApplyModifier(float multiplier, float timeInSeconds) {
+        timer = 0f;
+        float backupMoveSpeed = moveSpeed;
+        moveSpeed = moveSpeed* multiplier;
+        if (timer >= timeInSeconds){
+            moveSpeed = backupMoveSpeed;
+            timer = 0f;
+        }
+
+    }
+    private void UpdateTimer()
+    {
+        timer += Time.deltaTime; 
+    }
+    void Update()
+    {
+        UpdateTimer();
+    }
+
 }

@@ -12,7 +12,7 @@ public class StaminaControl : MonoBehaviour
     private float timer = 0f;                               //? Used for stamina regen  
 
 
-    /**
+    /** 
     * Used to drain stamina ( when casting a dash for example )
     * Will if there is enough stamina to call a drain
     * If true, drains stamina. Returns false otherwise.

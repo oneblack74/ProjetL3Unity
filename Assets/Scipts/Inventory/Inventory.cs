@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-// namespace InventoryScripts
-// {
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
@@ -125,6 +123,7 @@ public class Inventory : MonoBehaviour
 
     public ItemDefinition CheckItem(int index)
     {
+        Debug.Log(tab[0]);
         return tab[index].GetItem;
     }
 
