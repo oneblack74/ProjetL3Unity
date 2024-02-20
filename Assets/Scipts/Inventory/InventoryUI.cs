@@ -43,27 +43,20 @@ public class InventoryUI : MonoBehaviour
 
     private void InstantiateSlots()
     {
-        GameObject cursor = GameObject.Find("CursorUI");
-
         if (slotUIPrefab != null)
         {
             for (int i = 0; i < inventory.GetInventorySize; i++)
             {
                 int tmp = i;
                 slotsUI.Add(Instantiate(slotUIPrefab, transform));
-                slotsUI[i].GetComponent<Button>().onClick.AddListener(() => OnButtonCLick(tmp, cursor));
+                slotsUI[i].SetId(tmp);
             }
         }
     }
 
-    private void OnButtonCLick(int index, GameObject cursor)
-    {
-        inventory.SwitchItem(index, cursor.GetComponent<Inventory>().GetSlot(0));
-    }
-
-    // private void OnRightButtonClick(int index, GameObject cursor)
+    // private void OnButtonCLick(int index, GameObject cursor)
     // {
-    //     inventory.RightClick(index, cursor.GetComponent<Inventory>().GetSlot(0));
+    //     inventory.SwitchItem(index, cursor.GetComponent<Inventory>().GetSlot(0));
     // }
 
     private void AjusterTailleGridLayout()

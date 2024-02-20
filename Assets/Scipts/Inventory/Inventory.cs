@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
-    [SerializeField] public List<Slot> tab = new();
+    [SerializeField] private List<Slot> tab = new();
 
     void Start()
     {
@@ -83,14 +83,44 @@ public class Inventory : MonoBehaviour
         if (tab[index].GetItem == slot.GetItem)
         {
             (ItemDefinition, int) restant = tab[index].AddItem(slot.GetItem, slot.GetItemQuantity);
-            Debug.Log(restant.Item1);
-            Debug.Log(restant.Item2);
             slot.RemoveItem(slot.GetItemQuantity);
             slot.AddItem(restant.Item1, restant.Item2);
             return;
         }
         tab[index].SwitchItems(slot);
     }
+
+    public void LeftClick(int slotID)
+    {
+        GameObject cursor = GameObject.Find("CursorUI");
+        SwitchItem(slotID, cursor.GetComponent<Inventory>().GetSlot(0));
+    }
+
+    public void RightCLick(int slotID)
+    {
+        GameObject cursor = GameObject.Find("CursorUI");
+        Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
+        if (slotCursor.IsEmpty())
+        {
+            (ItemDefinition, int) restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+            slotCursor.AddItem(restant.Item1, restant.Item2);
+        }
+        else if (tab[slotID].IsEmpty() || tab[slotID].GetItem == slotCursor.GetItem)
+        {
+            (ItemDefinition, int) restant = slotCursor.RemoveItem(1);
+            tab[slotID].AddItem(restant.Item1, restant.Item2);
+        }
+    }
+
+    public void RedefineSlots(List<Slot> newTab)
+    {
+        tab.Clear();
+        foreach (Slot slot in newTab)
+        {
+            tab.Add(slot);
+        }
+    }
+
 
     public ItemDefinition CheckItem(int index)
     {
@@ -110,6 +140,11 @@ public class Inventory : MonoBehaviour
     public Slot GetSlot(int index)
     {
         return tab[index];
+    }
+
+    public List<Slot> GetTab
+    {
+        get { return tab; }
     }
 
 }
