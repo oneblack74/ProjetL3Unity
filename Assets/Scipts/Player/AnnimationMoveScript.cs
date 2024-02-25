@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-[RequireComponent(typeof(MoveScript))]
+[RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnnimationMoveScript : MonoBehaviour
 {
-    private MoveScript moveScript;
+    private Movement movement;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     [SerializeField] Sprite[] sprites;
 
     void Awake()
     {
-        moveScript = GetComponent<MoveScript>();
+        movement = GetComponent<Movement>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -23,9 +23,9 @@ public class AnnimationMoveScript : MonoBehaviour
 
     void Update()
     {
-        bool isMoving = moveScript.GetIsMove;
+        bool isMoving = movement.GetIsMove;
         animator.SetBool("IsMoving", isMoving);
-        int dir = moveScript.GetMyDirToInt();
+        int dir = movement.GetMyDirToInt();
         if (isMoving)
         {
             animator.SetInteger("Dir", dir);

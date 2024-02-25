@@ -20,6 +20,7 @@ public class StaminaControl : MonoBehaviour
         timer = 0f;
         if (stamina >= s)
             stamina -= s;
+
     }
 
     // This function is never called on its own
@@ -34,7 +35,12 @@ public class StaminaControl : MonoBehaviour
     {
         if (this.timer >= regenDelay)
         {
-            if (stamina < maxStamina) stamina += refillRate * Time.deltaTime;
+            if (stamina < maxStamina)
+            {
+                stamina += refillRate * Time.deltaTime;
+                if (stamina > maxStamina)
+                    stamina = maxStamina;
+            }
         }
     }
 

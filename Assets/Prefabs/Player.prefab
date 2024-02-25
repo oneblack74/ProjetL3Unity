@@ -12,11 +12,14 @@ GameObject:
   - component: {fileID: 8481298714664418583}
   - component: {fileID: 6250194954239924670}
   - component: {fileID: 3611963444078636118}
+  - component: {fileID: 4207365219810259414}
   - component: {fileID: 8251459157529416681}
   - component: {fileID: 6548961755992399879}
-  - component: {fileID: 3131892106084686298}
   - component: {fileID: 6308073569987021193}
   - component: {fileID: 1771600197516482872}
+  - component: {fileID: 7126322331697982297}
+  - component: {fileID: 4741672481411554118}
+  - component: {fileID: 8932293523763305958}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -163,6 +166,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44044614, y: 0.7206465}
   m_EdgeRadius: 0
+--- !u!95 &4207365219810259414
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672332087107729192}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &8251459157529416681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,21 +215,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventorySize: 50
   slotsPerLine: 10
---- !u!114 &3131892106084686298
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7672332087107729192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 288050317eed42f429e2bbb1892784e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  myDir: 1
-  isMoving: 0
 --- !u!114 &6308073569987021193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,5 +243,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxStamina: 100
   stamina: 50
-  regenDelay: 10
-  refillRate: 1
+  regenDelay: 2
+  refillRate: 5
+--- !u!114 &7126322331697982297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672332087107729192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7274454a11e710142aa4fa134282d149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedTmp: 10
+  speed: 10
+  myDir: 1
+  isMoving: 0
+--- !u!114 &4741672481411554118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672332087107729192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63232b793879a64d98820905a4ed06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintMultiplier: 1.5
+  staminaConsumption: 10
+--- !u!114 &8932293523763305958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672332087107729192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcd46ff917a02547abee4bcd8f8dd51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 1672739256, guid: 74589efc4d88a724bae62a3220b98da2, type: 3}
+  - {fileID: -1627361677, guid: 0f54d51289c19514cadf83924d366e5b, type: 3}
+  - {fileID: 412413236, guid: fbe54dc6ea48e844fba2f4ddd2725039, type: 3}
+  - {fileID: -177555011, guid: a5c18d895ac6b0e449874f6d1c15c23f, type: 3}

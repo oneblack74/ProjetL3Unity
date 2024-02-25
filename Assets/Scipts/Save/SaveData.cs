@@ -27,7 +27,6 @@ public class SaveData : MonoBehaviour
 
         string saveData = JsonUtility.ToJson(data);
         string chemin = Application.persistentDataPath + "/SaveData.json";
-        Debug.Log(data);
         Debug.Log(saveData);
         Debug.Log(chemin);
 

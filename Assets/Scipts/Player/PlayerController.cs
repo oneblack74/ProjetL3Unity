@@ -5,8 +5,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject cursorUI;
+
+    // Components
     private Inventory inventory;
+    private StaminaControl staminaControl;
+    private Movement movement;
+    private Sprint sprint;
+
+    // Actions
+    private InputAction sprintAction;
+    private InputAction moveAction;
+
+    // Variables
     private bool inventoryVisibility;
+    private Vector3 moveValue;
+    private bool isSprinting;
+
 
     void Awake()
     {
@@ -14,13 +28,16 @@ public class PlayerController : MonoBehaviour
         cursorUI.SetActive(false);
 
         inventory = GetComponent<Inventory>();
-
+        staminaControl = GetComponent<StaminaControl>();
+        movement = GetComponent<Movement>();
+        sprint = GetComponent<Sprint>();
     }
 
     void Start()
     {
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
-
+        sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
+        moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
@@ -28,6 +45,18 @@ public class PlayerController : MonoBehaviour
         inventoryVisibility = !inventoryVisibility;
         inventoryUI.SetActive(inventoryVisibility);
         cursorUI.SetActive(inventoryVisibility);
+    }
+
+    void Update()
+    {
+        moveValue = moveAction.ReadValue<Vector2>();
+        isSprinting = sprintAction.ReadValue<float>() > 0;
+    }
+
+    void FixedUpdate()
+    {
+        sprint.Sprinting(isSprinting, staminaControl, movement);
+        movement.Move(moveValue);
     }
 
     public Inventory GetInventory
@@ -42,6 +71,11 @@ public class PlayerController : MonoBehaviour
 
     public StaminaControl GetStaminaControl
     {
-        get { return GetComponent<StaminaControl>(); }
+        get { return staminaControl; }
+    }
+
+    public Movement GetMovement
+    {
+        get { return movement; }
     }
 }

@@ -7,12 +7,12 @@ public class Trap : MonoBehaviour
     private enum trapType { Damage, Slow };
     [SerializeField] private trapType type;
     private HealthControl healthObject;
-    private MoveScript moveObject;
+    private Movement movement;
     private float trapDamage = 10.0f;
 
     void Awake()
     {
-        moveObject = GameObject.Find("Player").GetComponent<MoveScript>();
+        movement = GameObject.Find("Player").GetComponent<Movement>();
         healthObject = GameObject.Find("Player").GetComponent<HealthControl>();
     }
 
@@ -43,6 +43,6 @@ public class Trap : MonoBehaviour
 
     private void procSlowTrap(float multiplier, float timeInSeconds)
     {
-        moveObject.ApplyModifier(multiplier, timeInSeconds);
+        //movement.ApplyModifier(multiplier, timeInSeconds);
     }
 }
