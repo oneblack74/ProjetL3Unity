@@ -123,7 +123,12 @@ public class Inventory : MonoBehaviour
 
     public ItemDefinition CheckItem(int index)
     {
-        Debug.Log(tab[0]);
+        Debug.Log(index + " | " + tab.Count);
+        if (index < 0 || index >= inventorySize)
+        {
+            Debug.Log(index);
+            throw new Exception("Index out of range");
+        }
         return tab[index].GetItem;
     }
 

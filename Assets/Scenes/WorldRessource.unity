@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 1
-  slotsPerLine: 0
+  slotsPerLine: 1
 --- !u!1001 &845400191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23099,6 +23099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    slots: []
     test: 0
 --- !u!4 &1534293171
 Transform:

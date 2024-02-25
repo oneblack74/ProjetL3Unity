@@ -12,7 +12,7 @@ public class SaveData : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             Charger();
         }
@@ -38,7 +38,7 @@ public class SaveData : MonoBehaviour
     {
         string chemin = Application.persistentDataPath + "/SaveData.json";
         string saveData = System.IO.File.ReadAllText(chemin);
-        Debug.Log("Sauvegarder");
+        Debug.Log("Charger");
         data = JsonUtility.FromJson<Data>(saveData);
         LoadElements();
     }
@@ -82,7 +82,8 @@ public struct Data
     public int test;
 }
 
-public struct StructSlot
+[System.Serializable]
+public class StructSlot
 {
     public int itemID;
     public int itemQuantity;
