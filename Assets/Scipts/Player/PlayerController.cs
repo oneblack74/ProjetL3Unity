@@ -12,12 +12,15 @@ public class PlayerController : MonoBehaviour
     {
         inventoryUI.SetActive(false);
         cursorUI.SetActive(false);
+
+        inventory = GetComponent<Inventory>();
+
     }
 
     void Start()
     {
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
-        inventory = GetComponent<Inventory>();
+
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
@@ -30,6 +33,11 @@ public class PlayerController : MonoBehaviour
     public Inventory GetInventory
     {
         get { return inventory; }
+    }
+
+    public HealthControl GetHealthControl
+    {
+        get { return GetComponent<HealthControl>(); }
     }
 
 }

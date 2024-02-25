@@ -45,8 +45,21 @@ public class SaveData : MonoBehaviour
 
     private void SaveElements()
     {
+        // player : ============================================
+
+        // __________ inventory
         SaveInventory(manager.GetPlayerController.GetInventory);
-        data.test = 5;
+
+        // __________ health
+        SaveHealth(manager.GetPlayerController.GetHealthControl);
+    }
+    private void LoadElements()
+    {
+        // player : ============================================
+        // __________ inventory
+        LoadInventory(manager.GetPlayerController.GetInventory);
+        // __________ health
+        LoadHealth(manager.GetPlayerController.GetHealthControl);
     }
 
     private void SaveInventory(Inventory inventory)
@@ -64,22 +77,32 @@ public class SaveData : MonoBehaviour
 
     }
 
+    private void SaveHealth(HealthControl healthControl)
+    {
+        data.health = new()
+        {
+            maxHealth = healthControl.GetMaxHealth,
+            health = healthControl.GetHealth
+        };
+    }
+
     private void LoadInventory(Inventory inventory)
     {
         inventory.RedefineSlots(data.slots);
     }
 
-    private void LoadElements()
+    private void LoadHealth(HealthControl healthControl)
     {
-        LoadInventory(manager.GetPlayerController.GetInventory);
+        healthControl.InitValues(data.health.maxHealth, data.health.health);
     }
+
 }
 
 [System.Serializable]
 public struct Data
 {
     public List<StructSlot> slots;
-    public int test;
+    public StructHealth health;
 }
 
 [System.Serializable]
@@ -87,4 +110,11 @@ public class StructSlot
 {
     public int itemID;
     public int itemQuantity;
+}
+
+[System.Serializable]
+public class StructHealth
+{
+    public float maxHealth;
+    public float health;
 }

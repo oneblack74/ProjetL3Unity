@@ -10,15 +10,19 @@ public class Trap : MonoBehaviour
     private MoveScript moveObject;
     private float trapDamage = 10.0f;
 
-    void Awake() {
-        moveObject   = GameObject.Find("Player").   GetComponent<MoveScript>();
+    void Awake()
+    {
+        moveObject = GameObject.Find("Player").GetComponent<MoveScript>();
         healthObject = GameObject.Find("Player").GetComponent<HealthControl>();
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.CompareTag("Player")) {
-            switch (type) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            switch (type)
+            {
                 case trapType.Damage:
                     procDamageTrap(trapDamage);
                     break;
@@ -32,11 +36,13 @@ public class Trap : MonoBehaviour
         }
     }
 
-    private void procDamageTrap(float damage) {
-        healthObject.DrainHealth(damage);
+    private void procDamageTrap(float damage)
+    {
+        healthObject.RemoveHealth(damage);
     }
 
-    private void procSlowTrap(float multiplier, float timeInSeconds) {
+    private void procSlowTrap(float multiplier, float timeInSeconds)
+    {
         moveObject.ApplyModifier(multiplier, timeInSeconds);
     }
 }
