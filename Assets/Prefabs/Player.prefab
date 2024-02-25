@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6548961755992399879}
   - component: {fileID: 3131892106084686298}
   - component: {fileID: 6308073569987021193}
+  - component: {fileID: 1771600197516482872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -219,3 +220,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 80
   health: 30
+--- !u!114 &1771600197516482872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7672332087107729192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef58fb70616692744995a0231d457da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxStamina: 100
+  stamina: 50
+  regenDelay: 10
+  refillRate: 1

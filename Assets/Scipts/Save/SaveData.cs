@@ -46,25 +46,27 @@ public class SaveData : MonoBehaviour
     private void SaveElements()
     {
         // player : ============================================
-
         // __________ inventory
-        SaveInventory(manager.GetPlayerController.GetInventory);
-
+        data.player.slots = SaveInventory(manager.GetPlayerController.GetInventory);
         // __________ health
-        SaveHealth(manager.GetPlayerController.GetHealthControl);
+        data.player.health = SaveHealth(manager.GetPlayerController.GetHealthControl);
+        // __________ stamina
+        data.player.stamina = SaveStamina(manager.GetPlayerController.GetStaminaControl);
     }
     private void LoadElements()
     {
         // player : ============================================
         // __________ inventory
-        LoadInventory(manager.GetPlayerController.GetInventory);
+        LoadInventory(manager.GetPlayerController.GetInventory, data.player.slots);
         // __________ health
-        LoadHealth(manager.GetPlayerController.GetHealthControl);
+        LoadHealth(manager.GetPlayerController.GetHealthControl, data.player.health);
+        // __________ stamina
+        LoadStamina(manager.GetPlayerController.GetStaminaControl, data.player.stamina);
     }
 
-    private void SaveInventory(Inventory inventory)
+    private List<StructSlot> SaveInventory(Inventory inventory)
     {
-        data.slots = new List<StructSlot>();
+        List<StructSlot> slots = new List<StructSlot>();
         foreach (Slot slot in inventory.GetTab)
         {
             StructSlot s = new()
@@ -72,28 +74,46 @@ public class SaveData : MonoBehaviour
                 itemID = slot.GetItem.getID,
                 itemQuantity = slot.GetItemQuantity
             };
-            data.slots.Add(s);
+            slots.Add(s);
         }
-
+        return slots;
     }
 
-    private void SaveHealth(HealthControl healthControl)
+    private StructHealth SaveHealth(HealthControl healthControl)
     {
-        data.health = new()
+        StructHealth health = new()
         {
             maxHealth = healthControl.GetMaxHealth,
             health = healthControl.GetHealth
         };
+        return health;
     }
 
-    private void LoadInventory(Inventory inventory)
+    private StructStamina SaveStamina(StaminaControl staminaControl)
     {
-        inventory.RedefineSlots(data.slots);
+        StructStamina stamina = new()
+        {
+            maxStamina = staminaControl.GetMaxStamina,
+            stamina = staminaControl.GetStamina,
+            regenDelay = staminaControl.GetRegenDelay,
+            refillRate = staminaControl.GetRefillRate
+        };
+        return stamina;
     }
 
-    private void LoadHealth(HealthControl healthControl)
+    private void LoadInventory(Inventory inventory, List<StructSlot> slots)
     {
-        healthControl.InitValues(data.health.maxHealth, data.health.health);
+        inventory.RedefineSlots(slots);
+    }
+
+    private void LoadHealth(HealthControl healthControl, StructHealth health)
+    {
+        healthControl.InitValues(health.maxHealth, health.health);
+    }
+
+    private void LoadStamina(StaminaControl staminaControl, StructStamina stamina)
+    {
+        staminaControl.InitValues(stamina.maxStamina, stamina.stamina, stamina.regenDelay, stamina.refillRate);
     }
 
 }
@@ -101,8 +121,15 @@ public class SaveData : MonoBehaviour
 [System.Serializable]
 public struct Data
 {
-    public List<StructSlot> slots;
+    public StructPlayer player;
+}
+
+[System.Serializable]
+public class StructPlayer
+{
     public StructHealth health;
+    public StructStamina stamina;
+    public List<StructSlot> slots;
 }
 
 [System.Serializable]
@@ -117,4 +144,13 @@ public class StructHealth
 {
     public float maxHealth;
     public float health;
+}
+
+[System.Serializable]
+public class StructStamina
+{
+    public float maxStamina;
+    public float stamina;
+    public float regenDelay;
+    public float refillRate;
 }

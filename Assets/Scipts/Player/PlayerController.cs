@@ -40,4 +40,8 @@ public class PlayerController : MonoBehaviour
         get { return GetComponent<HealthControl>(); }
     }
 
+    public StaminaControl GetStaminaControl
+    {
+        get { return GetComponent<StaminaControl>(); }
+    }
 }
