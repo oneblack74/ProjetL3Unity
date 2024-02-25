@@ -61,23 +61,6 @@ public class GameManager : MonoBehaviour
         return itemDico[ID];
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) TestChangeScene();
-    }
-
-    public void TestChangeScene()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            ChangeScene(2);
-        }
-        else
-        {
-            ChangeScene(1);
-        }
-    }
-
     public PlayerInput GetInputs
     {
         get { return inputs; }

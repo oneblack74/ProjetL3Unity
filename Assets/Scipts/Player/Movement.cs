@@ -14,17 +14,13 @@ public class Movement : MonoBehaviour
     [SerializeField] private Dir myDir = Dir.Down;
     [SerializeField] private bool isMoving = false;
 
-    void Start()
-    {
-    }
 
+    private Dir lastMoveDir;
 
     public void Move(Vector3 moveValue)
     {
-        // récupère l'input avec inputmanager et de movement et modifier le player avec transform.translate
-        // modifier myDir et isMoving ==> permettra au script MoveAnimationScript de jouer la bonne animation du player
-
         transform.Translate(speed * Time.deltaTime * moveValue);
+
         if (moveValue.x > 0)
         {
             myDir = Dir.Right;
@@ -49,7 +45,20 @@ public class Movement : MonoBehaviour
         {
             isMoving = false;
         }
+
+        // If the player is moving, update the last move direction
+        if (isMoving)
+        {
+            lastMoveDir = myDir;
+        }
+        else
+        {
+            // When the player stops moving, set the direction to the last move direction
+            myDir = lastMoveDir;
+        }
     }
+
+
 
     public float GetSpeedTmp
     {

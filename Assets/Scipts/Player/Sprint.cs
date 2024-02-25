@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Movement))]
+[RequireComponent(typeof(StaminaControl))]
 public class Sprint : MonoBehaviour
 {
-    [SerializeField] private float sprintMultiplier;
+    [SerializeField] private float speedMultiplier;
     [SerializeField] private float staminaConsumption;
 
     public void Sprinting(bool isSprinting, StaminaControl staminaControl, Movement movement)
@@ -13,7 +15,7 @@ public class Sprint : MonoBehaviour
         {
             if (staminaControl.GetStamina > 0)
             {
-                movement.GetSpeed = movement.GetSpeedTmp * sprintMultiplier;
+                movement.GetSpeed = movement.GetSpeedTmp * speedMultiplier;
                 staminaControl.DrainStaminaOverTime(staminaConsumption);
             }
             else

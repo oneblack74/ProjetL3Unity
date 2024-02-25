@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private StaminaControl staminaControl;
     private Movement movement;
     private Sprint sprint;
+    private Dash dash;
 
     // Actions
     private InputAction sprintAction;
@@ -31,11 +32,13 @@ public class PlayerController : MonoBehaviour
         staminaControl = GetComponent<StaminaControl>();
         movement = GetComponent<Movement>();
         sprint = GetComponent<Sprint>();
+        dash = GetComponent<Dash>();
     }
 
     void Start()
     {
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
+        GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
     }

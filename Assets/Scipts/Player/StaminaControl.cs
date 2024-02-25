@@ -15,11 +15,15 @@ public class StaminaControl : MonoBehaviour
 
     // This function is never called on its own 
     // Useful for 1-time drains, like dashes, jumps..
-    public void DrainStamina(float s)
+    public bool DrainStamina(float s)
     {
         timer = 0f;
         if (stamina >= s)
-            stamina -= s;
+        {
+            stamina -= s; return true;
+        }
+        else
+            return false;
 
     }
 
