@@ -7,11 +7,18 @@ public class SlotUI : MonoBehaviour
     private TextMeshProUGUI textMeshPro;
     private Image itemIcon;
     private int slotID;
+    private Inventory inventoryLink;
 
     void Awake()
     {
         textMeshPro = gameObject.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         itemIcon = gameObject.transform.GetChild(1).GetComponent<Image>();
+    }
+
+    // Le gO doit avoir un Inventory, c'est celui ci qui va être utilisé pour le slotUI
+    public void LinkInventory(Inventory inv)
+    {
+        inventoryLink = inv;
     }
 
     public void UpdateUI(ItemDefinition item, int itemQuantity)
@@ -40,12 +47,12 @@ public class SlotUI : MonoBehaviour
 
     public void LeftClick()
     {
-        GameManager.GetInstance().GetPlayerController.GetInventory.LeftClick(slotID);
+        inventoryLink.LeftClick(slotID);
     }
 
     public void RightCLick()
     {
-        GameManager.GetInstance().GetPlayerController.GetInventory.RightCLick(slotID);
+        inventoryLink.RightCLick(slotID);
     }
 
     public void MiddleClick()

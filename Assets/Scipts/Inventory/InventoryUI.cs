@@ -10,13 +10,11 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private SlotUI slotUIPrefab;
     private GridLayoutGroup gridLayout;
     [SerializeField] private Inventory inventory;
-    private List<SlotUI> slotsUI = new List<SlotUI>();
+    private readonly List<SlotUI> slotsUI = new();
 
     void Awake()
     {
-        gridLayout = GetComponent<GridLayoutGroup>();
-
-        if (gridLayout != null)
+        if (TryGetComponent<GridLayoutGroup>(out gridLayout))
         {
             AjusterTailleGridLayout();
         }
@@ -49,15 +47,11 @@ public class InventoryUI : MonoBehaviour
             {
                 int tmp = i;
                 slotsUI.Add(Instantiate(slotUIPrefab, transform));
+                slotsUI[i].LinkInventory(inventory);
                 slotsUI[i].SetId(tmp);
             }
         }
     }
-
-    // private void OnButtonCLick(int index, GameObject cursor)
-    // {
-    //     inventory.SwitchItem(index, cursor.GetComponent<Inventory>().GetSlot(0));
-    // }
 
     private void AjusterTailleGridLayout()
     {
