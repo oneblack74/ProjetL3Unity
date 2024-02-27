@@ -62,8 +62,7 @@ public class InventoryUI : MonoBehaviour
     private void AjusterTailleGridLayout()
     {
         gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
-        float size = (GetComponent<RectTransform>().rect.width -
-        (espaceEntreElements * (inventory.GetNbSlotPerLine() - 1))) / inventory.GetNbSlotPerLine();
+        float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (inventory.GetNbSlotPerLine() - 1))) / inventory.GetNbSlotPerLine();
         gridLayout.cellSize = new Vector2(size, size);
     }
 }

@@ -6,9 +6,17 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
-    [SerializeField] private List<Slot> tab = new();
+    [SerializeField] private List<Slot> tab = new List<Slot>();
 
     void Start()
+    {
+        if (!(tab.Count >= 1))
+        {
+            InitSlots();
+        }
+    }
+
+    public void InitSlots()
     {
         for (int i = 0; i < inventorySize; i++)
         {
@@ -123,7 +131,7 @@ public class Inventory : MonoBehaviour
 
     public ItemDefinition CheckItem(int index)
     {
-        Debug.Log(index + " | " + tab.Count);
+        // Debug.Log(index + " | " + tab.Count);
         if (index < 0 || index >= inventorySize)
         {
             Debug.Log(index);

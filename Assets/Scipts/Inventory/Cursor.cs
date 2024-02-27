@@ -11,6 +11,7 @@ public class Cursor : MonoBehaviour
     void Start()
     {
         inventory = GetComponent<Inventory>();
+        inventory.InitSlots();
     }
 
     void Update()
