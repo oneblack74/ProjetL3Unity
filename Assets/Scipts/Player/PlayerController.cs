@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     // Components
     private Inventory inventory;
     private StaminaControl staminaControl;
+    private HealthControl healthControl;
     private Movement movement;
     private Sprint sprint;
     private Dash dash;
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
         inventory = GetComponent<Inventory>();
         staminaControl = GetComponent<StaminaControl>();
+        healthControl = GetComponent<HealthControl>();
         movement = GetComponent<Movement>();
         sprint = GetComponent<Sprint>();
         dash = GetComponent<Dash>();
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
 
     public HealthControl GetHealthControl
     {
-        get { return GetComponent<HealthControl>(); }
+        get { return healthControl; }
     }
 
     public StaminaControl GetStaminaControl

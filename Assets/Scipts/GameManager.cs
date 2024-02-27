@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { private set; get; }
     public PlayerInput inputs;
-    public GameObject player;
+    private GameObject player;
+
     private PlayerController playerController;
     private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
     void Awake()
@@ -20,7 +21,6 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-
 
         // récupérer les item scriptableobject et les stocker dans un dico
         string[] guids = AssetDatabase.FindAssets("t:ItemDefinition", new[] { "Assets/ScriptableObjects/Items" });
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerController = player.GetComponent<PlayerController>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     public static GameManager GetInstance()

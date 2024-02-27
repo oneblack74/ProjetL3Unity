@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7201797170875069899}
   - component: {fileID: 3173586341112585096}
   - component: {fileID: 1329576786805907747}
+  - component: {fileID: 4322249550008653164}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputs: {fileID: 1329576786805907747}
+  player: {fileID: 0}
 --- !u!114 &1329576786805907747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,3 +78,26 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4322249550008653164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089120760815390050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a0f095cdc985df46a2559e84d6e0922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    player:
+      health:
+        maxHealth: 0
+        health: 0
+      stamina:
+        maxStamina: 0
+        stamina: 0
+        regenDelay: 0
+        refillRate: 0
+      slots: []
