@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private int slotsPerLine = 1;
-    [SerializeField] private List<Slot> tab = new List<Slot>();
+    [SerializeField] private List<Slot> tab = new();
 
     void Start()
     {
@@ -97,14 +97,14 @@ public class Inventory : MonoBehaviour
     }
 
     public void LeftClick(int slotID)
-    {
-        GameObject cursor = GameObject.Find("CursorUI");
-        SwitchItem(slotID, cursor.GetComponent<Inventory>().GetSlot(0));
+    {   
+        SwitchItem(slotID, GameManager.GetInstance().GetCursorUI.GetComponent<Inventory>().GetSlot(0));
+        // Si pb de reférence ici, le cursor n'est pas actif ;)
     }
 
     public void RightCLick(int slotID)
     {
-        GameObject cursor = GameObject.Find("CursorUI");
+        GameObject cursor = GameManager.GetInstance().GetCursorUI;
         Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
         if (slotCursor.IsEmpty())
         {
@@ -123,7 +123,7 @@ public class Inventory : MonoBehaviour
         tab.Clear();
         foreach (StructSlot slot in newTab)
         {
-            Slot s = new Slot(slot.itemQuantity, GameManager.GetInstance().ConvertIdToItem(slot.itemID));
+            Slot s = new(slot.itemQuantity, GameManager.GetInstance().ConvertIdToItem(slot.itemID));
             tab.Add(s);
         }
     }

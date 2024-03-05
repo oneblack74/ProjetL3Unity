@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteractable
+public class Interactable : MonoBehaviour
 {
-    public int Interact()
-    {
-        return 1;
-    }
+	[SerializeField] private IInteractable interactableComponent;
+
+	public void Interact()
+	{
+		interactableComponent.Interact();
+	}
 }

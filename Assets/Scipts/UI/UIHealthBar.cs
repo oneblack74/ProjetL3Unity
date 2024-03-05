@@ -16,6 +16,7 @@ public class UIHealthBar : MonoBehaviour
     void Start()
     {
         manager = GameManager.GetInstance();
+        Debug.Log(manager);
     }
 
     void Update()

@@ -14,21 +14,31 @@ public class InventoryUI : MonoBehaviour
 
     void Awake()
     {
-        if (TryGetComponent<GridLayoutGroup>(out gridLayout))
-        {
-            AjusterTailleGridLayout();
-        }
-        else
-        {
-            Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
-        }
+        Init();
+    }
 
-        InstantiateSlots();
+    private void Init()
+	{
+        if (inventory != null)
+        {
+            if (TryGetComponent<GridLayoutGroup>(out gridLayout))
+            {
+                AjusterTailleGridLayout();
+            }
+            else
+            {
+                Debug.LogError("Le composant GridLayoutGroup n'a pas été trouvé sur cet objet.");
+            }
+            InstantiateSlots();
+        }
     }
 
     void Update()
     {
-        UpdateUI();
+        if (inventory != null)
+        {
+            UpdateUI();
+        }
     }
 
     public void UpdateUI()
@@ -52,6 +62,15 @@ public class InventoryUI : MonoBehaviour
             }
         }
     }
+
+    public void LinkInventory(Inventory inv)
+	{
+        if (inventory == null)
+        {
+            inventory = inv;
+            Init();
+        }
+	}
 
     private void AjusterTailleGridLayout()
     {

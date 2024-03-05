@@ -6,20 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance { private set; get; }
+    public static GameManager Instance { private set; get; }
     public PlayerInput inputs;
-    private GameObject player;
 
     private PlayerController playerController;
-    private Dictionary<int, ItemDefinition> itemDico = new Dictionary<int, ItemDefinition>();
+    [SerializeField] private GameObject cursorUI;
+
+    private readonly Dictionary<int, ItemDefinition> itemDico = new();
+    
     void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(this);
             return;
         }
-        instance = this;
+        Instance = this;
         DontDestroyOnLoad(gameObject);
 
         // récupérer les item scriptableobject et les stocker dans un dico
@@ -43,13 +45,25 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetInstance()
     {
-        return instance;
+        return Instance;
     }
 
     public void ChangeScene(int sceneIndex)
     {
         SceneManager.LoadSceneAsync(sceneIndex);
     }
+
+    // S'occupe de changer en mode "dans un inventaire", TODO : Empécher les controlles
+    public void OpenInventory()
+	{
+        cursorUI.SetActive(true);
+	}
+
+    // S'occupe de changer en mode "dans un inventaire" Cf : GameManager.OpenInventory()
+    public void CloseInventory()
+	{
+        cursorUI.SetActive(false);
+	}
 
     public int GetSceneIndex
     {
@@ -69,5 +83,10 @@ public class GameManager : MonoBehaviour
     public PlayerController GetPlayerController
     {
         get { return playerController; }
+    }
+
+    public GameObject GetCursorUI 
+    {
+        get { return cursorUI; }
     }
 }

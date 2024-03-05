@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject cursorUI;
 
     // Components
     private Inventory inventory;
@@ -23,11 +23,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveValue;
     private bool isSprinting;
 
+    private List<IInteractable> triggerList = new();
 
     void Awake()
     {
         inventoryUI.SetActive(false);
-        cursorUI.SetActive(false);
+        GameManager.GetInstance().CloseInventory();
 
         inventory = GetComponent<Inventory>();
         staminaControl = GetComponent<StaminaControl>();
@@ -40,16 +41,54 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
+        GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
+        inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(1), 5);
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
     {
         inventoryVisibility = !inventoryVisibility;
         inventoryUI.SetActive(inventoryVisibility);
-        cursorUI.SetActive(inventoryVisibility);
+        GameManager.GetInstance().OpenInventory();
+    }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        if (collision.gameObject.GetComponent<Interactable>() == null)
+        {
+            return;
+        }
+        IInteractable objectInteracted = collision.gameObject.GetComponent<IInteractable>();
+        if (!triggerList.Contains(objectInteracted))
+        {
+            triggerList.Add(objectInteracted);
+        }
+    }
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+        if (collision.gameObject.GetComponent<Interactable>() == null)
+        {
+            return;
+        }
+        IInteractable objectInteracted = collision.gameObject.GetComponent<IInteractable>();
+        if (triggerList.Contains(objectInteracted))
+        {
+            triggerList.Remove(objectInteracted);
+        }
+    }
+
+
+	public void Interact(InputAction.CallbackContext context)
+	{
+        if (triggerList.Count == 0)
+		{
+            return;
+		}
+        triggerList[0].Interact();
     }
 
     void Update()
