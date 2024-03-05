@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(TrapVisibility))]
 public class TrapSlow : MonoBehaviour
 {
     private enum TrapState { Active, Inactive };
     [SerializeField] private TrapState state = TrapState.Active;
     private GameManager manager;
     [SerializeField] private float slowMultiplier = 0.5f;
-    private float timer = 0.0f;
+    [SerializeField] private float timer = 0.0f;
     [SerializeField] private float slowDuration = 3.0f;
     private bool timerActive = false;
 
@@ -51,8 +52,9 @@ public class TrapSlow : MonoBehaviour
         {
             if (state == TrapState.Active)
             {
-                manager.GetPlayerController.GetMovement.GetSpeed = manager.GetPlayerController.GetMovement.GetSpeedTmp * slowMultiplier;
+                other.GetComponent<Movement>().ModifierSpeed(slowMultiplier);
                 state = TrapState.Inactive;
+                GetComponent<TrapVisibility>().ChangeVisibility();
                 timerActive = true;
             }
 

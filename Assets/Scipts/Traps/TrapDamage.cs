@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(TrapVisibility))]
 public class TrapDamage : MonoBehaviour
 {
     private enum TrapState { Active, Inactive };
@@ -27,6 +28,7 @@ public class TrapDamage : MonoBehaviour
             if (state == TrapState.Active)
             {
                 manager.GetPlayerController.GetHealthControl.RemoveHealth(trapDamage);
+                GetComponent<TrapVisibility>().ChangeVisibility();
                 state = TrapState.Inactive;
             }
 

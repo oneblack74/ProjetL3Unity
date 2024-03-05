@@ -58,7 +58,10 @@ public class Movement : MonoBehaviour
         }
     }
 
-
+    public void ModifierSpeed(float speedMultiplier)
+    {
+        speed = speedTmp * speedMultiplier;
+    }
 
     public float GetSpeedTmp
     {
