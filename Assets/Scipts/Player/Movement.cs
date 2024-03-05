@@ -20,7 +20,6 @@ public class Movement : MonoBehaviour
 
     public void Move(Vector3 moveValue)
     {
-        Debug.Log(speed);
         transform.Translate(speed * Time.fixedDeltaTime * moveValue);
 
         if (moveValue.x > 0)

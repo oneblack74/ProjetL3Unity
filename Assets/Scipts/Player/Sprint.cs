@@ -23,9 +23,5 @@ public class Sprint : MonoBehaviour
                 movement.GetSpeed = movement.GetSpeedTmp;
             }
         }
-        else
-        {
-            movement.GetSpeed = movement.GetSpeedTmp;
-        }
     }
 }

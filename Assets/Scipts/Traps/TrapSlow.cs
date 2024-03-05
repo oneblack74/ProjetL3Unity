@@ -53,7 +53,8 @@ public class TrapSlow : MonoBehaviour
             if (state == TrapState.Active)
             {
                 float newSpeed = manager.GetPlayerController.GetMovement.GetSpeedTmp * slowMultiplier;
-                manager.GetPlayerController.GetMovement.ModifySpeed(newSpeed);
+                //manager.GetPlayerController.GetMovement.ModifySpeed(newSpeed);
+                other.GetComponent<Movement>().GetSpeed = newSpeed;
 
                 GetComponent<TrapVisibility>().ChangeVisibility();
                 state = TrapState.Inactive;
