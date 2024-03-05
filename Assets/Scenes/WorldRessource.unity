@@ -23522,6 +23522,10 @@ PrefabInstance:
       propertyPath: inventoryUI
       value: 
       objectReference: {fileID: 103737260}
+    - target: {fileID: 8527713822405752227, guid: 473e9bb1e6edc114cb16dc28e56de083, type: 3}
+      propertyPath: distance
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23809,6 +23813,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 839491022896556530, guid: 32267d0ea84dc024e9ffd112cb6a67c8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4114356161939276742, guid: 32267d0ea84dc024e9ffd112cb6a67c8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.0684047
@@ -23927,6 +23935,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282876623732173000, guid: 0582367eb60b9654fa625933d2069f69, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8846342832536142984, guid: 0582367eb60b9654fa625933d2069f69, type: 3}
       propertyPath: m_Name
       value: TrapDamage

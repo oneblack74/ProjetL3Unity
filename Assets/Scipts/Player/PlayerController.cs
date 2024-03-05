@@ -61,7 +61,8 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         sprint.Sprinting(isSprinting, staminaControl, movement);
-        movement.Move(moveValue);
+        if (!movement.GetIsLock)
+            movement.Move(moveValue);
     }
 
     public Inventory GetInventory

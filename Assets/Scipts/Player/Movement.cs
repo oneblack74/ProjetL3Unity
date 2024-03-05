@@ -13,13 +13,15 @@ public class Movement : MonoBehaviour
     public enum Dir { Up, Down, Left, Right };
     [SerializeField] private Dir myDir = Dir.Down;
     [SerializeField] private bool isMoving = false;
+    private bool isLock = false;
 
 
     private Dir lastMoveDir;
 
     public void Move(Vector3 moveValue)
     {
-        transform.Translate(speed * Time.deltaTime * moveValue);
+        Debug.Log(speed);
+        transform.Translate(speed * Time.fixedDeltaTime * moveValue);
 
         if (moveValue.x > 0)
         {
@@ -58,10 +60,11 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void ModifierSpeed(float speedMultiplier)
+    public void ModifySpeed(float newSpeed)
     {
-        speed = speedTmp * speedMultiplier;
+        speed = newSpeed;
     }
+
 
     public float GetSpeedTmp
     {
@@ -94,6 +97,10 @@ public class Movement : MonoBehaviour
         get { return isMoving; }
     }
 
-
+    public bool GetIsLock
+    {
+        get { return isLock; }
+        set { isLock = value; }
+    }
 
 }
