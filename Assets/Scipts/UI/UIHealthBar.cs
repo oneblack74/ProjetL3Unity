@@ -16,12 +16,12 @@ public class UIHealthBar : MonoBehaviour
     void Start()
     {
         manager = GameManager.GetInstance();
-        Debug.Log(manager);
     }
 
     void Update()
     {
-        HealthControl healthControl = manager.GetPlayerController.GetHealthControl;
+        PlayerController playerController = manager.GetPlayerController;
+        HealthControl healthControl = playerController.GetHealthControl;
         image.fillAmount = healthControl.GetHealth / healthControl.GetMaxHealth;
     }
 }

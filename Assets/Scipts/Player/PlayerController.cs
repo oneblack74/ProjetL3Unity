@@ -19,16 +19,15 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
 
     // Variables
-    private bool inventoryVisibility;
+    private bool inInventory = false; // Variable qui gère si le joueur est dans SON inventaire
     private Vector3 moveValue;
     private bool isSprinting;
 
-    private List<IInteractable> triggerList = new();
+    private readonly List<IInteractable> triggerList = new();
 
-    void Awake()
-    {
+	void Awake()
+	{
         inventoryUI.SetActive(false);
-        GameManager.GetInstance().CloseInventory();
 
         inventory = GetComponent<Inventory>();
         staminaControl = GetComponent<StaminaControl>();
@@ -38,21 +37,36 @@ public class PlayerController : MonoBehaviour
         dash = GetComponent<Dash>();
     }
 
-    void Start()
+	void Start()
     {
+        GameManager.GetInstance().CloseInventory();
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
-        inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(1), 5);
+
+        
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
     {
-        inventoryVisibility = !inventoryVisibility;
-        inventoryUI.SetActive(inventoryVisibility);
-        GameManager.GetInstance().OpenInventory();
+        if (GameManager.GetInstance().GetIsPlayerInInventory && !inInventory)
+		{
+            return;
+		}
+        if (inInventory)
+        {
+            inventoryUI.SetActive(false);
+            GameManager.GetInstance().CloseInventory();
+        }
+        else
+        {
+            inventoryUI.SetActive(true);
+            GameManager.GetInstance().OpenInventory();
+            inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(1), 5);
+        }
+        inInventory = !inInventory;
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
@@ -81,14 +95,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
 	public void Interact(InputAction.CallbackContext context)
 	{
-        if (triggerList.Count == 0)
+        if (triggerList.Count == 0 || inInventory)
 		{
             return;
 		}
-        triggerList[0].Interact();
+        triggerList[0].Interact(); //TODO: A modifier pour que ce soit l'objet le plus proche  
     }
 
     void Update()
@@ -103,6 +116,11 @@ public class PlayerController : MonoBehaviour
         if (!movement.GetIsLock)
             movement.Move(moveValue);
     }
+
+    public void LockPlayer(bool state)
+	{
+        movement.GetIsLock = state;
+	}
 
     public Inventory GetInventory
     {

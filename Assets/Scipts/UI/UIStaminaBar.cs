@@ -20,7 +20,8 @@ public class UIStaminaBar : MonoBehaviour
 
     void Update()
     {
-        StaminaControl staminaControl = manager.GetPlayerController.GetStaminaControl; ;
+        PlayerController playerController = manager.GetPlayerController;
+        StaminaControl staminaControl = playerController.GetStaminaControl;
         image.fillAmount = staminaControl.GetStamina / staminaControl.GetMaxStamina;
     }
 }

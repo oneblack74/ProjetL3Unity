@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { private set; get; }
+    public static GameManager Instance;
     public PlayerInput inputs;
 
     private PlayerController playerController;
+    private bool playerInInventory; // Variable qui gère si le player est dans un inventaire AUTRE que le siens 
     [SerializeField] private GameObject cursorUI;
 
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
@@ -53,17 +54,21 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadSceneAsync(sceneIndex);
     }
 
-    // S'occupe de changer en mode "dans un inventaire", TODO : Empécher les controlles
+    // S'occupe de changer en mode "dans un inventaire"
     public void OpenInventory()
 	{
+        playerController.LockPlayer(true);
         cursorUI.SetActive(true);
+        playerInInventory = true;
 	}
 
-    // S'occupe de changer en mode "dans un inventaire" Cf : GameManager.OpenInventory()
+    // S'occupe de changer en mode "dans un inventaire"
     public void CloseInventory()
 	{
+        playerController.LockPlayer(false);
         cursorUI.SetActive(false);
-	}
+        playerInInventory = false;
+    }
 
     public int GetSceneIndex
     {
@@ -89,4 +94,9 @@ public class GameManager : MonoBehaviour
     {
         get { return cursorUI; }
     }
+
+    public bool GetIsPlayerInInventory
+	{
+        get { return playerInInventory; }
+	}
 }

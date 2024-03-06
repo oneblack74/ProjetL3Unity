@@ -13,13 +13,17 @@ public class Movement : MonoBehaviour
     public enum Dir { Up, Down, Left, Right };
     [SerializeField] private Dir myDir = Dir.Down;
     [SerializeField] private bool isMoving = false;
-    private bool isLock = false;
+    private bool isLock = false; // Ptn t'es un monstre de l'avoir prévu
 
 
     private Dir lastMoveDir;
 
     public void Move(Vector3 moveValue)
     {
+        if (isLock) // Si le joueur est dans un inventaire, par exemple
+		{
+            return;
+		}
         transform.Translate(speed * Time.fixedDeltaTime * moveValue);
 
         if (moveValue.x > 0)

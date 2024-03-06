@@ -4,8 +4,9 @@ using UnityEngine;
 
 public interface IInteractable
 {
-    public int Interact()
+	// Retourne la réuissite de l'intéraction
+    public bool Interact()
 	{
-		return 1;
+		return true;
 	}
 }

@@ -10,10 +10,11 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        if (!(tab.Count >= 1))
-        {
-            InitSlots();
-        }
+        if (inventorySize == 0)
+		{
+            inventorySize = 1;
+		} 
+        InitSlots();
     }
 
     public void InitSlots()
@@ -67,7 +68,6 @@ public class Inventory : MonoBehaviour
         if (tab[ind].GetItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
-        //Debug.Log(tab[ind].getItemQuantity);
         return (tab[ind].GetItem, tab[ind].AddItem(item, quantity).Item2);
     }
 
@@ -131,10 +131,8 @@ public class Inventory : MonoBehaviour
 
     public ItemDefinition CheckItem(int index)
     {
-        // Debug.Log(index + " | " + tab.Count);
         if (index < 0 || index >= inventorySize)
         {
-            Debug.Log(index);
             throw new Exception("Index out of range");
         }
         return tab[index].GetItem;

@@ -23942,6 +23942,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1329576786805907747, guid: 5bfb01ee67eaa164bb9e497ebd1b6d89, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1927735749}
     - target: {fileID: 3173586341112585096, guid: 5bfb01ee67eaa164bb9e497ebd1b6d89, type: 3}
       propertyPath: player
       value: 
@@ -24124,8 +24128,8 @@ SceneRoots:
   - {fileID: 1927735750}
   - {fileID: 1833710024}
   - {fileID: 1670980719}
-  - {fileID: 1771504827}
   - {fileID: 3872840097997850309}
+  - {fileID: 1771504827}
   - {fileID: 8494970148169103160}
   - {fileID: 1857630849}
   - {fileID: 813608030}

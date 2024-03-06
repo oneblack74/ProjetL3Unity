@@ -8,7 +8,7 @@ public class Chest : MonoBehaviour, IInteractable
     private GameObject actualUI;
     private bool openned = false;
 
-	public int Interact()
+	public bool Interact()
     {
         if (openned)
         {
@@ -21,24 +21,21 @@ public class Chest : MonoBehaviour, IInteractable
             GameManager.GetInstance().OpenInventory();
         }
         openned = !openned;
-        return 1;
+        return true;
     }
 
     private void Open()
     {
         actualUI = Instantiate(PrefabUi);
         Transform parent = GameObject.Find("UI").transform;
-        Debug.Log(parent);
         actualUI.transform.SetParent(parent, false);
         actualUI.transform.SetSiblingIndex(0);
         actualUI.transform.GetChild(0).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(gameObject.GetComponent<Inventory>());
         actualUI.transform.GetChild(1).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(GameManager.GetInstance().GetPlayerController.GetInventory);
-
     }
 
     private void Close()
 	{
-        Debug.Log("Closed");
         Destroy(actualUI);
 	}
 }
