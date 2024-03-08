@@ -19,14 +19,14 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
 
     // Variables
-    private bool inInventory = false; // Variable qui gère si le joueur est dans SON inventaire
+    private bool inInventory = false; // Variable qui gï¿½re si le joueur est dans SON inventaire
     private Vector3 moveValue;
     private bool isSprinting;
 
     private readonly List<IInteractable> triggerList = new();
 
-	void Awake()
-	{
+    void Awake()
+    {
         inventoryUI.SetActive(false);
 
         inventory = GetComponent<Inventory>();
@@ -37,24 +37,26 @@ public class PlayerController : MonoBehaviour
         dash = GetComponent<Dash>();
     }
 
-	void Start()
+    void Start()
     {
+        GameManager.GetInstance().GetPlayerController = this;
         GameManager.GetInstance().CloseInventory();
+
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
 
-        
+
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
     {
         if (GameManager.GetInstance().GetIsPlayerInInventory && !inInventory)
-		{
+        {
             return;
-		}
+        }
         if (inInventory)
         {
             inventoryUI.SetActive(false);
@@ -69,8 +71,8 @@ public class PlayerController : MonoBehaviour
         inInventory = !inInventory;
     }
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.GetComponent<Interactable>() == null)
         {
             return;
@@ -82,8 +84,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	private void OnTriggerExit2D(Collider2D collision)
-	{
+    private void OnTriggerExit2D(Collider2D collision)
+    {
         if (collision.gameObject.GetComponent<Interactable>() == null)
         {
             return;
@@ -95,12 +97,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	public void Interact(InputAction.CallbackContext context)
-	{
+    public void Interact(InputAction.CallbackContext context)
+    {
         if (triggerList.Count == 0 || inInventory)
-		{
+        {
             return;
-		}
+        }
         triggerList[0].Interact(); //TODO: A modifier pour que ce soit l'objet le plus proche  
     }
 
@@ -118,9 +120,9 @@ public class PlayerController : MonoBehaviour
     }
 
     public void LockPlayer(bool state)
-	{
+    {
         movement.GetIsLock = state;
-	}
+    }
 
     public Inventory GetInventory
     {
