@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b63232b793879a64d98820905a4ed06d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedMultiplier: 0
+  speedMultiplier: 1.5
   staminaConsumption: 10
 --- !u!114 &8932293523763305958
 MonoBehaviour:
@@ -341,5 +341,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerMax: 0.2
-  distance: 500
+  distance: 20
   isDashing: 0

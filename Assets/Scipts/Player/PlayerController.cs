@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        inventoryUI = GameObject.Find("InventoryUI");
+        Debug.Log(inventoryUI);
         inventoryUI.SetActive(false);
 
         inventory = GetComponent<Inventory>();
@@ -64,6 +66,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
             inventoryUI.SetActive(true);
             GameManager.GetInstance().OpenInventory();
             inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(1), 5);

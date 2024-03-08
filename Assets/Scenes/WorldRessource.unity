@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &103737260 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2297237601595119649, guid: 94cd06d803f1c1145997c44eb362dd7c, type: 3}
-  m_PrefabInstance: {fileID: 5635751896658210739}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &103737261 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1748821029070736825, guid: 94cd06d803f1c1145997c44eb362dd7c, type: 3}
@@ -22905,7 +22900,7 @@ PrefabInstance:
     - target: {fileID: 8251459157529416681, guid: 473e9bb1e6edc114cb16dc28e56de083, type: 3}
       propertyPath: inventoryUI
       value: 
-      objectReference: {fileID: 103737260}
+      objectReference: {fileID: 0}
     - target: {fileID: 8527713822405752227, guid: 473e9bb1e6edc114cb16dc28e56de083, type: 3}
       propertyPath: distance
       value: 20
@@ -23451,6 +23446,10 @@ PrefabInstance:
     - target: {fileID: 7089120760815390050, guid: 5bfb01ee67eaa164bb9e497ebd1b6d89, type: 3}
       propertyPath: m_Name
       value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7089120760815390050, guid: 5bfb01ee67eaa164bb9e497ebd1b6d89, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7201797170875069899, guid: 5bfb01ee67eaa164bb9e497ebd1b6d89, type: 3}
       propertyPath: m_LocalPosition.x

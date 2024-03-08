@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     private PlayerController playerController;
     private bool playerInInventory; // Variable qui gère si le player est dans un inventaire AUTRE que le siens 
     private GameObject cursorUI;
+    private SaveData saveData;
 
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
 
@@ -39,12 +40,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        saveData = GetComponent<SaveData>();
 
     }
-
-
-
-
 
     public static GameManager GetInstance()
     {
@@ -58,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator ChangeSceneCoroutine(int sceneIndex)
     {
+        saveData.Sauvegarder();
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
 
         while (!operation.isDone)
@@ -68,6 +67,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         cursorUI = GameObject.Find("CursorUI");
+
+        saveData.Charger();
     }
 
 
