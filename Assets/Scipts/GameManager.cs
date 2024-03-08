@@ -19,9 +19,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance != null)
+        if (GetInstance() != null)
         {
-            Destroy(this);
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -39,9 +39,7 @@ public class GameManager : MonoBehaviour
                 itemDico.Add(item.getID, item);
             }
         }
-
         saveData = GetComponent<SaveData>();
-
     }
 
     public static GameManager GetInstance()
@@ -80,7 +78,7 @@ public class GameManager : MonoBehaviour
         playerInInventory = true;
     }
 
-    // S'occupe de changer en mode "dans un inventaire"
+    // S'occupe de changer en mode "hors d'un inventaire"
     public void CloseInventory()
     {
         playerController.LockPlayer(false);

@@ -341,5 +341,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerMax: 0.2
-  distance: 20
+  distance: 3
   isDashing: 0

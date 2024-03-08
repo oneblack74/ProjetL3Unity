@@ -25,13 +25,16 @@ public class TrapDamage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (other.isTrigger)
+			{
+                return;
+			}
             if (state == TrapState.Active)
             {
                 manager.GetPlayerController.GetHealthControl.RemoveHealth(trapDamage);
                 GetComponent<TrapVisibility>().ChangeVisibility();
                 state = TrapState.Inactive;
             }
-
         }
     }
 }

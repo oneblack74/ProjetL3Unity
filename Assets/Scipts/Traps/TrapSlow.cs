@@ -50,6 +50,10 @@ public class TrapSlow : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            if (other.isTrigger)
+			{
+                return;
+			}
             if (state == TrapState.Active)
             {
                 float newSpeed = manager.GetPlayerController.GetMovement.GetSpeedTmp * slowMultiplier;

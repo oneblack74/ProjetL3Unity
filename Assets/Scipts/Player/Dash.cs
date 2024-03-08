@@ -65,7 +65,6 @@ public class Dash : MonoBehaviour
         {
             CalculSpeedMultiplier();
 
-            movement.GetIsLock = true;
             isDashing = true;
             dashDir = movement.GetMyDir;
             if (TestDash())
@@ -90,7 +89,6 @@ public class Dash : MonoBehaviour
                 movement.GetSpeed = movement.GetSpeedTmp;
                 isDashing = false;
                 boxCollider.enabled = true;
-                movement.GetIsLock = false;
             }
         }
     }
