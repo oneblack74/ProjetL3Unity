@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject prefabInventoryUI;
+    private GameObject inventoryUI;
 
     // Components
     private Inventory inventory;
@@ -27,10 +28,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        inventoryUI = GameObject.Find("InventoryUI");
-        Debug.Log(inventoryUI);
-        inventoryUI.SetActive(false);
-
         inventory = GetComponent<Inventory>();
         staminaControl = GetComponent<StaminaControl>();
         healthControl = GetComponent<HealthControl>();
@@ -49,8 +46,6 @@ public class PlayerController : MonoBehaviour
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
-
-
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
@@ -61,17 +56,22 @@ public class PlayerController : MonoBehaviour
         }
         if (inInventory)
         {
-            inventoryUI.SetActive(false);
+            Destroy(inventoryUI);
+            inventoryUI = null;
+            inInventory = false;
             GameManager.GetInstance().CloseInventory();
         }
         else
         {
-
-            inventoryUI.SetActive(true);
+            inventoryUI = Instantiate(prefabInventoryUI);
+            Transform parent = GameObject.Find("UI").transform;
+            inventoryUI.transform.SetParent(parent, false);
+            inventoryUI.transform.SetSiblingIndex(0);
+            inventoryUI.transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(inventory);
+            inInventory = true;
             GameManager.GetInstance().OpenInventory();
-            inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(1), 5);
+            inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(2), 2);
         }
-        inInventory = !inInventory;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -76,9 +76,14 @@ public class Inventory : MonoBehaviour
     {
         foreach (Slot slot in tab)
         {
-            if (slot.IsEmpty())
+            if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.getMaxStack))
             {
-                return slot.AddItem(item, quantity);
+                (ItemDefinition, int) reste = slot.AddItem(item, quantity);
+                if (reste.Item2 <= 0)
+                {
+                    return reste;
+                }
+                AddItemFast(reste.Item1, reste.Item2);
             }
         }
         return (null, 0);

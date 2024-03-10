@@ -12,8 +12,10 @@ public class GameManager : MonoBehaviour
 
     private PlayerController playerController;
     private bool playerInInventory; // Variable qui gère si le player est dans un inventaire AUTRE que le siens 
-    private GameObject cursorUI;
     private SaveData saveData;
+
+    [SerializeField] private GameObject prefabCursorUI;
+    private GameObject cursorUI;
 
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
 
@@ -64,17 +66,17 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
-        cursorUI = GameObject.Find("CursorUI");
-
         saveData.Charger();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
-
 
     // S'occupe de changer en mode "dans un inventaire"
     public void OpenInventory()
     {
         playerController.LockPlayer(true);
-        cursorUI.SetActive(true);
+        cursorUI = Instantiate(prefabCursorUI);
+        Transform parent = GameObject.Find("UI").transform;
+        cursorUI.transform.SetParent(parent, false);
         playerInInventory = true;
     }
 
@@ -82,8 +84,8 @@ public class GameManager : MonoBehaviour
     public void CloseInventory()
     {
         playerController.LockPlayer(false);
-        if (cursorUI == null) cursorUI = GameObject.Find("CursorUI");
-        cursorUI.SetActive(false);
+        Destroy(cursorUI);
+        cursorUI = null;
         playerInInventory = false;
     }
 
