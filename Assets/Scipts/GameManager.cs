@@ -44,6 +44,16 @@ public class GameManager : MonoBehaviour
         saveData = GetComponent<SaveData>();
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene(1);
+    }
+
     public static GameManager GetInstance()
     {
         return Instance;

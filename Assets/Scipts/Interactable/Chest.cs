@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteractable
@@ -8,7 +6,7 @@ public class Chest : MonoBehaviour, IInteractable
     private GameObject actualUI;
     private bool openned = false;
 
-	public bool Interact()
+    public bool Interact()
     {
         if (openned)
         {
@@ -35,7 +33,7 @@ public class Chest : MonoBehaviour, IInteractable
     }
 
     private void Close()
-	{
+    {
         Destroy(actualUI);
-	}
+    }
 }

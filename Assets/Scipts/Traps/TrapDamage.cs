@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -26,9 +24,9 @@ public class TrapDamage : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (other.isTrigger)
-			{
+            {
                 return;
-			}
+            }
             if (state == TrapState.Active)
             {
                 manager.GetPlayerController.GetHealthControl.RemoveHealth(trapDamage);

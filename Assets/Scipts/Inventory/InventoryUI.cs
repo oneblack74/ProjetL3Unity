@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     private void Init()
-	{
+    {
         if (inventory != null)
         {
             if (TryGetComponent<GridLayoutGroup>(out gridLayout))
@@ -64,7 +63,7 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void LinkInventory(Inventory inv)
-	{
+    {
         Debug.Log("Linking Inventory...");
         if (inventory == null)
         {
@@ -75,7 +74,7 @@ public class InventoryUI : MonoBehaviour
             return;
         }
         Debug.Log("Inventory Not Linked");
-	}
+    }
 
     private void AjusterTailleGridLayout()
     {

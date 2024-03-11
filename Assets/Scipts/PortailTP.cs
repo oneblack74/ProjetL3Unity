@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PortailTP : MonoBehaviour
@@ -16,9 +14,9 @@ public class PortailTP : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             if (other.isTrigger)
-			{
+            {
                 return;
-			}
+            }
             if (manager.GetSceneIndex == 1)
             {
                 manager.ChangeScene(2);
