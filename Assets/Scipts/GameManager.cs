@@ -82,10 +82,18 @@ public class GameManager : MonoBehaviour
         if (GetSceneIndex == 2)
         {
             GameObject[] portails = GameObject.FindGameObjectsWithTag("Portail");
-            int ind = Random.Range(0, portails.Length);
-            PortailTP portail = portails[ind].GetComponent<PortailTP>();
+            List<GameObject> portailsValide = new();
+            foreach (GameObject p in portails)
+            {
+                if (p.GetComponent<PortailTP>().GetState != PortailTP.State.Desactiver)
+                {
+                    portailsValide.Add(p);
+                }
+            }
+            int ind = Random.Range(0, portailsValide.Count);
+            PortailTP portail = portailsValide[ind].GetComponent<PortailTP>();
             portail.GetState = PortailTP.State.Start;
-            playerController.transform.position = portails[ind].transform.position;
+            playerController.transform.position = portailsValide[ind].transform.position;
         }
         else if (GetSceneIndex == 1)
         {

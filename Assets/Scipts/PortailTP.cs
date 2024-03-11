@@ -9,6 +9,7 @@ public class PortailTP : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float timer = 0;
     [SerializeField] private float maxTimer = 3;
+    [SerializeField] private int id;
 
     void Awake()
     {
@@ -81,5 +82,10 @@ public class PortailTP : MonoBehaviour
     {
         get { return state; }
         set { state = value; }
+    }
+
+    public int GetID
+    {
+        get { return id; }
     }
 }
