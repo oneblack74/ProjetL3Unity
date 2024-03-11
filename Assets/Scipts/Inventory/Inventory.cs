@@ -112,13 +112,17 @@ public class Inventory : MonoBehaviour
     {
         if (index < 0 || index >= inventorySize)
         {
-            throw new Exception("Index out of range");
+            throw new Exception("Index out of range" + index + ">" + inventorySize);
         }
         return tab[index].GetItem;
     }
 
     public int CheckItemQuantity(int index)
     {
+        if (index < 0 || index >= inventorySize)
+        {
+            throw new Exception("Index out of range" + index + ">" + inventorySize);
+        }
         return tab[index].GetItemQuantity;
     }
 

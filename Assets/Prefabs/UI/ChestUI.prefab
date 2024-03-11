@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   espaceEntreElements: 10
   slotPerLine: 10
-  slotUIPrefab: {fileID: 1114659226723823090, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
+  slotUIPrefab: {fileID: 8946732701515733719, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
   inventory: {fileID: 0}
 --- !u!1 &5988144161748412571
 GameObject:
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   espaceEntreElements: 10
   slotPerLine: 10
-  slotUIPrefab: {fileID: 1114659226723823090, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
+  slotUIPrefab: {fileID: 8946732701515733719, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
   inventory: {fileID: 0}
 --- !u!1 &7471326649413037788
 GameObject:

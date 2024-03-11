@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
             inventoryUI.transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(inventory);
             inInventory = true;
             GameManager.GetInstance().OpenInventory();
-            inventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(2), 2);
         }
     }
 

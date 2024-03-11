@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   espaceEntreElements: 20
   slotPerLine: 10
-  slotUIPrefab: {fileID: 1114659226723823090, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
+  slotUIPrefab: {fileID: 8946732701515733719, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
   inventory: {fileID: 0}
 --- !u!1 &2297237601595119649
 GameObject:

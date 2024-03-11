@@ -7,7 +7,7 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private float espaceEntreElements = 10f;
     [SerializeField] private int slotPerLine = 10;
-    [SerializeField] private SlotUI slotUIPrefab;
+    [SerializeField] private GameObject slotUIPrefab;
     private GridLayoutGroup gridLayout;
     [SerializeField] private Inventory inventory;
     private readonly List<SlotUI> slotsUI = new();
@@ -43,7 +43,7 @@ public class InventoryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-        for (int i = 0; i < inventory.GetInventorySize; i++)
+        for (int i = 0; i < slotsUI.Count; i++)
         {
             slotsUI[i].UpdateUI(inventory.CheckItem(i), inventory.CheckItemQuantity(i));
         }
@@ -56,7 +56,8 @@ public class InventoryUI : MonoBehaviour
             for (int i = 0; i < inventory.GetInventorySize; i++)
             {
                 int tmp = i;
-                slotsUI.Add(Instantiate(slotUIPrefab, transform));
+                GameObject slot = Instantiate(slotUIPrefab, transform);
+                slotsUI.Add(slot.GetComponent<SlotUI>());
                 slotsUI[i].LinkInventory(inventory);
                 slotsUI[i].SetId(tmp);
             }
@@ -65,12 +66,9 @@ public class InventoryUI : MonoBehaviour
 
     public void LinkInventory(Inventory inv)
 	{
-        if (inventory == null)
-        {
-            inventory = inv;
-            Init();
-            return;
-        }
+        inventory = inv;
+        Init();
+        return;
 	}
 
     private void AjusterTailleGridLayout()
