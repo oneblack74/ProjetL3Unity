@@ -87,7 +87,14 @@ public class Inventory : MonoBehaviour
         Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
         if (slotCursor.IsEmpty())
         {
-            (ItemDefinition, int) restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+            (ItemDefinition, int) restant;
+            if (tab[slotID].GetItemQuantity % 2 == 0) {
+                restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
+            }
+            else
+            {
+                restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2 + 1);
+            }
             slotCursor.AddItem(restant.Item1, restant.Item2);
         }
         else if (tab[slotID].IsEmpty() || tab[slotID].GetItem == slotCursor.GetItem)

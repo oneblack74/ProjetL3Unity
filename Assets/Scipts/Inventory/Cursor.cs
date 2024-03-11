@@ -32,4 +32,9 @@ public class Cursor : MonoBehaviour
     {
         transform.position = Mouse.current.position.ReadValue();
     }
+
+    private void OnDestroy()
+    {
+        GameManager.GetInstance().GetPlayerController.GetInventory.AddItemFast(inventory.CheckItem(0), inventory.CheckItemQuantity(0));
+    }
 }
