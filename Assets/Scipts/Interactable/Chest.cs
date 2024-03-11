@@ -3,6 +3,7 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject PrefabUi;
+    [SerializeField] private int id;
     private GameObject actualUI;
     private bool openned = false;
 
@@ -35,5 +36,10 @@ public class Chest : MonoBehaviour, IInteractable
     private void Close()
     {
         Destroy(actualUI);
+    }
+
+    public int GetID
+    {
+        get { return id; }
     }
 }

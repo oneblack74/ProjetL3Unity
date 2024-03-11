@@ -56,8 +56,10 @@ public class SaveData : MonoBehaviour
 
         // portails : ==========================================
         data.portails = SavePortails(oldData);
-        Debug.Log(data.portails);
-        Debug.Log(data.portails.Count);
+
+        // coffres : ===========================================
+        data.coffres = SaveCoffres(oldData);
+
     }
     private void LoadElements()
     {
@@ -71,6 +73,9 @@ public class SaveData : MonoBehaviour
 
         // portails : ==========================================
         LoadPortails(data.portails);
+
+        // coffres : ===========================================
+        LoadCoffres(data.coffres);
     }
 
 
@@ -171,6 +176,48 @@ public class SaveData : MonoBehaviour
         return portails;
     }
 
+    private List<StructCoffres> SaveCoffres(Data oldData)
+    {
+        List<StructCoffres> coffres = new List<StructCoffres>();
+        GameObject[] gameObjectsCoffre = GameObject.FindGameObjectsWithTag("Chest");
+
+        for (int i = 0; i < gameObjectsCoffre.Length; i++)
+        {
+            Chest coffre = gameObjectsCoffre[i].GetComponent<Chest>();
+            StructCoffres c = new StructCoffres
+            {
+                id = coffre.GetID,
+                inventory = SaveInventory(coffre.GetComponent<Inventory>())
+            };
+            coffres.Add(c);
+        }
+        if (oldData.coffres != null)
+        {
+            for (int i = 0; i < oldData.coffres.Count; i++)
+            {
+                bool exist = false;
+                for (int j = 0; j < gameObjectsCoffre.Length; j++)
+                {
+                    Chest coffre = gameObjectsCoffre[j].GetComponent<Chest>();
+                    if (coffre.GetID == oldData.coffres[i].id)
+                    {
+                        exist = true;
+                    }
+                }
+                if (!exist)
+                {
+                    StructCoffres c = new StructCoffres
+                    {
+                        id = oldData.coffres[i].id,
+                        inventory = oldData.coffres[i].inventory
+                    };
+                    coffres.Add(c);
+                }
+            }
+        }
+        return coffres;
+    }
+
     private void LoadInventory(Inventory inventory, List<StructSlot> slots)
     {
         inventory.RedefineSlots(slots);
@@ -206,13 +253,37 @@ public class SaveData : MonoBehaviour
         }
     }
 
+    private void LoadCoffres(List<StructCoffres> coffres)
+    {
+        GameObject[] gameObjectsCoffre = GameObject.FindGameObjectsWithTag("Chest");
+        for (int i = 0; i < gameObjectsCoffre.Length; i++)
+        {
+            Chest coffre = gameObjectsCoffre[i].GetComponent<Chest>();
+            for (int j = 0; j < coffres.Count; j++)
+            {
+                if (coffre.GetID == coffres[j].id)
+                {
+                    LoadInventory(coffre.GetComponent<Inventory>(), coffres[j].inventory);
+                }
+            }
+        }
+    }
+
 }
 
 [System.Serializable]
 public struct Data
 {
+    public List<StructCoffres> coffres;
     public List<StructPortails> portails;
     public StructPlayer player;
+}
+
+[System.Serializable]
+public class StructCoffres
+{
+    public int id;
+    public List<StructSlot> inventory;
 }
 
 [System.Serializable]
