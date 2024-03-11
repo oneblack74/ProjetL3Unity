@@ -9,25 +9,15 @@ public class SaveData : MonoBehaviour
     {
         manager = GameManager.GetInstance();
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Charger();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Sauvegarder();
-        }
-    }
+
     public void Sauvegarder()
     {
         SaveElements();
 
         string saveData = JsonUtility.ToJson(data);
         string chemin = Application.persistentDataPath + "/SaveData.json";
-        Debug.Log(saveData);
-        Debug.Log(chemin);
+        //Debug.Log(saveData);
+        //Debug.Log(chemin);
 
         System.IO.File.WriteAllText(chemin, saveData);
     }
@@ -36,7 +26,7 @@ public class SaveData : MonoBehaviour
     {
         string chemin = Application.persistentDataPath + "/SaveData.json";
         string saveData = System.IO.File.ReadAllText(chemin);
-        Debug.Log("Charger");
+        //Debug.Log("Charger");
         data = JsonUtility.FromJson<Data>(saveData);
         LoadElements();
     }

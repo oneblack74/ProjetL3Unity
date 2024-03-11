@@ -78,6 +78,20 @@ public class GameManager : MonoBehaviour
         }
         saveData.Charger();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        if (GetSceneIndex == 2)
+        {
+            GameObject[] portails = GameObject.FindGameObjectsWithTag("Portail");
+            int ind = Random.Range(0, portails.Length);
+            PortailTP portail = portails[ind].GetComponent<PortailTP>();
+            portail.GetState = PortailTP.State.Start;
+            playerController.transform.position = portails[ind].transform.position;
+        }
+        else if (GetSceneIndex == 1)
+        {
+            PortailTP portails = GameObject.FindGameObjectWithTag("Portail").GetComponent<PortailTP>();
+            portails.GetState = PortailTP.State.Start;
+            playerController.transform.position = portails.transform.position;
+        }
     }
 
     // S'occupe de changer en mode "dans un inventaire"
