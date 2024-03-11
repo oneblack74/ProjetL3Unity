@@ -186,17 +186,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3019e816-46e4-475f-94f4-a296a1b76cb3",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "OpenInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "fcdedbb6-6211-4ff7-8118-e9b767113fb9",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -208,7 +197,18 @@
                 },
                 {
                     "name": "",
-                    "id": "cf129565-e0c3-41cd-8b4b-e1be4bdfb6c6",
+                    "id": "1c0976d2-f04f-4994-b45f-3d384c6cab5b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d50ddd97-e3bf-491b-83ac-24d953698a25",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -219,7 +219,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f41abeaf-b67b-4d45-b56f-6c3bde6cce41",
+                    "id": "de37fcff-4b76-4dd0-9185-a90f680b346e",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",

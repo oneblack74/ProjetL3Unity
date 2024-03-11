@@ -38,9 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        GameManager.GetInstance().GetPlayerController = this;
         GameManager.GetInstance().CloseInventory();
-
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
@@ -74,6 +72,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (triggerList.Count == 0 || inInventory)
+        {
+            return;
+        }
+        triggerList[0].Interact(); //TODO: A modifier pour que ce soit l'objet le plus proche  
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<Interactable>() == null)
@@ -98,15 +105,6 @@ public class PlayerController : MonoBehaviour
         {
             triggerList.Remove(objectInteracted);
         }
-    }
-
-    public void Interact(InputAction.CallbackContext context)
-    {
-        if (triggerList.Count == 0 || inInventory)
-        {
-            return;
-        }
-        triggerList[0].Interact(); //TODO: A modifier pour que ce soit l'objet le plus proche  
     }
 
     void Update()
@@ -145,5 +143,15 @@ public class PlayerController : MonoBehaviour
     public Movement GetMovement
     {
         get { return movement; }
+    }
+
+    void OnDestroy()
+    {
+        if (GameManager.GetInstance() != null)
+        {
+            GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed -= ShowInventory;
+            GameManager.GetInstance().GetInputs.actions["Interact"].performed -= Interact;
+            GameManager.GetInstance().GetInputs.actions["Dash"].performed -= context => dash.ActiveDash();
+        }
     }
 }

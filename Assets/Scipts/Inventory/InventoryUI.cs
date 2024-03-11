@@ -63,18 +63,14 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void LinkInventory(Inventory inv)
-    {
-        Debug.Log("Linking Inventory...");
+	{
         if (inventory == null)
         {
-            Debug.Log(inv);
             inventory = inv;
             Init();
-            Debug.Log("Inventory Linked");
             return;
         }
-        Debug.Log("Inventory Not Linked");
-    }
+	}
 
     private void AjusterTailleGridLayout()
     {

@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
             }
         }
         saveData = GetComponent<SaveData>();
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     public void QuitGame()
@@ -76,8 +77,8 @@ public class GameManager : MonoBehaviour
 
             yield return null;
         }
-        saveData.Charger();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        saveData.Charger();
         if (GetSceneIndex == 2)
         {
             GameObject[] portails = GameObject.FindGameObjectsWithTag("Portail");
