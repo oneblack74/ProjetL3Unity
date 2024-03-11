@@ -5,7 +5,6 @@ using System;
 public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
-    [SerializeField] private int slotsPerLine = 1;
     [SerializeField] private List<Slot> tab = new();
 
     void Start()
@@ -23,31 +22,6 @@ public class Inventory : MonoBehaviour
         {
             tab.Add(new Slot(0, GameManager.GetInstance().ConvertIdToItem(0)));
         }
-    }
-
-    // Retourne le nombre de case par ligne de l'inventaire
-    // Retourne -1 si l'offset n'est pas possible (a modifier si besoin)
-    public int GetNbSlotPerLine()
-    {
-        if (slotsPerLine == 0)
-        {
-            return inventorySize;
-        }
-        if (inventorySize % slotsPerLine == 0)
-        {
-            return slotsPerLine;
-        }
-        return -1;
-    }
-
-    // Retourne le nombre de lignes de l'inventaire
-    public int GetNbLine()
-    {
-        if (GetNbSlotPerLine() == -1)
-        {
-            return 1;
-        }
-        return inventorySize / slotsPerLine;
     }
 
     public (ItemDefinition, int) RemoveItem(int ind, int quantity)

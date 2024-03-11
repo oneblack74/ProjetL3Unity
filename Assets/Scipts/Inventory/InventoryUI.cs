@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private float espaceEntreElements = 10f;
+    [SerializeField] private int slotPerLine = 10;
     [SerializeField] private SlotUI slotUIPrefab;
     private GridLayoutGroup gridLayout;
     [SerializeField] private Inventory inventory;
@@ -75,7 +76,7 @@ public class InventoryUI : MonoBehaviour
     private void AjusterTailleGridLayout()
     {
         gridLayout.spacing = new Vector2(espaceEntreElements, espaceEntreElements);
-        float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (inventory.GetNbSlotPerLine() - 1))) / inventory.GetNbSlotPerLine();
+        float size = (GetComponent<RectTransform>().rect.width - (espaceEntreElements * (slotPerLine - 1))) / slotPerLine;
         gridLayout.cellSize = new Vector2(size, size);
     }
 }

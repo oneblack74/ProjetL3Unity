@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -10}
-  m_SizeDelta: {x: 430, y: 230}
+  m_SizeDelta: {x: 1100, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2243105934472911945
 MonoBehaviour:
@@ -73,7 +73,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c258d047c962ad64887be3987edc8416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  espaceEntreElements: 10
+  espaceEntreElements: 20
+  slotPerLine: 10
   slotUIPrefab: {fileID: 1114659226723823090, guid: bb9ca085eaac25c4ab031c9e7ab30361, type: 3}
   inventory: {fileID: 0}
 --- !u!1 &2297237601595119649
@@ -112,7 +113,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 300}
+  m_SizeDelta: {x: 1200, y: 700}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4746820938237161011
 CanvasRenderer:
