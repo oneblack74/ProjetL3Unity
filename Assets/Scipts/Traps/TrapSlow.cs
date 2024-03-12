@@ -54,8 +54,8 @@ public class TrapSlow : MonoBehaviour
             }
             if (state == TrapState.Active)
             {
+                manager.PlaySound("Slow");
                 float newSpeed = manager.GetPlayerController.GetMovement.GetSpeedTmp * slowMultiplier;
-                //manager.GetPlayerController.GetMovement.ModifySpeed(newSpeed);
                 other.GetComponent<Movement>().GetSpeed = newSpeed;
 
                 GetComponent<TrapVisibility>().ChangeVisibility();

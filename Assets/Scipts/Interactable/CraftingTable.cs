@@ -73,6 +73,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
                 craftingInventory.CheckItem(1).getID == recipe.GetItem1.id && craftingInventory.CheckItemQuantity(1) >= recipe.GetItem1.quantity &&
                 craftingInventory.CheckItem(2).getID == recipe.GetItem2.id && craftingInventory.CheckItemQuantity(2) >= recipe.GetItem2.quantity)
             {
+                manager.PlaySound("Craft");
                 craftingInventory.RemoveItem(0, recipe.GetItem0.quantity);
                 craftingInventory.RemoveItem(1, recipe.GetItem1.quantity);
                 craftingInventory.RemoveItem(2, recipe.GetItem2.quantity);
