@@ -45,6 +45,7 @@ public class PortailTP : MonoBehaviour
             }
             if (state == State.Activer)
             {
+                manager.PlaySound("Portail");
                 if (manager.GetSceneIndex == 2)
                 {
                     manager.ChangeScene(1);

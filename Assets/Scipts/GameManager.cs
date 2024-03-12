@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public PlayerInput inputs;
+    private AudioSource audioSource;
 
     private PlayerController playerController;
     private UIHotbar hotbar;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     private GameObject cursorUI;
 
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
+    private readonly Dictionary<string, AudioClip> soundDico = new();
     [SerializeField] private GameObject PrefabMenuUI;
     private GameObject actualMenuUI;
     private bool inMenu;
@@ -33,7 +35,6 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        // Ressouces.loadAll<ItemDefinition>("Items");
 
         // récupérer les item scriptableobject et les stocker dans un dico
         ItemDefinition[] items = Resources.LoadAll<ItemDefinition>("Items");
@@ -45,6 +46,18 @@ public class GameManager : MonoBehaviour
                 itemDico.Add(item.getID, item);
             }
         }
+
+        // récupérer les sons et les stocker dans un dico
+        audioSource = gameObject.AddComponent<AudioSource>();
+        AudioClip[] sounds = Resources.LoadAll<AudioClip>("Sounds");
+        foreach (AudioClip sound in sounds)
+        {
+            if (sound != null)
+            {
+                soundDico.Add(sound.name, sound);
+            }
+        }
+
         saveData = GetComponent<SaveData>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         hotbar = GameObject.Find("UI/Hotbar/HotbarSelectUI").GetComponent<UIHotbar>();
@@ -55,6 +68,11 @@ public class GameManager : MonoBehaviour
     public static GameManager GetInstance()
     {
         return Instance;
+    }
+
+    public void PlaySound(string soundName)
+    {
+        audioSource.PlayOneShot(soundDico[soundName]);
     }
 
     public void QuitGame()
@@ -187,4 +205,5 @@ public class GameManager : MonoBehaviour
     {
         get { return inMenu; }
     }
+
 }
