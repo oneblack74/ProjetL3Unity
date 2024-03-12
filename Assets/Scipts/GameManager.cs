@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
         actualMenuUI = Instantiate(PrefabMenuUI);
         Transform parent = GameObject.Find("UI").transform;
         actualMenuUI.transform.SetParent(parent, false);
-        actualMenuUI.transform.SetSiblingIndex(0);
+        actualMenuUI.transform.SetAsLastSibling();
         actualMenuUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(QuitGame);
     }
 
@@ -167,7 +167,11 @@ public class GameManager : MonoBehaviour
 
     public void MoveSelect(int way)
     {
-        hotbar.MoveSelect(way);
+        if (!inMenu)
+        {
+            PlaySound("Scroll");
+            hotbar.MoveSelect(way);
+        }
     }
 
     public int GetSceneIndex

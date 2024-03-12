@@ -29,6 +29,7 @@ public class TrapDamage : MonoBehaviour
             }
             if (state == TrapState.Active)
             {
+                manager.PlaySound("Degat");
                 manager.GetPlayerController.GetHealthControl.RemoveHealth(trapDamage);
                 GetComponent<TrapVisibility>().ChangeVisibility();
                 state = TrapState.Inactive;
