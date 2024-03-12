@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     private GameObject cursorUI;
 
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
+    [SerializeField] private GameObject PrefabMenuUI;
+    private GameObject actualMenuUI;
+    private bool inMenu;
 
     void Awake()
     {
@@ -47,19 +50,16 @@ public class GameManager : MonoBehaviour
         hotbar = GameObject.Find("UI/Hotbar/HotbarSelectUI").GetComponent<UIHotbar>();
     }
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 
-    public void PlayGame()
-    {
-        SceneManager.LoadScene(1);
-    }
 
     public static GameManager GetInstance()
     {
         return Instance;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void ChangeScene(int sceneIndex)
@@ -104,6 +104,24 @@ public class GameManager : MonoBehaviour
             portails.GetState = PortailTP.State.Start;
             playerController.transform.position = portails.transform.position;
         }
+    }
+
+    public void OpenMenu()
+    {
+        inMenu = true;
+        playerController.LockPlayer(true);
+        actualMenuUI = Instantiate(PrefabMenuUI);
+        Transform parent = GameObject.Find("UI").transform;
+        actualMenuUI.transform.SetParent(parent, false);
+        actualMenuUI.transform.SetSiblingIndex(0);
+        actualMenuUI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(QuitGame);
+    }
+
+    public void CloseMenu()
+    {
+        inMenu = false;
+        playerController.LockPlayer(false);
+        Destroy(actualMenuUI);
     }
 
     // S'occupe de changer en mode "dans un inventaire"
@@ -163,5 +181,10 @@ public class GameManager : MonoBehaviour
     public bool GetIsPlayerInInventory
     {
         get { return playerInInventory; }
+    }
+
+    public bool GetInMenu
+    {
+        get { return inMenu; }
     }
 }

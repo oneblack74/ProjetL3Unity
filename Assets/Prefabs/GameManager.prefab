@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputs: {fileID: 1329576786805907747}
   prefabCursorUI: {fileID: 4922618070177865336, guid: 4d9349636b72fe04bbed445b2a6b06dd, type: 3}
+  PrefabMenuUI: {fileID: 4620712839249909256, guid: 7c154fb190364cb4daaf934d5e83eb84, type: 3}
 --- !u!114 &1329576786805907747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +92,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data:
+    coffres: []
+    portails: []
     player:
       health:
         maxHealth: 0

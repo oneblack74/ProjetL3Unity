@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using UnityEditor;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 scrollValue;
 
     private readonly List<IInteractable> triggerList = new();
+    private GameManager manager;
 
     void Awake()
     {
@@ -40,18 +42,32 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
-        GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
-        GameManager.GetInstance().GetInputs.actions["Dash"].performed += dash.ActiveDash;
-        sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
-        moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
-        scrollAction = GameManager.GetInstance().GetInputs.actions["SwitchSelect"];
-        GameManager.GetInstance().CloseInventory();
+        manager = GameManager.GetInstance();
+        manager.GetInputs.actions["OpenInventory"].performed += ShowInventory;
+        manager.GetInputs.actions["Interact"].performed += Interact;
+        manager.GetInputs.actions["Dash"].performed += dash.ActiveDash;
+        manager.GetInputs.actions["OpenMenu"].performed += ShowMenu;
+        sprintAction = manager.GetInputs.actions["Sprint"];
+        moveAction = manager.GetInputs.actions["Move"];
+        scrollAction = manager.GetInputs.actions["SwitchSelect"];
+        manager.CloseInventory();
+    }
+
+    public void ShowMenu(InputAction.CallbackContext context)
+    {
+        if (manager.GetInMenu)
+        {
+            manager.CloseMenu();
+        }
+        else
+        {
+            manager.OpenMenu();
+        }
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
     {
-        if (GameManager.GetInstance().GetIsPlayerInInventory && !inInventory)
+        if (manager.GetIsPlayerInInventory && !inInventory && !manager.GetInMenu)
         {
             return;
         }
@@ -60,7 +76,7 @@ public class PlayerController : MonoBehaviour
             Destroy(inventoryUI);
             inventoryUI = null;
             inInventory = false;
-            GameManager.GetInstance().CloseInventory();
+            manager.CloseInventory();
         }
         else
         {
@@ -70,7 +86,7 @@ public class PlayerController : MonoBehaviour
             inventoryUI.transform.SetSiblingIndex(0);
             inventoryUI.transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(inventory);
             inInventory = true;
-            GameManager.GetInstance().OpenInventory();
+            manager.OpenInventory();
         }
     }
 
@@ -116,11 +132,11 @@ public class PlayerController : MonoBehaviour
         scrollValue = scrollAction.ReadValue<Vector2>();
         if (scrollValue.y > 100)
         {
-            GameManager.GetInstance().MoveSelect(-1);
+            manager.MoveSelect(-1);
         }
         if (scrollValue.y < -100)
         {
-            GameManager.GetInstance().MoveSelect(1);
+            manager.MoveSelect(1);
         }
     }
 
@@ -158,11 +174,11 @@ public class PlayerController : MonoBehaviour
 
     void OnDestroy()
     {
-        if (GameManager.GetInstance() != null)
+        if (manager != null)
         {
-            GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed -= ShowInventory;
-            GameManager.GetInstance().GetInputs.actions["Interact"].performed -= Interact;
-            GameManager.GetInstance().GetInputs.actions["Dash"].performed -= dash.ActiveDash;
+            manager.GetInputs.actions["OpenInventory"].performed -= ShowInventory;
+            manager.GetInputs.actions["Interact"].performed -= Interact;
+            manager.GetInputs.actions["Dash"].performed -= dash.ActiveDash;
         }
     }
 }
