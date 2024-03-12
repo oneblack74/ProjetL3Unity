@@ -11,17 +11,24 @@ public class InventoryTests
 {
     private Inventory inventory;
     private ItemDefinition kayou;
+    private ItemDefinition dummy;
+    private GameManager manager;
+    GameObject gObject = new GameObject();
+    GameObject gObject2 = new GameObject();
 
     [SetUp]
     public void Setup()
     {
-        //? Initialise the inventory and a sample stone item 
-        inventory = new GameObject().AddComponent<Inventory>();
+        manager = (GameManager)Resources.Load("Scipts/GameManager.cs");
+        //gObject.AddComponent<GameManager>();
+        gObject2.AddComponent<PlayerController>();
+        gObject2.AddComponent<Inventory>();
+        kayou = manager.ConvertIdToItem(2); //? sets ID and max stack
         kayou = ScriptableObject.CreateInstance<ItemDefinition>();
-        kayou.Initialize(2, "Stone", 64);
+        inventory = manager.GetPlayerController.GetInventory;
     }
 
-    [Test]
+    [Test] // Tests might not work, but this is a fine enough template
     public void AddItem_AddsItemToEmptySlot()
     {
         int initialQuantity = inventory.GetSlot(0).GetItemQuantity;
@@ -62,18 +69,18 @@ public class InventoryTests
     [Test]
     public void SwitchItem_SwapsItemsBetweenSlots()
     {
-        ItemDefinition otherItem = ScriptableObject.CreateInstance<ItemDefinition>();
-        otherItem.Initialize(3, "OtherItem", 10); //! 
-        inventory.AddItem(0, kayou, 3);
-        inventory.AddItem(1, otherItem, 2);
+        dummy = manager.ConvertIdToItem(1);
 
+        inventory.AddItem(0, kayou, 3);
+        inventory.AddItem(1, dummy, 2);
         inventory.SwitchItem(0, inventory.GetSlot(1));
 
-        Assert.AreEqual(otherItem, inventory.GetSlot(0).GetItem);
+        Assert.AreEqual(dummy, inventory.GetSlot(0).GetItem);
         Assert.AreEqual(kayou, inventory.GetSlot(1).GetItem);
         Assert.AreEqual(2, inventory.GetSlot(0).GetItemQuantity);
         Assert.AreEqual(3, inventory.GetSlot(1).GetItemQuantity);
     }
+
 
     [TearDown]
     public void TearDown() //? Clean up after each test
