@@ -13,8 +13,10 @@ public class Dash : MonoBehaviour
     [SerializeField] private float timerMax;
     [SerializeField] private float distance;
     [SerializeField] private bool isDashing = false;
+    [SerializeField] private float staminaCount = 10.0f;
     private float timer;
     private Movement.Dir dashDir;
+    private GameManager manager;
 
     void Awake()
     {
@@ -22,6 +24,11 @@ public class Dash : MonoBehaviour
         staminaControl = GetComponent<StaminaControl>();
         boxCollider = GetComponent<BoxCollider2D>();
         CalculSpeedMultiplier();
+    }
+
+    void Start()
+    {
+        manager = GameManager.GetInstance();
     }
 
     private void CalculSpeedMultiplier()
@@ -59,10 +66,11 @@ public class Dash : MonoBehaviour
 
     public void ActiveDash(InputAction.CallbackContext context)
     {
-        if (!isDashing)
+        if (!isDashing && staminaControl.GetStamina >= staminaCount)
         {
             CalculSpeedMultiplier();
-
+            manager.PlaySound("Dash");
+            staminaControl.DrainStamina(staminaCount);
             isDashing = true;
             dashDir = movement.GetMyDir;
             if (TestDash())

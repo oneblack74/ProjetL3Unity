@@ -7,9 +7,13 @@ public class StaminaControl : MonoBehaviour
     [SerializeField] private float stamina = 0f;            //? Actual Stamina
     [SerializeField] private float regenDelay = 0f;         //? Delay after which the stamina will recover
     [SerializeField] private float refillRate = 0f;         //? Rate at which the stamina will recover
+    [SerializeField] private GameManager manager;
     private float timer = 0f;                               //? Used for stamina regen  
 
-
+    void Start()
+    {
+        manager = GameManager.GetInstance();
+    }
 
     // This function is never called on its own 
     // Useful for 1-time drains, like dashes, jumps..
@@ -55,8 +59,11 @@ public class StaminaControl : MonoBehaviour
     }
     void Update()
     {
-        UpdateTimer();
-        RegenStamina();
+        if (!manager.GetInMenu)
+        {
+            UpdateTimer();
+            RegenStamina();
+        }
     }
 
     public void InitValues(float maxStamina, float stamina, float regenDelay, float refillRate)
