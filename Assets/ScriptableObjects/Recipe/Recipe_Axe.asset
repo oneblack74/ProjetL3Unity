@@ -9,9 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2db300a7c83ce240a1d428379298569, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: a87314025caedb140a1149dd0af32016, type: 3}
+  m_Name: Recipe_Axe
   m_EditorClassIdentifier: 
-  MAX_STACK: 1
-  ID: 4
-  ICON: {fileID: 0}
+  item0:
+    id: 1
+    quantity: 1
+  item1:
+    id: 1
+    quantity: 1
+  item2:
+    id: 2
+    quantity: 3
