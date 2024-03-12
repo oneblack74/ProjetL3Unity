@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: quantity
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4200603981549991666, guid: 4005a48e22b68db4eb99264103bf1106, type: 3}
+      propertyPath: requieredItemIDs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6865655822138733112, guid: 4005a48e22b68db4eb99264103bf1106, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6999817

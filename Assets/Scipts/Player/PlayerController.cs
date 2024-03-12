@@ -179,6 +179,7 @@ public class PlayerController : MonoBehaviour
             manager.GetInputs.actions["OpenInventory"].performed -= ShowInventory;
             manager.GetInputs.actions["Interact"].performed -= Interact;
             manager.GetInputs.actions["Dash"].performed -= dash.ActiveDash;
+            manager.GetInputs.actions["OpenMenu"].performed -= ShowMenu;
         }
     }
 }

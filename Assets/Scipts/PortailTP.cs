@@ -45,13 +45,13 @@ public class PortailTP : MonoBehaviour
             }
             if (state == State.Activer)
             {
-                if (manager.GetSceneIndex == 1)
+                if (manager.GetSceneIndex == 2)
                 {
-                    manager.ChangeScene(2);
+                    manager.ChangeScene(1);
                 }
                 else
                 {
-                    manager.ChangeScene(1);
+                    manager.ChangeScene(2);
                 }
             }
             else if (manager.GetSceneIndex == 2 && state == State.Couldown)
