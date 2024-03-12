@@ -28,14 +28,13 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        // Ressouces.loadAll<ItemDefinition>("Items");
 
         // récupérer les item scriptableobject et les stocker dans un dico
-        string[] guids = AssetDatabase.FindAssets("t:ItemDefinition", new[] { "Assets/ScriptableObjects/Items" });
+        ItemDefinition[] items = Resources.LoadAll<ItemDefinition>("Items");
 
-        foreach (string guid in guids)
+        foreach (ItemDefinition item in items)
         {
-            string path = AssetDatabase.GUIDToAssetPath(guid);
-            ItemDefinition item = AssetDatabase.LoadAssetAtPath<ItemDefinition>(path);
             if (item != null)
             {
                 itemDico.Add(item.getID, item);
