@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public PlayerInput inputs;
 
     private PlayerController playerController;
+    private UIHotbar hotbar;
     private bool playerInInventory; // Variable qui gère si le player est dans un inventaire AUTRE que le siens 
     private SaveData saveData;
 
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
         }
         saveData = GetComponent<SaveData>();
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        hotbar = GameObject.Find("UI/Hotbar/HotbarSelectUI").GetComponent<UIHotbar>();
     }
 
     public void QuitGame()
@@ -77,6 +80,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        hotbar = GameObject.Find("/UI/Hotbar/HotbarSelectUI").GetComponent<UIHotbar>();
         saveData.Charger();
         if (GetSceneIndex == 2)
         {
@@ -106,6 +110,7 @@ public class GameManager : MonoBehaviour
     public void OpenInventory()
     {
         playerController.LockPlayer(true);
+        hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = false;
         cursorUI = Instantiate(prefabCursorUI);
         Transform parent = GameObject.Find("UI").transform;
         cursorUI.transform.SetParent(parent, false);
@@ -116,9 +121,15 @@ public class GameManager : MonoBehaviour
     public void CloseInventory()
     {
         playerController.LockPlayer(false);
+        hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = true;
         Destroy(cursorUI);
         cursorUI = null;
         playerInInventory = false;
+    }
+
+    public void MoveSelect(int way)
+    {
+        hotbar.MoveSelect(way);
     }
 
     public int GetSceneIndex

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(StaminaControl))]
@@ -56,7 +57,7 @@ public class Dash : MonoBehaviour
         return hit == null;
     }
 
-    public void ActiveDash()
+    public void ActiveDash(InputAction.CallbackContext context)
     {
         if (!isDashing)
         {

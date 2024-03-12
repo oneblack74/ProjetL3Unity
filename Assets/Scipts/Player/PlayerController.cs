@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     // Actions
     private InputAction sprintAction;
     private InputAction moveAction;
+    private InputAction scrollAction;
 
     // Variables
     private bool inInventory = false; // Variable qui g�re si le joueur est dans SON inventaire
     private Vector3 moveValue;
     private bool isSprinting;
+    private Vector2 scrollValue;
 
     private readonly List<IInteractable> triggerList = new();
 
@@ -41,9 +43,10 @@ public class PlayerController : MonoBehaviour
         GameManager.GetInstance().CloseInventory();
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
-        GameManager.GetInstance().GetInputs.actions["Dash"].performed += context => dash.ActiveDash();
+        GameManager.GetInstance().GetInputs.actions["Dash"].performed += dash.ActiveDash;
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
+        scrollAction = GameManager.GetInstance().GetInputs.actions["SwitchSelect"];
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
@@ -110,6 +113,15 @@ public class PlayerController : MonoBehaviour
     {
         moveValue = moveAction.ReadValue<Vector2>();
         isSprinting = sprintAction.ReadValue<float>() > 0;
+        scrollValue = scrollAction.ReadValue<Vector2>();
+        if (scrollValue.y > 100)
+        {
+            GameManager.GetInstance().MoveSelect(-1);
+        }
+        if (scrollValue.y < -100)
+        {
+            GameManager.GetInstance().MoveSelect(1);
+        }
     }
 
     void FixedUpdate()
@@ -150,7 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed -= ShowInventory;
             GameManager.GetInstance().GetInputs.actions["Interact"].performed -= Interact;
-            GameManager.GetInstance().GetInputs.actions["Dash"].performed -= context => dash.ActiveDash();
+            GameManager.GetInstance().GetInputs.actions["Dash"].performed -= dash.ActiveDash;
         }
     }
 }

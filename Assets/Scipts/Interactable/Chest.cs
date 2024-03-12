@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Interactable))]
 public class Chest : MonoBehaviour, IInteractable
 {
     [SerializeField] private GameObject PrefabUi;
