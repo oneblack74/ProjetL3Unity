@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2db300a7c83ce240a1d428379298569, type: 3}
-  m_Name: Sword
+  m_Name: Pickaxe
   m_EditorClassIdentifier: 
   MAX_STACK: 1
-  ID: 4
-  ICON: {fileID: 598519246, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
+  ID: 6
+  ICON: {fileID: 442982471, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
   IS_PLACABLE: 0

@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemID: 2
+  quantity: 1
+  requieredItemIDs: 
 --- !u!212 &2371550184122379332
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,8 +91,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f585ab65b458da146991f28e2d0df8da, type: 3}
-  m_Color: {r: 0.381132, g: 0.381132, b: 0.381132, a: 1}
+  m_Sprite: {fileID: -1654869559, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -136,7 +138,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2.0004885}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -157,3 +159,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390ae857fda45d349993d25b2f176aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSprite: {fileID: -1654869559, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
+  nearSprite: {fileID: 1677324415, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
