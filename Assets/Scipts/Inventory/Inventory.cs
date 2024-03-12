@@ -10,9 +10,9 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         if (inventorySize == 0)
-		{
+        {
             inventorySize = 1;
-		} 
+        }
         InitSlots();
     }
 
@@ -76,7 +76,7 @@ public class Inventory : MonoBehaviour
     }
 
     public void LeftClick(int slotID)
-    {   
+    {
         SwitchItem(slotID, GameManager.GetInstance().GetCursorUI.GetComponent<Inventory>().GetSlot(0));
         // Si pb de reférence ici, le cursor n'est pas actif ;)
     }
@@ -88,7 +88,8 @@ public class Inventory : MonoBehaviour
         if (slotCursor.IsEmpty())
         {
             (ItemDefinition, int) restant;
-            if (tab[slotID].GetItemQuantity % 2 == 0) {
+            if (tab[slotID].GetItemQuantity % 2 == 0)
+            {
                 restant = tab[slotID].RemoveItem(tab[slotID].GetItemQuantity / 2);
             }
             else
@@ -114,7 +115,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public ItemDefinition CheckItem(int index)
     {
         if (index < 0 || index >= inventorySize)
@@ -131,6 +131,18 @@ public class Inventory : MonoBehaviour
             throw new Exception("Index out of range" + index + ">" + inventorySize);
         }
         return tab[index].GetItemQuantity;
+    }
+
+    public bool IsInInventory(int itemID)
+    {
+        foreach (Slot slot in tab)
+        {
+            if (slot.GetItem.getID == itemID)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int GetInventorySize

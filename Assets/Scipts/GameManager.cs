@@ -110,7 +110,8 @@ public class GameManager : MonoBehaviour
     public void OpenInventory()
     {
         playerController.LockPlayer(true);
-        hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = false;
+        if (hotbar != null)
+            hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = false;
         cursorUI = Instantiate(prefabCursorUI);
         Transform parent = GameObject.Find("UI").transform;
         cursorUI.transform.SetParent(parent, false);
@@ -121,7 +122,8 @@ public class GameManager : MonoBehaviour
     public void CloseInventory()
     {
         playerController.LockPlayer(false);
-        hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = true;
+        if (hotbar != null)
+            hotbar.gameObject.transform.parent.transform.GetChild(hotbar.gameObject.transform.parent.transform.childCount - 1).GetComponent<Image>().raycastTarget = true;
         Destroy(cursorUI);
         cursorUI = null;
         playerInInventory = false;
