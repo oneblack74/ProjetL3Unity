@@ -9,11 +9,15 @@ public class CraftingTable : MonoBehaviour, IInteractable
     private GameManager manager;
     private GameObject actualUI;
     private bool openned = false;
-    private Inventory inventory;
+    private Inventory craftingInventory;
 
     void Awake()
     {
-        Inventory craftingInventory = gameObject.GetComponent<Inventory>();
+        craftingInventory = gameObject.GetComponent<Inventory>();
+    }
+
+    void Start()
+    {
         manager = GameManager.GetInstance();
     }
 
@@ -42,29 +46,37 @@ public class CraftingTable : MonoBehaviour, IInteractable
         actualUI.transform.GetChild(0).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(gameObject.GetComponent<Inventory>());
         actualUI.transform.GetChild(1).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(GameManager.GetInstance().GetPlayerController.GetInventory);
 
-        PrefabUi.transform.Find("BtnCraft").GetComponent<Button>().onClick.AddListener(Close);
+        actualUI.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(Craft);
 
     }
 
     private void Close()
     {
+        Inventory playerInventory = GameManager.GetInstance().GetPlayerController.GetInventory;
+        for (int i = 0; i < 3; i++)
+        {
+            if (craftingInventory.CheckItem(i).getID != 0)
+            {
+                playerInventory.AddItemFast(manager.ConvertIdToItem(craftingInventory.CheckItem(i).getID), craftingInventory.CheckItemQuantity(i));
+                craftingInventory.RemoveItem(i, craftingInventory.CheckItemQuantity(i));
+            }
+        }
+
         Destroy(actualUI);
     }
 
     public void Craft()
     {
-        Inventory playerInventory = manager.GetPlayerController.GetInventory;
-
         foreach (Recipe recipe in recipes)
         {
-            if (playerInventory.CheckItem(0).getID == recipe.GetItem0.id && playerInventory.CheckItemQuantity(0) >= recipe.GetItem0.quantity &&
-                playerInventory.CheckItem(1).getID == recipe.GetItem1.id && playerInventory.CheckItemQuantity(1) >= recipe.GetItem1.quantity &&
-                playerInventory.CheckItem(2).getID == recipe.GetItem2.id && playerInventory.CheckItemQuantity(2) >= recipe.GetItem2.quantity)
+            if (craftingInventory.CheckItem(0).getID == recipe.GetItem0.id && craftingInventory.CheckItemQuantity(0) >= recipe.GetItem0.quantity &&
+                craftingInventory.CheckItem(1).getID == recipe.GetItem1.id && craftingInventory.CheckItemQuantity(1) >= recipe.GetItem1.quantity &&
+                craftingInventory.CheckItem(2).getID == recipe.GetItem2.id && craftingInventory.CheckItemQuantity(2) >= recipe.GetItem2.quantity)
             {
-                playerInventory.RemoveItem(0, recipe.GetItem0.quantity);
-                playerInventory.RemoveItem(1, recipe.GetItem1.quantity);
-                playerInventory.RemoveItem(2, recipe.GetItem2.quantity);
-                playerInventory.AddItemFast(manager.ConvertIdToItem(recipe.GetResult.id), recipe.GetResult.quantity);
+                craftingInventory.RemoveItem(0, recipe.GetItem0.quantity);
+                craftingInventory.RemoveItem(1, recipe.GetItem1.quantity);
+                craftingInventory.RemoveItem(2, recipe.GetItem2.quantity);
+                manager.GetPlayerController.GetInventory.AddItemFast(manager.ConvertIdToItem(recipe.GetResult.id), recipe.GetResult.quantity);
             }
         }
     }
