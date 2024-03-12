@@ -40,13 +40,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        GameManager.GetInstance().CloseInventory();
         GameManager.GetInstance().GetInputs.actions["OpenInventory"].performed += ShowInventory;
         GameManager.GetInstance().GetInputs.actions["Interact"].performed += Interact;
         GameManager.GetInstance().GetInputs.actions["Dash"].performed += dash.ActiveDash;
         sprintAction = GameManager.GetInstance().GetInputs.actions["Sprint"];
         moveAction = GameManager.GetInstance().GetInputs.actions["Move"];
         scrollAction = GameManager.GetInstance().GetInputs.actions["SwitchSelect"];
+        GameManager.GetInstance().CloseInventory();
     }
 
     public void ShowInventory(InputAction.CallbackContext context)
