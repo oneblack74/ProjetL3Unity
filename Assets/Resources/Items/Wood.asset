@@ -15,3 +15,4 @@ MonoBehaviour:
   MAX_STACK: 64
   ID: 1
   ICON: {fileID: -1654869559, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
+  IS_PLACABLE: 1

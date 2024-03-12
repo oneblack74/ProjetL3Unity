@@ -109,6 +109,7 @@ public class PlayerController : MonoBehaviour
         if (!triggerList.Contains(objectInteracted))
         {
             triggerList.Add(objectInteracted);
+            collision.gameObject.GetComponent<Interactable>().ChangeNear();
         }
     }
 
@@ -122,6 +123,7 @@ public class PlayerController : MonoBehaviour
         if (triggerList.Contains(objectInteracted))
         {
             triggerList.Remove(objectInteracted);
+            collision.gameObject.GetComponent<Interactable>().ChangeNear();
         }
     }
 

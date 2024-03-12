@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 269980635337309814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: -2.44, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.42138356, g: 0.2688601, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: bb77eaa8b291cd548bc6d5e860a3e228, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventorySize: 30
-  slotsPerLine: 10
 --- !u!114 &7499993600807733761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PrefabUi: {fileID: 2790541384947522229, guid: 046e72cb954ccb44bba79b89a6ed25be, type: 3}
+  id: 0
 --- !u!114 &-3513516152077403681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 390ae857fda45d349993d25b2f176aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 21300000, guid: bb77eaa8b291cd548bc6d5e860a3e228, type: 3}
+  nearSprite: {fileID: 21300000, guid: 86c0a9e6a7736024d8721ec371695607, type: 3}
 --- !u!61 &22958922032710862
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -163,12 +165,12 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.17, y: 0.17}
   m_EdgeRadius: 0
