@@ -146,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlaceBlock(InputAction.CallbackContext context)
     {
-        if (!manager.GetIsPlayerInInventory)
+        if (!manager.GetIsPlayerInInventory && !manager.GetInMenu && manager.GetSceneIndex == 1)
         {
             int slot = manager.GetHotbar.GetSlot;
             int itemID = manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).getID;

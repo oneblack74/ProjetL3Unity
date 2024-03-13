@@ -16,18 +16,25 @@ public class Chest : MonoBehaviour, IInteractable
 
     public bool Interact()
     {
-        if (openned)
+        if (!manager.GetInMenu)
         {
-            Close();
-            manager.CloseInventory();
+            if (openned)
+            {
+                Close();
+                GameManager.GetInstance().CloseInventory();
+            }
+            else
+            {
+
+                Open();
+                GameManager.GetInstance().OpenInventory();
+
+            }
+            openned = !openned;
+            return true;
         }
-        else
-        {
-            Open();
-            manager.OpenInventory();
-        }
-        openned = !openned;
-        return true;
+        return false;
+
     }
 
     private void Open()

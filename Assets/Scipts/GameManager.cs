@@ -138,7 +138,8 @@ public class GameManager : MonoBehaviour
     public void CloseMenu()
     {
         inMenu = false;
-        playerController.LockPlayer(false);
+        if (!playerInInventory)
+            playerController.LockPlayer(false);
         Destroy(actualMenuUI);
     }
 

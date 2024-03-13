@@ -23,18 +23,24 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     public bool Interact()
     {
-        if (openned)
+        if (!manager.GetInMenu)
         {
-            Close();
-            GameManager.GetInstance().CloseInventory();
+            if (openned)
+            {
+                Close();
+                GameManager.GetInstance().CloseInventory();
+            }
+            else
+            {
+
+                Open();
+                GameManager.GetInstance().OpenInventory();
+
+            }
+            openned = !openned;
+            return true;
         }
-        else
-        {
-            Open();
-            GameManager.GetInstance().OpenInventory();
-        }
-        openned = !openned;
-        return true;
+        return false;
     }
 
     private void Open()
