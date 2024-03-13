@@ -24,25 +24,25 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public (ItemDefinition, int) RemoveItem(int ind, int quantity)
+    public (ItemDefinition, int) RemoveItem(int index, int quantity)
     {
-        if (ind < 0 || ind >= inventorySize)
+        if (index < 0 || index >= inventorySize)
             throw new Exception("Index out of range");
-        if (tab[ind].GetItemQuantity < quantity)
+        if (tab[index].GetItemQuantity < quantity)
             throw new Exception("Not enough item in the slot");
 
-        return (tab[ind].GetItem, tab[ind].RemoveItem(quantity).Item2);
+        return (tab[index].GetItem, tab[index].RemoveItem(quantity).Item2);
     }
 
     // retourne l'exces d'item non ajoute
-    public (ItemDefinition, int) AddItem(int ind, ItemDefinition item, int quantity)
+    public (ItemDefinition, int) AddItem(int index, ItemDefinition item, int quantity)
     {
-        if (ind < 0 || ind >= inventorySize)
+        if (index < 0 || index >= inventorySize)
             throw new Exception("Index out of range");
-        if (tab[ind].GetItemQuantity + quantity > item.getMaxStack)
+        if (tab[index].GetItemQuantity + quantity > item.getMaxStack)
             throw new Exception("Too much item in the slot");
 
-        return (tab[ind].GetItem, tab[ind].AddItem(item, quantity).Item2);
+        return (tab[index].GetItem, tab[index].AddItem(item, quantity).Item2);
     }
 
     // Ajoute un item à la première place possible

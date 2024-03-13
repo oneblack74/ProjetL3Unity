@@ -210,4 +210,9 @@ public class GameManager : MonoBehaviour
         get { return inMenu; }
     }
 
+    public UIHotbar GetHotbar
+    {
+        get { return hotbar; }
+    }
+
 }

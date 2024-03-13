@@ -22,4 +22,16 @@ public class Ressource : MonoBehaviour, IInteractable
         Destroy(gameObject);
         return true;
     }
+
+    public int GetitemID
+    {
+        get { return itemID; }
+        set { itemID = value; }
+    }
+
+    public int GetQuantity
+    {
+        get { return quantity; }
+        set { quantity = value; }
+    }
 }

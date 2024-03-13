@@ -16,4 +16,9 @@ public class UIHotbar : MonoBehaviour
         }
         transform.localPosition = new Vector3(-525 + (116 * slot), 0, 0);
     }
+
+    public int GetSlot
+    {
+        get { return slot; }
+    }
 }

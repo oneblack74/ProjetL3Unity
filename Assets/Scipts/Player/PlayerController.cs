@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private GameObject prefabInventoryUI;
     private GameObject inventoryUI;
+    [SerializeField] private GameObject prefabRessource;
 
     // Components
     private Inventory inventory;
@@ -47,7 +48,8 @@ public class PlayerController : MonoBehaviour
         manager.GetInputs.actions["Interact"].performed += Interact;
         manager.GetInputs.actions["Dash"].performed += dash.ActiveDash;
         manager.GetInputs.actions["OpenMenu"].performed += ShowMenu;
-        sprintAction = manager.GetInputs.actions["Sprint"];
+        manager.GetInputs.actions["PlaceBlock"].performed += PlaceBlock;
+        sprintAction = manager.GetInputs.actions["Sprint"];         
         moveAction = manager.GetInputs.actions["Move"];
         scrollAction = manager.GetInputs.actions["SwitchSelect"];
         manager.CloseInventory();
@@ -142,6 +144,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlaceBlock(InputAction.CallbackContext context)
+    {
+        if (!GameManager.GetInstance().GetIsPlayerInInventory)
+        {
+            int slot = GameManager.GetInstance().GetHotbar.GetSlot;
+            int itemID = GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).getID;
+            if (itemID == 0)
+            {
+                return;
+            }
+            GameObject res = Instantiate(prefabRessource);
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            res.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
+            res.GetComponent<Ressource>().GetitemID = itemID;
+            GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
+            res.GetComponent<Ressource>().GetQuantity = 1;
+            // TODO: Changer la texture au placement
+        }
+    }
+
     void FixedUpdate()
     {
         sprint.Sprinting(isSprinting, staminaControl, movement);
@@ -182,6 +204,7 @@ public class PlayerController : MonoBehaviour
             manager.GetInputs.actions["Interact"].performed -= Interact;
             manager.GetInputs.actions["Dash"].performed -= dash.ActiveDash;
             manager.GetInputs.actions["OpenMenu"].performed -= ShowMenu;
+            manager.GetInputs.actions["PlaceBlock"].performed -= PlaceBlock;
         }
     }
 }

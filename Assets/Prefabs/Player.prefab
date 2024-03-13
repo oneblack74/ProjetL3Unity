@@ -237,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabInventoryUI: {fileID: 2297237601595119649, guid: 94cd06d803f1c1145997c44eb362dd7c, type: 3}
+  prefabRessource: {fileID: 856724855412730258, guid: 4005a48e22b68db4eb99264103bf1106, type: 3}
 --- !u!114 &6548961755992399879
 MonoBehaviour:
   m_ObjectHideFlags: 0
