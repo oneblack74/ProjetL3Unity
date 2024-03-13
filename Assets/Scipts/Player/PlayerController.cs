@@ -166,7 +166,8 @@ public class PlayerController : MonoBehaviour
             manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
             res.GetComponent<Ressource>().GetQuantity = 1;
             res.GetComponent<SpriteRenderer>().sprite = GameManager.GetInstance().ConvertIdToItem(itemID).getIcon;
-            // TODO: Changer la texture au placement
+            res.GetComponent<Interactable>().GetDefaultSprite = GameManager.GetInstance().ConvertIdToItem(itemID).getIcon;
+            res.GetComponent<Interactable>().GetNearSprite = GameManager.GetInstance().ConvertIdToItem(itemID).getNearIcon;
         }
     }
 

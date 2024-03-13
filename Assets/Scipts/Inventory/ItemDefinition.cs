@@ -9,13 +9,15 @@ public class ItemDefinition : ScriptableObject
     [SerializeField] private int MAX_STACK;
     [SerializeField] private int ID;
     [SerializeField] private Sprite ICON;
+    [SerializeField] private Sprite NEAR_ICON;
     [SerializeField] private bool IS_PLACABLE;
 
-    public ItemDefinition(int id, int maxStack, Sprite icon, bool isPlacable)
+    public ItemDefinition(int id, int maxStack, Sprite icon, Sprite nearIcon, bool isPlacable)
     {
         ID = id;
         MAX_STACK = maxStack;
         ICON = icon;
+        NEAR_ICON = nearIcon;
         IS_PLACABLE = isPlacable;
     }
 
@@ -33,10 +35,15 @@ public class ItemDefinition : ScriptableObject
     {
         get { return ICON; }
     }
+    public Sprite getNearIcon
+    {
+        get { return NEAR_ICON; }
+    }
 
     public bool getIsPlacable
     {
-        get { return IS_PLACABLE;  }
+        get { return IS_PLACABLE; }
     }
+
 }
 // }
