@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         manager.GetInputs.actions["Dash"].performed += dash.ActiveDash;
         manager.GetInputs.actions["OpenMenu"].performed += ShowMenu;
         manager.GetInputs.actions["PlaceBlock"].performed += PlaceBlock;
-        sprintAction = manager.GetInputs.actions["Sprint"];         
+        sprintAction = manager.GetInputs.actions["Sprint"];
         moveAction = manager.GetInputs.actions["Move"];
         scrollAction = manager.GetInputs.actions["SwitchSelect"];
         manager.CloseInventory();
@@ -146,10 +146,10 @@ public class PlayerController : MonoBehaviour
 
     public void PlaceBlock(InputAction.CallbackContext context)
     {
-        if (!GameManager.GetInstance().GetIsPlayerInInventory)
+        if (!manager.GetIsPlayerInInventory)
         {
-            int slot = GameManager.GetInstance().GetHotbar.GetSlot;
-            int itemID = GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).getID;
+            int slot = manager.GetHotbar.GetSlot;
+            int itemID = manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).getID;
             if (itemID == 0)
             {
                 return;
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             Vector2 mousePos = Mouse.current.position.ReadValue();
             res.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
             res.GetComponent<Ressource>().GetitemID = itemID;
-            GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
+            manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
             res.GetComponent<Ressource>().GetQuantity = 1;
             // TODO: Changer la texture au placement
         }

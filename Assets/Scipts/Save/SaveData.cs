@@ -54,6 +54,8 @@ public class SaveData : MonoBehaviour
         data.player.health = SaveHealth(manager.GetPlayerController.GetHealthControl);
         // __________ stamina
         data.player.stamina = SaveStamina(manager.GetPlayerController.GetStaminaControl);
+        // __________ hotbar
+        data.player.hotbar = SaveInventory(GameObject.Find("UI/Hotbar/HotbarInventoryUI").GetComponent<Inventory>());
 
         // portails : ==========================================
         data.portails = SavePortails(oldData);
@@ -71,6 +73,8 @@ public class SaveData : MonoBehaviour
         LoadHealth(manager.GetPlayerController.GetHealthControl, data.player.health);
         // __________ stamina
         LoadStamina(manager.GetPlayerController.GetStaminaControl, data.player.stamina);
+        // __________ hotbar
+        LoadInventory(GameObject.Find("UI/Hotbar/HotbarInventoryUI").GetComponent<Inventory>(), data.player.hotbar);
 
         // portails : ==========================================
         LoadPortails(data.portails);
@@ -300,6 +304,7 @@ public class StructPlayer
     public StructHealth health;
     public StructStamina stamina;
     public List<StructSlot> slots;
+    public List<StructSlot> hotbar;
 }
 
 [System.Serializable]
