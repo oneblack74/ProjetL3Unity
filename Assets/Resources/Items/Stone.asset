@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAX_STACK: 64
   ID: 2
-  ICON: {fileID: -1520661294, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
+  ICON: {fileID: 1794236225, guid: da9878ba35ba7584b893fb8aa2c7e65b, type: 3}
+  NEAR_ICON: {fileID: -270354820, guid: 73ce3856b27e35e4583661078fedc1db, type: 3}
   IS_PLACABLE: 1
