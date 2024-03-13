@@ -48,6 +48,10 @@ public class Inventory : MonoBehaviour
     // Ajoute un item à la première place possible
     public (ItemDefinition, int) AddItemFast(ItemDefinition item, int quantity)
     {
+        if (IsFullFor(item, quantity))
+        {
+            return (item, quantity);
+        }
         foreach (Slot slot in tab)
         {
             if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.getMaxStack))
@@ -61,6 +65,30 @@ public class Inventory : MonoBehaviour
             }
         }
         return (null, 0);
+    }
+
+    public bool IsFullFor(ItemDefinition item, int quantity)
+    {
+        int quantityRestant = quantity;
+        foreach (Slot slot in tab)
+        {
+            if (slot.IsEmpty())
+            {
+                return false;
+            }
+            if (slot.GetItem == item)
+            {
+                if (item.getMaxStack - slot.GetItemQuantity < quantityRestant)
+                {
+                    return false;
+                }
+                else
+                {
+                    quantityRestant -= item.getMaxStack - slot.GetItemQuantity;
+                }
+            }
+        }
+        return true;
     }
 
     public void SwitchItem(int index, Slot slot)

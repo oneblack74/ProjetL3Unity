@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEditor;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -154,12 +155,17 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
-            GameObject res = Instantiate(prefabRessource);
             Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (Physics2D.OverlapArea(new Vector2(mousePos.x - 0.5f, mousePos.y - 0.5f), new Vector2(mousePos.x + 0.5f, mousePos.y + 0.5f)) != null)
+            {
+                return; // TODO: ça marche pas
+            }
+            GameObject res = Instantiate(prefabRessource);
             res.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
             res.GetComponent<Ressource>().GetitemID = itemID;
             manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
             res.GetComponent<Ressource>().GetQuantity = 1;
+            res.GetComponent<SpriteRenderer>().sprite = GameManager.GetInstance().ConvertIdToItem(itemID).getIcon;
             // TODO: Changer la texture au placement
         }
     }

@@ -18,7 +18,14 @@ public class Ressource : MonoBehaviour, IInteractable
                 return false;
             }
         }
-        GameManager.GetInstance().GetPlayerController.GetInventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(itemID), quantity);
+        if (!GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().IsFullFor(GameManager.GetInstance().ConvertIdToItem(itemID), quantity))
+        {
+            GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().AddItemFast(GameManager.GetInstance().ConvertIdToItem(itemID), quantity);
+        }
+        else
+        {
+            GameManager.GetInstance().GetPlayerController.GetInventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(itemID), quantity);
+        }
         Destroy(gameObject);
         return true;
     }
