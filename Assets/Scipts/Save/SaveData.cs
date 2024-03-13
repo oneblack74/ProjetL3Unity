@@ -63,6 +63,10 @@ public class SaveData : MonoBehaviour
         // coffres : ===========================================
         data.coffres = SaveCoffres(oldData);
 
+        // coord : =============================================
+        if (manager.GetSceneIndex == 1)
+            data.coord = SaveCoord();
+
     }
     private void LoadElements()
     {
@@ -81,6 +85,10 @@ public class SaveData : MonoBehaviour
 
         // coffres : ===========================================
         LoadCoffres(data.coffres);
+
+        // coord : =============================================
+        if (manager.GetSceneIndex == 1)
+            LoadCoord(data.coord);
     }
 
 
@@ -223,6 +231,22 @@ public class SaveData : MonoBehaviour
         return coffres;
     }
 
+    private List<StructCoord> SaveCoord()
+    {
+        List<StructCoord> coord = new List<StructCoord>();
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Ressource");
+        for (int i = 0; i < gameObjects.Length; i++)
+        {
+            StructCoord c = new()
+            {
+                x = gameObjects[i].transform.position.x,
+                y = gameObjects[i].transform.position.y
+            };
+            coord.Add(c);
+        }
+        return coord;
+    }
+
     private void LoadInventory(Inventory inventory, List<StructSlot> slots)
     {
         inventory.RedefineSlots(slots);
@@ -274,6 +298,15 @@ public class SaveData : MonoBehaviour
         }
     }
 
+    private void LoadCoord(List<StructCoord> coord)
+    {
+        for (int i = 0; i < coord.Count; i++)
+        {
+            GameObject ressource = Instantiate(manager.GetPlayerController.GetPrefabRessource);
+            ressource.transform.position = new Vector3(coord[i].x, coord[i].y, 0);
+        }
+    }
+
 }
 
 [System.Serializable]
@@ -281,7 +314,15 @@ public struct Data
 {
     public List<StructCoffres> coffres;
     public List<StructPortails> portails;
+    public List<StructCoord> coord;
     public StructPlayer player;
+}
+
+[System.Serializable]
+public class StructCoord
+{
+    public float x;
+    public float y;
 }
 
 [System.Serializable]

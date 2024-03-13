@@ -196,6 +196,11 @@ public class PlayerController : MonoBehaviour
         get { return movement; }
     }
 
+    public GameObject GetPrefabRessource
+    {
+        get { return prefabRessource; }
+    }
+
     void OnDestroy()
     {
         if (manager != null)
