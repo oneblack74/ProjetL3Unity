@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        triggerList[0].Interact(); //TODO: A modifier pour que ce soit l'objet le plus proche  
+        triggerList[0].Interact();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
