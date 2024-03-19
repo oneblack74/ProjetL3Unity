@@ -188,5 +188,4 @@ public class Inventory : MonoBehaviour
     {
         get { return tab; }
     }
-
 }

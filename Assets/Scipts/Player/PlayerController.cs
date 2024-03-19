@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
-    // SerilizedField
+    // Prefabs
     [SerializeField] private GameObject prefabInventoryUI;
     [SerializeField] private GameObject prefabRessource;
 
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
             Vector2 mousePos = Mouse.current.position.ReadValue();
             if (Physics2D.OverlapArea(new Vector2(mousePos.x - 0.5f, mousePos.y - 0.5f), new Vector2(mousePos.x + 0.5f, mousePos.y + 0.5f)) != null)
             {
-                return; // TODO: ça marche pas
+                return;
             }
             GameObject res = Instantiate(prefabRessource);
             res.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
