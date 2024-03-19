@@ -5,9 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnnimationMoveScript : MonoBehaviour
 {
+    // les components
     private Movement movement;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
+    // les SerilizedField
     [SerializeField] Sprite[] sprites;
 
     void Awake()

@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class UIHotbar : MonoBehaviour
 {
+    // Variable
     private int slot = 0;
+
     public void MoveSelect(int way)
     {
         slot += way;

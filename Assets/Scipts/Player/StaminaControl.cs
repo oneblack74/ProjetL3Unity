@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class StaminaControl : MonoBehaviour
 {
-    [SerializeField] private float maxStamina = 0f;         //? Maximum Stamina
-    [SerializeField] private float stamina = 0f;            //? Actual Stamina
-    [SerializeField] private float regenDelay = 0f;         //? Delay after which the stamina will recover
-    [SerializeField] private float refillRate = 0f;         //? Rate at which the stamina will recover
-    [SerializeField] private GameManager manager;
-    private float timer = 0f;                               //? Used for stamina regen  
+    // SerilizedField
+    [SerializeField] private float maxStamina = 0f;
+    [SerializeField] private float stamina = 0f;
+    [SerializeField] private float regenDelay = 0f;
+    [SerializeField] private float refillRate = 0f;
+
+    // Manager
+    private GameManager manager;
+
+    // Timer
+    private float timer = 0f;
 
     void Start()
     {
         manager = GameManager.GetInstance();
     }
 
-    // This function is never called on its own 
-    // Useful for 1-time drains, like dashes, jumps..
     public bool DrainStamina(float s)
     {
         timer = 0f;
@@ -29,8 +32,6 @@ public class StaminaControl : MonoBehaviour
 
     }
 
-    // This function is never called on its own
-    // Useful for draining over time, like for sprinting
     public void DrainStaminaOverTime(float rate)
     {
         timer = 0f;
@@ -57,6 +58,7 @@ public class StaminaControl : MonoBehaviour
             timer += Time.deltaTime;
         }
     }
+
     void Update()
     {
         if (!manager.GetInMenu)

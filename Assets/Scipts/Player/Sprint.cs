@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(StaminaControl))]
 public class Sprint : MonoBehaviour
 {
+    // SerilizedField
     [SerializeField] private float speedMultiplier;
     [SerializeField] private float staminaConsumption;
 

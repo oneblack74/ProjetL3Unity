@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Recipe", menuName = "TE/Recipe", order = 0)]
 public class Recipe : ScriptableObject
 {
+    [Header("Liste des composants")]
     [SerializeField] private StructItem item0;
     [SerializeField] private StructItem item1;
     [SerializeField] private StructItem item2;
+
+    [Header("Résultat")]
     [SerializeField] private StructItem result;
 
     public StructItem GetItem0

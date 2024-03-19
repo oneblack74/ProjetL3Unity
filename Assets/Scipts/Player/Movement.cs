@@ -3,20 +3,22 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
+    // SerilizedField
     [SerializeField] private float speedTmp;
     [SerializeField] private float speed;
-
-    public enum Dir { Up, Down, Left, Right };
     [SerializeField] private Dir myDir = Dir.Down;
     [SerializeField] private bool isMoving = false;
-    private bool isLock = false; // Ptn t'es un monstre de l'avoir pr�vu
 
+    // Enum
+    public enum Dir { Up, Down, Left, Right };
 
+    // Variables
+    private bool isLock = false;
     private Dir lastMoveDir;
 
     public void Move(Vector3 moveValue)
     {
-        if (isLock) // Si le joueur est dans un inventaire, par exemple
+        if (isLock)
         {
             return;
         }
@@ -47,14 +49,12 @@ public class Movement : MonoBehaviour
             isMoving = false;
         }
 
-        // If the player is moving, update the last move direction
         if (isMoving)
         {
             lastMoveDir = myDir;
         }
         else
         {
-            // When the player stops moving, set the direction to the last move direction
             myDir = lastMoveDir;
         }
     }

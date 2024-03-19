@@ -6,16 +6,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Dash : MonoBehaviour
 {
+    // Components
     private Movement movement;
     private StaminaControl staminaControl;
     private BoxCollider2D boxCollider;
-    private float speedDash;
+
+    // SerilizedField
     [SerializeField] private float timerMax;
     [SerializeField] private float distance;
     [SerializeField] private bool isDashing = false;
     [SerializeField] private float staminaCount = 10.0f;
+
+    // Variables
+    private float speedDash;
     private float timer;
     private Movement.Dir dashDir;
+
+    // Manager
     private GameManager manager;
 
     void Awake()

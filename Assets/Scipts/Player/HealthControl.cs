@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class HealthControl : MonoBehaviour
 {
-    [SerializeField] private float maxHealth = 0f;          //? Maximum health
-    [SerializeField] private float health = 0f;              //? Actual health
+    // SerilizedField
+    [SerializeField] private float maxHealth = 0f;
+    [SerializeField] private float health = 0f;
 
 
     public void AddHealth(float value)

@@ -4,7 +4,10 @@ using UnityEngine.UI;
 
 public class UIStaminaBar : MonoBehaviour
 {
+    // Manager
     private GameManager manager;
+
+    // Variable
     private Image image;
 
     void Awake()

@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
-using UnityEditor;
-using System;
 
 public class PlayerController : MonoBehaviour
 {
+    // SerilizedField
     [SerializeField] private GameObject prefabInventoryUI;
-    private GameObject inventoryUI;
     [SerializeField] private GameObject prefabRessource;
 
     // Components
@@ -24,12 +22,14 @@ public class PlayerController : MonoBehaviour
     private InputAction scrollAction;
 
     // Variables
-    private bool inInventory = false; // Variable qui g�re si le joueur est dans SON inventaire
+    private bool inInventory = false;
+    private GameObject inventoryUI;
     private Vector3 moveValue;
     private bool isSprinting;
     private Vector2 scrollValue;
-
     private readonly List<IInteractable> triggerList = new();
+
+    // Manager
     private GameManager manager;
 
     void Awake()
@@ -165,9 +165,9 @@ public class PlayerController : MonoBehaviour
             res.GetComponent<Ressource>().GetitemID = itemID;
             manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
             res.GetComponent<Ressource>().GetQuantity = 1;
-            res.GetComponent<SpriteRenderer>().sprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetIcon;
-            res.GetComponent<Interactable>().GetDefaultSprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetIcon;
-            res.GetComponent<Interactable>().GetNearSprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetNearIcon;
+            res.GetComponent<SpriteRenderer>().sprite = manager.ConvertIdToItem(itemID).GetIcon;
+            res.GetComponent<Interactable>().GetDefaultSprite = manager.ConvertIdToItem(itemID).GetIcon;
+            res.GetComponent<Interactable>().GetNearSprite = manager.ConvertIdToItem(itemID).GetNearIcon;
         }
     }
 

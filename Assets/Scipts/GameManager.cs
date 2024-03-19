@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -8,21 +7,25 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    // Instance
     public static GameManager Instance;
+
+    // Components
     public PlayerInput inputs;
     private AudioSource audioSource;
-
     private PlayerController playerController;
-    private UIHotbar hotbar;
-    private bool playerInInventory; // Variable qui gère si le player est dans un inventaire AUTRE que le siens 
-    private SaveData saveData;
 
+    // SerializeField
+    [SerializeField] private GameObject PrefabMenuUI;
     [SerializeField] private GameObject prefabCursorUI;
-    private GameObject cursorUI;
 
+    // Variables
+    private UIHotbar hotbar;
+    private bool playerInInventory;
+    private SaveData saveData;
+    private GameObject cursorUI;
     private readonly Dictionary<int, ItemDefinition> itemDico = new();
     private readonly Dictionary<string, AudioClip> soundDico = new();
-    [SerializeField] private GameObject PrefabMenuUI;
     private GameObject actualMenuUI;
     private bool inMenu;
 
@@ -92,9 +95,6 @@ public class GameManager : MonoBehaviour
 
         while (!operation.isDone)
         {
-            // ajouter ici du code pour afficher une barre de progression
-            // Debug.Log("Progress: " + operation.progress);
-
             yield return null;
         }
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();

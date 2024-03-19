@@ -4,10 +4,15 @@ using UnityEngine;
 [RequireComponent(typeof(TrapVisibility))]
 public class TrapDamage : MonoBehaviour
 {
+    // Enum
     private enum TrapState { Active, Inactive };
+
+    // SerializeField
     [SerializeField] private TrapState state = TrapState.Active;
-    private GameManager manager;
     [SerializeField] private float trapDamage = 10.0f;
+
+    // Manager
+    private GameManager manager;
 
     void Awake()
     {

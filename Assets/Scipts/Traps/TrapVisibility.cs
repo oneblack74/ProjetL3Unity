@@ -3,9 +3,12 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class TrapVisibility : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    // SerializeField
     [SerializeField] private float visibilityStart = 0.5f;
     [SerializeField] private float visibilityEnd = 1.0f;
+
+    // Variables
+    private SpriteRenderer spriteRenderer;
 
     void Awake()
     {

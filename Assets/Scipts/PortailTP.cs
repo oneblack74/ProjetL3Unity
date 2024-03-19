@@ -3,13 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PortailTP : MonoBehaviour
 {
+    // Manager
     private GameManager manager;
+
+    // Enum
     public enum State { Activer, Couldown, Desactiver, Start };
+
+    // SerializeField
+    [SerializeField] private float maxTimer = 3;
+    [SerializeField] private int id;
+
+    // Variables
     private State state = State.Activer;
     private SpriteRenderer spriteRenderer;
     private float timer = 0;
-    [SerializeField] private float maxTimer = 3;
-    [SerializeField] private int id;
 
     void Awake()
     {

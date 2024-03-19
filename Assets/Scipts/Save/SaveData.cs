@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SaveData : MonoBehaviour
 {
-    public Data data = new Data();
+    public Data data = new();
     private GameManager manager;
     void Start()
     {
@@ -12,18 +12,11 @@ public class SaveData : MonoBehaviour
 
     public void Sauvegarder()
     {
-        Data? oldData = LoadJson();
-
-        if (oldData == null)
-        {
-            oldData = new Data();
-        }
+        Data? oldData = LoadJson() ?? new Data();
         SaveElements((Data)oldData);
 
         string saveData = JsonUtility.ToJson(data);
         string chemin = Application.persistentDataPath + "/SaveData.json";
-        //Debug.Log(saveData);
-        //Debug.Log(chemin);
 
         System.IO.File.WriteAllText(chemin, saveData);
     }
@@ -94,7 +87,7 @@ public class SaveData : MonoBehaviour
 
     private List<StructSlot> SaveInventory(Inventory inventory)
     {
-        List<StructSlot> slots = new List<StructSlot>();
+        List<StructSlot> slots = new();
         foreach (Slot slot in inventory.GetTab)
         {
             StructSlot s = new()
@@ -131,7 +124,7 @@ public class SaveData : MonoBehaviour
 
     private List<StructPortails> SavePortails(Data oldData)
     {
-        List<StructPortails> portails = new List<StructPortails>();
+        List<StructPortails> portails = new();
         GameObject[] gameObjectsPortail = GameObject.FindGameObjectsWithTag("Portail");
 
         for (int i = 0; i < gameObjectsPortail.Length; i++)
@@ -191,13 +184,13 @@ public class SaveData : MonoBehaviour
 
     private List<StructCoffres> SaveCoffres(Data oldData)
     {
-        List<StructCoffres> coffres = new List<StructCoffres>();
+        List<StructCoffres> coffres = new();
         GameObject[] gameObjectsCoffre = GameObject.FindGameObjectsWithTag("Chest");
 
         for (int i = 0; i < gameObjectsCoffre.Length; i++)
         {
             Chest coffre = gameObjectsCoffre[i].GetComponent<Chest>();
-            StructCoffres c = new StructCoffres
+            StructCoffres c = new()
             {
                 id = coffre.GetID,
                 inventory = SaveInventory(coffre.GetComponent<Inventory>())
@@ -219,7 +212,7 @@ public class SaveData : MonoBehaviour
                 }
                 if (!exist)
                 {
-                    StructCoffres c = new StructCoffres
+                    StructCoffres c = new()
                     {
                         id = oldData.coffres[i].id,
                         inventory = oldData.coffres[i].inventory
@@ -233,7 +226,7 @@ public class SaveData : MonoBehaviour
 
     private List<StructCoord> SaveCoord()
     {
-        List<StructCoord> coord = new List<StructCoord>();
+        List<StructCoord> coord = new();
         GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("Ressource");
         for (int i = 0; i < gameObjects.Length; i++)
         {

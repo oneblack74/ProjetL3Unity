@@ -3,7 +3,10 @@ using UnityEngine.UI;
 
 public class UIHealthBar : MonoBehaviour
 {
+    // Manager
     private GameManager manager;
+
+    // Variable
     private Image image;
 
     void Awake()

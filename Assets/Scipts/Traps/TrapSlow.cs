@@ -4,12 +4,19 @@ using UnityEngine;
 [RequireComponent(typeof(TrapVisibility))]
 public class TrapSlow : MonoBehaviour
 {
+    // Enum
     private enum TrapState { Active, Inactive };
+
+    // SerializeField
     [SerializeField] private TrapState state = TrapState.Active;
-    private GameManager manager;
     [SerializeField] private float slowMultiplier = 0.5f;
     [SerializeField] private float timer = 0.0f;
     [SerializeField] private float slowDuration = 3.0f;
+
+    // Manager
+    private GameManager manager;
+
+    // Variables
     private bool timerActive = false;
 
     void Awake()
