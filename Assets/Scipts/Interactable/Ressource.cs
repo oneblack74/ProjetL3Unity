@@ -7,23 +7,29 @@ public class Ressource : MonoBehaviour, IInteractable
     [SerializeField] private int itemID;
     [SerializeField] private int quantity = 1;
     [SerializeField] private List<int> requieredItemIDs = new();
+    GameManager manager;
+
+    void Start()
+    {
+        manager = GameManager.GetInstance();
+    }
 
     public bool Interact()
     {
         for (int i = 0; i < requieredItemIDs.Count; i++)
         {
-            if (!GameManager.GetInstance().GetPlayerController.GetInventory.IsInInventory(requieredItemIDs[i]))
+            if (!manager.GetPlayerController.GetInventory.IsInInventory(requieredItemIDs[i]))
             {
                 return false;
             }
         }
-        if (!GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().IsFullFor(GameManager.GetInstance().ConvertIdToItem(itemID), quantity))
+        if (!manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().IsFullFor(manager.ConvertIdToItem(itemID), quantity))
         {
-            GameManager.GetInstance().GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().AddItemFast(GameManager.GetInstance().ConvertIdToItem(itemID), quantity);
+            manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().AddItemFast(manager.ConvertIdToItem(itemID), quantity);
         }
         else
         {
-            GameManager.GetInstance().GetPlayerController.GetInventory.AddItemFast(GameManager.GetInstance().ConvertIdToItem(itemID), quantity);
+            manager.GetPlayerController.GetInventory.AddItemFast(manager.ConvertIdToItem(itemID), quantity);
         }
         Destroy(gameObject);
         return true;

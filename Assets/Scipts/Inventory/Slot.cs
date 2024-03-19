@@ -2,11 +2,13 @@ public class Slot
 {
     private int quantity = 0;
     private ItemDefinition item = null;
+    private readonly GameManager manager;
 
     public Slot(int quantity = 0, ItemDefinition item = null)
     {
         this.quantity = quantity;
         this.item = item;
+        manager = GameManager.GetInstance();
     }
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
@@ -24,7 +26,7 @@ public class Slot
         {
             ItemDefinition tmp = item;
             this.quantity = 0;
-            item = GameManager.GetInstance().ConvertIdToItem(0);
+            item = manager.ConvertIdToItem(0);
             return (tmp, quantity);
         }
         this.quantity -= quantity;
@@ -48,7 +50,7 @@ public class Slot
         this.quantity = quantity;
         if (quantity == 0)
         {
-            this.item = GameManager.GetInstance().ConvertIdToItem(0);
+            this.item = manager.ConvertIdToItem(0);
         }
         else
         {

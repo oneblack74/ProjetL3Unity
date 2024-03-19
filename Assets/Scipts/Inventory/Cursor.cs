@@ -7,9 +7,11 @@ public class Cursor : MonoBehaviour
     [SerializeField] private SlotUI slotUI;
     private bool following = true;
     private Inventory inventory;
+    private GameManager manager;
 
     void Start()
     {
+        manager = GameManager.GetInstance();
         inventory = GetComponent<Inventory>();
         inventory.InitSlots();
     }
@@ -35,6 +37,6 @@ public class Cursor : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.GetInstance().GetPlayerController.GetInventory.AddItemFast(inventory.CheckItem(0), inventory.CheckItemQuantity(0));
+        manager.GetPlayerController.GetInventory.AddItemFast(inventory.CheckItem(0), inventory.CheckItemQuantity(0));
     }
 }

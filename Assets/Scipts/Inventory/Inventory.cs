@@ -6,9 +6,11 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField] private int inventorySize = 5;
     [SerializeField] private List<Slot> tab = new();
+    private GameManager manager;
 
     void Start()
     {
+        manager = GameManager.GetInstance();
         if (inventorySize == 0)
         {
             inventorySize = 1;
@@ -20,7 +22,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventorySize; i++)
         {
-            tab.Add(new Slot(0, GameManager.GetInstance().ConvertIdToItem(0)));
+            tab.Add(new Slot(0, manager.ConvertIdToItem(0)));
         }
     }
 
@@ -105,12 +107,12 @@ public class Inventory : MonoBehaviour
 
     public void LeftClick(int slotID)
     {
-        SwitchItem(slotID, GameManager.GetInstance().GetCursorUI.GetComponent<Inventory>().GetSlot(0));
+        SwitchItem(slotID, manager.GetCursorUI.GetComponent<Inventory>().GetSlot(0));
     }
 
     public void RightCLick(int slotID)
     {
-        GameObject cursor = GameManager.GetInstance().GetCursorUI;
+        GameObject cursor = manager.GetCursorUI;
         Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
         if (slotCursor.IsEmpty())
         {
@@ -137,7 +139,7 @@ public class Inventory : MonoBehaviour
         tab.Clear();
         foreach (StructSlot slot in newTab)
         {
-            Slot s = new(slot.itemQuantity, GameManager.GetInstance().ConvertIdToItem(slot.itemID));
+            Slot s = new(slot.itemQuantity, manager.ConvertIdToItem(slot.itemID));
             tab.Add(s);
         }
     }

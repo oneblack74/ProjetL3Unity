@@ -28,13 +28,13 @@ public class CraftingTable : MonoBehaviour, IInteractable
             if (openned)
             {
                 Close();
-                GameManager.GetInstance().CloseInventory();
+                manager.CloseInventory();
             }
             else
             {
 
                 Open();
-                GameManager.GetInstance().OpenInventory();
+                manager.OpenInventory();
 
             }
             openned = !openned;
@@ -50,7 +50,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
         actualUI.transform.SetParent(parent, false);
         actualUI.transform.SetSiblingIndex(0);
         actualUI.transform.GetChild(0).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(gameObject.GetComponent<Inventory>());
-        actualUI.transform.GetChild(1).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(GameManager.GetInstance().GetPlayerController.GetInventory);
+        actualUI.transform.GetChild(1).transform.GetChild(0).GetComponent<InventoryUI>().LinkInventory(manager.GetPlayerController.GetInventory);
 
         actualUI.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(Craft);
 
@@ -58,7 +58,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     private void Close()
     {
-        Inventory playerInventory = GameManager.GetInstance().GetPlayerController.GetInventory;
+        Inventory playerInventory = manager.GetPlayerController.GetInventory;
         for (int i = 0; i < 3; i++)
         {
             if (craftingInventory.CheckItem(i).GetID != 0)
