@@ -50,9 +50,7 @@ public class Slot
                 this.quantity = item.GetMaxStack;
                 return (this.item, restant);
             }
-            Debug.Log("Before quantity : " + this.quantity + " adding " + quantity);
             this.quantity += quantity;
-            Debug.Log(this.quantity);
             return (this.item, 0);
         }
         this.quantity = quantity;

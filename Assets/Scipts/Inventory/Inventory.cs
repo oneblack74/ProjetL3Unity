@@ -65,7 +65,6 @@ public class Inventory : MonoBehaviour
         {
             if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.GetMaxStack))
             {
-                Debug.Log("Quantity : " + quantity);
                 (ItemDefinition, int) reste = slot.AddItem(item, quantity);
                 if (reste.Item2 <= 0)
                 {
