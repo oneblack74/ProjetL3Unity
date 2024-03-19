@@ -4,9 +4,9 @@ using TMPro;
 
 public class SlotUI : MonoBehaviour
 {
+    private int slotID;
     private TextMeshProUGUI textMeshPro;
     private Image itemIcon;
-    private int slotID;
     private Inventory inventoryLink;
 
     void Awake()
@@ -15,7 +15,6 @@ public class SlotUI : MonoBehaviour
         itemIcon = gameObject.transform.GetChild(1).GetComponent<Image>();
     }
 
-    // Le gO doit avoir un Inventory, c'est celui ci qui va être utilisé pour le slotUI
     public void LinkInventory(Inventory inv)
     {
         inventoryLink = inv;
@@ -27,7 +26,7 @@ public class SlotUI : MonoBehaviour
         {
             return;
         }
-        itemIcon.sprite = item.getIcon;
+        itemIcon.sprite = item.GetIcon;
 
         if (textMeshPro == null)
         {
@@ -57,6 +56,6 @@ public class SlotUI : MonoBehaviour
 
     public void MiddleClick()
     {
-
+        ;
     }
 }

@@ -99,7 +99,7 @@ public class SaveData : MonoBehaviour
         {
             StructSlot s = new()
             {
-                itemID = slot.GetItem.getID,
+                itemID = slot.GetItem.GetID,
                 itemQuantity = slot.GetItemQuantity
             };
             slots.Add(s);

@@ -8,8 +8,8 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] private float espaceEntreElements = 10f;
     [SerializeField] private int slotPerLine = 10;
     [SerializeField] private GameObject slotUIPrefab;
-    private GridLayoutGroup gridLayout;
     [SerializeField] private Inventory inventory;
+    private GridLayoutGroup gridLayout;
     private readonly List<SlotUI> slotsUI = new();
 
     void Awake()
@@ -65,11 +65,11 @@ public class InventoryUI : MonoBehaviour
     }
 
     public void LinkInventory(Inventory inv)
-	{
+    {
         inventory = inv;
         Init();
         return;
-	}
+    }
 
     private void AjusterTailleGridLayout()
     {

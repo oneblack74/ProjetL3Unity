@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if (!manager.GetIsPlayerInInventory && !manager.GetInMenu && manager.GetSceneIndex == 1)
         {
             int slot = manager.GetHotbar.GetSlot;
-            int itemID = manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).getID;
+            int itemID = manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().CheckItem(slot).GetID;
             if (itemID == 0)
             {
                 return;
@@ -165,9 +165,9 @@ public class PlayerController : MonoBehaviour
             res.GetComponent<Ressource>().GetitemID = itemID;
             manager.GetHotbar.transform.parent.GetChild(0).GetComponent<Inventory>().RemoveItem(slot, 1);
             res.GetComponent<Ressource>().GetQuantity = 1;
-            res.GetComponent<SpriteRenderer>().sprite = GameManager.GetInstance().ConvertIdToItem(itemID).getIcon;
-            res.GetComponent<Interactable>().GetDefaultSprite = GameManager.GetInstance().ConvertIdToItem(itemID).getIcon;
-            res.GetComponent<Interactable>().GetNearSprite = GameManager.GetInstance().ConvertIdToItem(itemID).getNearIcon;
+            res.GetComponent<SpriteRenderer>().sprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetIcon;
+            res.GetComponent<Interactable>().GetDefaultSprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetIcon;
+            res.GetComponent<Interactable>().GetNearSprite = GameManager.GetInstance().ConvertIdToItem(itemID).GetNearIcon;
         }
     }
 

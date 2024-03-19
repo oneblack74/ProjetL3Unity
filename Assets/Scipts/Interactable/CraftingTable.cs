@@ -4,7 +4,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Inventory))]
 public class CraftingTable : MonoBehaviour, IInteractable
 {
-    [SerializeField] private GameObject PrefabUi;
+    [SerializeField] private GameObject prefabUI;
     [SerializeField] private Recipe[] recipes;
     private GameManager manager;
     private GameObject actualUI;
@@ -45,7 +45,7 @@ public class CraftingTable : MonoBehaviour, IInteractable
 
     private void Open()
     {
-        actualUI = Instantiate(PrefabUi);
+        actualUI = Instantiate(prefabUI);
         Transform parent = GameObject.Find("UI").transform;
         actualUI.transform.SetParent(parent, false);
         actualUI.transform.SetSiblingIndex(0);
@@ -61,9 +61,9 @@ public class CraftingTable : MonoBehaviour, IInteractable
         Inventory playerInventory = GameManager.GetInstance().GetPlayerController.GetInventory;
         for (int i = 0; i < 3; i++)
         {
-            if (craftingInventory.CheckItem(i).getID != 0)
+            if (craftingInventory.CheckItem(i).GetID != 0)
             {
-                playerInventory.AddItemFast(manager.ConvertIdToItem(craftingInventory.CheckItem(i).getID), craftingInventory.CheckItemQuantity(i));
+                playerInventory.AddItemFast(manager.ConvertIdToItem(craftingInventory.CheckItem(i).GetID), craftingInventory.CheckItemQuantity(i));
                 craftingInventory.RemoveItem(i, craftingInventory.CheckItemQuantity(i));
             }
         }
@@ -75,9 +75,9 @@ public class CraftingTable : MonoBehaviour, IInteractable
     {
         foreach (Recipe recipe in recipes)
         {
-            if (craftingInventory.CheckItem(0).getID == recipe.GetItem0.id && craftingInventory.CheckItemQuantity(0) >= recipe.GetItem0.quantity &&
-                craftingInventory.CheckItem(1).getID == recipe.GetItem1.id && craftingInventory.CheckItemQuantity(1) >= recipe.GetItem1.quantity &&
-                craftingInventory.CheckItem(2).getID == recipe.GetItem2.id && craftingInventory.CheckItemQuantity(2) >= recipe.GetItem2.quantity)
+            if (craftingInventory.CheckItem(0).GetID == recipe.GetItem0.id && craftingInventory.CheckItemQuantity(0) >= recipe.GetItem0.quantity &&
+                craftingInventory.CheckItem(1).GetID == recipe.GetItem1.id && craftingInventory.CheckItemQuantity(1) >= recipe.GetItem1.quantity &&
+                craftingInventory.CheckItem(2).GetID == recipe.GetItem2.id && craftingInventory.CheckItemQuantity(2) >= recipe.GetItem2.quantity)
             {
                 manager.PlaySound("Craft");
                 craftingInventory.RemoveItem(0, recipe.GetItem0.quantity);

@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Inventory))]
 public class Cursor : MonoBehaviour
 {
-    private bool following = true;
     [SerializeField] private SlotUI slotUI;
+    private bool following = true;
     private Inventory inventory;
 
     void Start()

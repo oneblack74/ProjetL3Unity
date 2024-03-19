@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         {
             if (item != null)
             {
-                itemDico.Add(item.getID, item);
+                itemDico.Add(item.GetID, item);
             }
         }
 

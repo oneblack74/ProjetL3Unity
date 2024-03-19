@@ -1,6 +1,3 @@
-// namespace InventoryScripts
-// {
-
 public class Slot
 {
     private int quantity = 0;
@@ -39,10 +36,10 @@ public class Slot
     {
         if (this.item == item)
         {
-            if (this.quantity + quantity > item.getMaxStack)
+            if (this.quantity + quantity > item.GetMaxStack)
             {
-                int restant = quantity - (item.getMaxStack - this.quantity);
-                this.quantity = item.getMaxStack;
+                int restant = quantity - (item.GetMaxStack - this.quantity);
+                this.quantity = item.GetMaxStack;
                 return (this.item, restant);
             }
             this.quantity += quantity;
@@ -87,4 +84,3 @@ public class Slot
         get { return item; }
     }
 }
-// }

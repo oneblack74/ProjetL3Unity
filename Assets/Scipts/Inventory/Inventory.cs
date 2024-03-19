@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
     {
         if (index < 0 || index >= inventorySize)
             throw new Exception("Index out of range");
-        if (tab[index].GetItemQuantity + quantity > item.getMaxStack)
+        if (tab[index].GetItemQuantity + quantity > item.GetMaxStack)
             throw new Exception("Too much item in the slot");
 
         return (tab[index].GetItem, tab[index].AddItem(item, quantity).Item2);
@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
         }
         foreach (Slot slot in tab)
         {
-            if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.getMaxStack))
+            if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.GetMaxStack))
             {
                 (ItemDefinition, int) reste = slot.AddItem(item, quantity);
                 if (reste.Item2 <= 0)
@@ -78,13 +78,13 @@ public class Inventory : MonoBehaviour
             }
             if (slot.GetItem == item)
             {
-                if (item.getMaxStack - slot.GetItemQuantity < quantityRestant)
+                if (item.GetMaxStack - slot.GetItemQuantity < quantityRestant)
                 {
                     return false;
                 }
                 else
                 {
-                    quantityRestant -= item.getMaxStack - slot.GetItemQuantity;
+                    quantityRestant -= item.GetMaxStack - slot.GetItemQuantity;
                 }
             }
         }
@@ -106,7 +106,6 @@ public class Inventory : MonoBehaviour
     public void LeftClick(int slotID)
     {
         SwitchItem(slotID, GameManager.GetInstance().GetCursorUI.GetComponent<Inventory>().GetSlot(0));
-        // Si pb de reférence ici, le cursor n'est pas actif ;)
     }
 
     public void RightCLick(int slotID)
@@ -165,7 +164,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (Slot slot in tab)
         {
-            if (slot.GetItem.getID == itemID)
+            if (slot.GetItem.GetID == itemID)
             {
                 return true;
             }
@@ -189,4 +188,3 @@ public class Inventory : MonoBehaviour
     }
 
 }
-// }

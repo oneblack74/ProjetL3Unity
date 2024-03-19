@@ -2,8 +2,6 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ItemDefinition", menuName = "TE/ItemDefinition", order = 0)]
 
-// namespace InventoryScripts
-// {
 public class ItemDefinition : ScriptableObject
 {
     [SerializeField] private int MAX_STACK;
@@ -21,29 +19,28 @@ public class ItemDefinition : ScriptableObject
         IS_PLACABLE = isPlacable;
     }
 
-    public int getID
+    public int GetID
     {
         get { return ID; }
     }
 
-    public int getMaxStack
+    public int GetMaxStack
     {
         get { return MAX_STACK; }
     }
 
-    public Sprite getIcon
+    public Sprite GetIcon
     {
         get { return ICON; }
     }
-    public Sprite getNearIcon
+    public Sprite GetNearIcon
     {
         get { return NEAR_ICON; }
     }
 
-    public bool getIsPlacable
+    public bool GetIsPlacable
     {
         get { return IS_PLACABLE; }
     }
 
 }
-// }
