@@ -40,15 +40,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // récupérer les item scriptableobject et les stocker dans un dico
-        ItemDefinition[] items = Resources.LoadAll<ItemDefinition>("Items");
-
-        foreach (ItemDefinition item in items)
-        {
-            if (item != null)
-            {
-                itemDico.Add(item.GetID, item);
-            }
-        }
+        LoadItems();
 
         // récupérer les sons et les stocker dans un dico
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -66,7 +58,18 @@ public class GameManager : MonoBehaviour
         hotbar = GameObject.Find("UI/Hotbar/HotbarSelectUI").GetComponent<UIHotbar>();
     }
 
+    public void LoadItems()
+    {
+        ItemDefinition[] items = Resources.LoadAll<ItemDefinition>("Items");
 
+        foreach (ItemDefinition item in items)
+        {
+            if (item != null)
+            {
+                itemDico.Add(item.GetID, item);
+            }
+        }
+    }
 
     public static GameManager GetInstance()
     {

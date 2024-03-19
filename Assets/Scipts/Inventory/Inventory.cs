@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        manager = GameManager.GetInstance();
+        InitManager(GameManager.GetInstance());
         if (inventorySize == 0)
         {
             inventorySize = 1;
@@ -18,11 +18,18 @@ public class Inventory : MonoBehaviour
         InitSlots();
     }
 
+    public void InitManager(GameManager manager)
+    {
+        this.manager = manager;
+    }
+
     public void InitSlots()
     {
         for (int i = 0; i < inventorySize; i++)
         {
-            tab.Add(new Slot(0, manager.ConvertIdToItem(0)));
+            Slot s = new Slot(0, manager.ConvertIdToItem(0));
+            s.InitManager(manager);
+            tab.Add(s);
         }
     }
 
@@ -58,12 +65,13 @@ public class Inventory : MonoBehaviour
         {
             if (slot.IsEmpty() || (slot.GetItem == item && slot.GetItemQuantity < item.GetMaxStack))
             {
+                Debug.Log("Quantity : " + quantity);
                 (ItemDefinition, int) reste = slot.AddItem(item, quantity);
                 if (reste.Item2 <= 0)
                 {
                     return reste;
                 }
-                AddItemFast(reste.Item1, reste.Item2);
+                return AddItemFast(reste.Item1, reste.Item2);
             }
         }
         return (null, 0);
@@ -105,14 +113,27 @@ public class Inventory : MonoBehaviour
         tab[index].SwitchItems(slot);
     }
 
-    public void LeftClick(int slotID)
+    public void LeftClick(int slotID, GameObject cur = null)
     {
-        SwitchItem(slotID, manager.GetCursorUI.GetComponent<Inventory>().GetSlot(0));
+        if (cur == null)
+        {
+            SwitchItem(slotID, manager.GetCursorUI.GetComponent<Inventory>().GetSlot(0));
+        } else
+        {
+            SwitchItem(slotID, cur.GetComponent<Inventory>().GetSlot(0));
+        }
     }
 
-    public void RightCLick(int slotID)
+    public void RightCLick(int slotID, GameObject cur = null)
     {
-        GameObject cursor = manager.GetCursorUI;
+        GameObject cursor;
+        if (cur == null)
+        {
+            cursor = manager.GetCursorUI;
+        } else
+        {
+            cursor = cur;
+        }
         Slot slotCursor = cursor.GetComponent<Inventory>().GetSlot(0);
         if (slotCursor.IsEmpty())
         {
@@ -172,6 +193,14 @@ public class Inventory : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void Fill(int itemID = 1)
+    {
+        foreach (Slot slot in tab)
+        {
+            slot.AddItem(manager.ConvertIdToItem(itemID), manager.ConvertIdToItem(itemID).GetMaxStack);
+        }
     }
 
     public int GetInventorySize

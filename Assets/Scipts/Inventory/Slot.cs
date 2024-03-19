@@ -1,14 +1,20 @@
+using UnityEngine;
 public class Slot
 {
     private int quantity = 0;
     private ItemDefinition item = null;
-    private readonly GameManager manager;
+    private GameManager manager;
 
     public Slot(int quantity = 0, ItemDefinition item = null)
     {
         this.quantity = quantity;
         this.item = item;
-        manager = GameManager.GetInstance();
+        InitManager(GameManager.GetInstance());
+    }
+
+    public void InitManager(GameManager manager)
+    {
+        this.manager = manager;
     }
 
     // Switch les items dans ce slot avec le slot donnée en paramètre
@@ -44,7 +50,9 @@ public class Slot
                 this.quantity = item.GetMaxStack;
                 return (this.item, restant);
             }
+            Debug.Log("Before quantity : " + this.quantity + " adding " + quantity);
             this.quantity += quantity;
+            Debug.Log(this.quantity);
             return (this.item, 0);
         }
         this.quantity = quantity;
