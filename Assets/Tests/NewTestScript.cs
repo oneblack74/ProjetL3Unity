@@ -12,6 +12,7 @@ public class NewTestScript
     Inventory inv_cursor;
     GameObject cursor;
 
+    [SetUp]
     public void Init()
     {
         GameObject gm = GameObject.Instantiate(new GameObject("GameManager"));
@@ -36,7 +37,6 @@ public class NewTestScript
     [Test]
     public void AddFastTest()
     {
-        Init();
 
         inv.AddItemFast(manager.ConvertIdToItem(1), 2);
 
@@ -46,7 +46,6 @@ public class NewTestScript
     [Test]
     public void AddItemTest()
     {
-        Init();
 
         inv.AddItem(1, manager.ConvertIdToItem(2), 1);
 
@@ -56,7 +55,6 @@ public class NewTestScript
     [Test]
     public void RemoveItem()
     {
-        Init();
 
         inv.AddItem(1, manager.ConvertIdToItem(2), 1);
 
@@ -68,7 +66,6 @@ public class NewTestScript
     [Test]
     public void SwapItem()
     {
-        Init();
 
         inv.AddItem(0, manager.ConvertIdToItem(1), 1);
 
@@ -80,7 +77,7 @@ public class NewTestScript
     [Test]
     public void AddItemFastQuandPlein()
     {
-        Init();
+
 
         inv.Fill();
 
@@ -92,14 +89,15 @@ public class NewTestScript
     [Test]
     public void AddItemSlotQuandPlein()
     {
-        Init();
+
 
         inv.Fill();
         try
         {
             inv.AddItem(0, manager.ConvertIdToItem(0), 1);
             Debug.Assert(false);
-        } catch (Exception)
+        }
+        catch (Exception)
         {
             Debug.Assert(true);
         }
@@ -108,13 +106,15 @@ public class NewTestScript
     [Test]
     public void PrendreItemSlotVide()
     {
-        Init();
 
-        try {
+
+        try
+        {
             inv.RemoveItem(0, 1);
             Debug.Assert(false);
         }
-        catch (Exception) {
+        catch (Exception)
+        {
             Debug.Assert(true);
         }
     }
@@ -122,7 +122,7 @@ public class NewTestScript
     [Test]
     public void RightClickVide()
     {
-        Init();
+
 
         cursor.GetComponent<Inventory>().AddItemFast(manager.ConvertIdToItem(1), 1);
 
@@ -134,7 +134,7 @@ public class NewTestScript
     [Test]
     public void RightClickPrendrePair()
     {
-        Init();
+
 
         inv.AddItemFast(manager.ConvertIdToItem(1), 10);
 
@@ -146,7 +146,7 @@ public class NewTestScript
     [Test]
     public void RightClickPrendreImpair()
     {
-        Init();
+
 
         inv.AddItemFast(manager.ConvertIdToItem(1), 9);
 
@@ -158,7 +158,7 @@ public class NewTestScript
     [Test]
     public void RightClickPrendreVide()
     {
-        Init();
+
 
         inv.RightCLick(0, cursor);
 
@@ -168,7 +168,7 @@ public class NewTestScript
     [Test]
     public void AddItemFastOverflow()
     {
-        Init();
+
 
         inv.AddItemFast(manager.ConvertIdToItem(1), manager.ConvertIdToItem(1).GetMaxStack - 2);
 
