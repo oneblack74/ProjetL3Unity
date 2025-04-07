@@ -1,4 +1,4 @@
-# 🕹️ Projet L3 Unity
+# 🕹️ Unity-L3-GameProject
 
 🎓 Projet de Licence 3 réalisé au second semestre dans le cadre d’un travail de groupe.  
 L’objectif était de concevoir un **jeu Unity** en respectant des **contraintes hebdomadaires** données par les enseignants.
