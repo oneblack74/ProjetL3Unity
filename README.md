@@ -90,24 +90,6 @@ Voici les grandes fonctionnalités implémentées dans le projet :
 
 ---
 
-## 📂 Organisation du projet
-
-```
-Assets/
-├── Scenes/
-│   ├── MainMenu.unity
-│   ├── Hub.unity
-│   └── ResourceWorld.unity
-├── Scripts/
-│   ├── Player/
-│   ├── Inventory/
-│   ├── UI/
-│   └── World/
-└── Prefabs/
-```
-
----
-
 ## ✨ Objectifs pédagogiques
 
 - Travailler en équipe avec Git
